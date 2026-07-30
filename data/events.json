@@ -1,0 +1,25 @@
+[
+  {
+    "slug": "update-3-admin-abuse",
+    "name": "Update 3 + Admin Abuse",
+    "startsAt": "2026-08-02T15:00:00-04:00",
+    "endsAt": "2026-08-09T15:00:00-04:00",
+    "publishedStatus": "upcoming",
+    "accentColor": "purple",
+    "confirmedChanges": [
+      "The published schedule lists a start at 3:00 PM ET / 12:00 PM PT on August 2, 2026.",
+      "The published schedule lists an end at 3:00 PM ET / 12:00 PM PT on August 9, 2026."
+    ],
+    "unconfirmedNotes": [
+      "Specific crates, toys, rebirth changes, and codes have not been confirmed in-game."
+    ],
+    "evidence": [
+      {
+        "status": "community_reported",
+        "verifiedAt": "2026-07-30",
+        "sourceUrl": "https://allthings.how/unbox-asmr-events-schedule/",
+        "notes": "Third-party published event schedule; re-check against official channels before launch."
+      }
+    ]
+  }
+]
