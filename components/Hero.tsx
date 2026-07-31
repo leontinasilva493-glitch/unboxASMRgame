@@ -7,8 +7,8 @@ export function Hero() {
   return <section className="hero">
     <div className="hero-copy">
       <span className="eyebrow"><ShieldIcon /> Unofficial fan guide</span>
-      <h1>Unbox ASMR <em>Roblox</em> Guide & Verified Wiki</h1>
-      <p className="hero-lead">Real gameplay. Verified data. No made-up codes. Get direct answers for crates, toys, workers, rebirths, Gamepasses, and weekly events.</p>
+      <h1>Unbox ASMR — <em>Verified</em> Guide & Data Tracker</h1>
+      <p className="hero-lead">Dated sources and evidence-gated data for Unbox ASMR on Roblox. Check crates, toys, workers, rebirths, Gamepasses, codes, and weekly events without made-up values.</p>
       <div className="hero-actions"><Link className="button button-primary" href="/beginner-guide/">Start the Beginner Guide <ArrowIcon /></Link><a className="button button-secondary" href={ROBLOX_URL} target="_blank" rel="noopener noreferrer" data-event="play_roblox_click">Play on Roblox ↗</a></div>
       <LastVerified date="2026-07-30" />
     </div>
