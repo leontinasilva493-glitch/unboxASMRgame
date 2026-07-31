@@ -9,8 +9,8 @@ import { events, gamepasses } from "@/lib/data";
 import { pageMetadata, SITE_URL } from "@/lib/site";
 
 export const metadata: Metadata = pageMetadata({
-  title: "Unbox ASMR Roblox Wiki: Crates, Toys & Rebirths",
-  description: "Verified Unbox ASMR Roblox guides for crates, toys, workers, rebirths, gamepasses, codes and weekly events. Checked after every update.",
+  title: "Unbox ASMR Guide — Verified Crates, Toys & Rebirth Data",
+  description: "Verified Unbox ASMR guide with dated sources for Gamepasses, codes and events, plus evidence-gated crates, toys, rebirths and workers.",
   path: "/",
 });
 
@@ -32,7 +32,6 @@ const faqs = [
 
 export default function Home() {
   const event = events[0];
-  const faqJsonLd = { "@context": "https://schema.org", "@type": "FAQPage", mainEntity: faqs.map(([question, answer]) => ({ "@type": "Question", name: question, acceptedAnswer: { "@type": "Answer", text: answer } })) };
   return <>
     <Hero />
     <div className="container status-strip" aria-label="Quick status">
@@ -51,7 +50,6 @@ export default function Home() {
     <section className="section-compact"><div className="container"><div className="event-banner"><div className="event-banner-copy"><span className="eyebrow">Next reported event</span><h2>{event.name}</h2><p>The schedule is community-reported and must be re-checked against official channels before publication. No feature list is being guessed.</p><Link className="text-link" href="/updates/">Open update details <ArrowIcon /></Link></div><EventCountdown startsAt={event.startsAt} endsAt={event.endsAt} initialStatus={event.publishedStatus}/></div></div></section>
 
     <section className="section"><div className="container narrow"><div className="section-head"><div><span className="section-kicker">Clear answers</span><h2>Frequently asked questions</h2></div></div><div className="faq-list">{faqs.map(([question, answer]) => <details key={question}><summary>{question}</summary><p>{answer}</p></details>)}</div><SourceList sources={[{ label: "Official Unbox ASMR Roblox experience", url: "https://www.roblox.com/games/112233638491976/Unbox-ASMR", note: "Official identity and developer attribution." }, { label: "Rolimon’s public game snapshot", url: "https://www.rolimons.com/game/112233638491976", note: "Dated third-party snapshot; not live data." }]} /><RelatedLinks links={[{ href: "/sources/", label: "Evidence policy" }, { href: "/about/", label: "About this guide" }]} /></div></section>
-    <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }} />
-    <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify({ "@context": "https://schema.org", "@type": "WebPage", name: "Unbox ASMR Roblox Guide & Verified Wiki", url: SITE_URL }) }} />
+    <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify({ "@context": "https://schema.org", "@type": "WebPage", name: "Unbox ASMR — Verified Guide & Data Tracker", url: SITE_URL }) }} />
   </>;
 }

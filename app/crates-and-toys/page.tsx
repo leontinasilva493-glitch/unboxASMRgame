@@ -6,7 +6,7 @@ import { EmptyVerifiedState, InlineCallout, PageIntro, RelatedLinks, SourceList 
 import { pageMetadata } from "@/lib/site";
 
 export const metadata: Metadata = pageMetadata({
-  title: "All Unbox ASMR Crates & Toys: Prices, Rarity and Cash",
+  title: "Unbox ASMR Crates & Toys — Prices, Rarity & Sources",
   description: "Evidence-gated Unbox ASMR crates and toys tables for Roblox. Unverified prices, odds, rarity, and cash values are never guessed.",
   path: "/crates-and-toys/",
   noindex: true,
