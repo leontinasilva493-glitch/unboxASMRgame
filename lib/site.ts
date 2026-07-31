@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 
-export const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || "https://unboxasmr.guide";
+export const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || "https://unboxasmrguide.site";
 export const ROBLOX_URL =
   process.env.NEXT_PUBLIC_ROBLOX_GAME_URL ||
   "https://www.roblox.com/games/112233638491976/Unbox-ASMR";
