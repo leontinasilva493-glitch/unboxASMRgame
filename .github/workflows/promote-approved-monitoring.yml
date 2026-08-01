@@ -1,0 +1,73 @@
+name: Promote approved monitoring evidence
+
+on:
+  workflow_dispatch:
+    inputs:
+      issue_number:
+        description: Approved monitoring issue number
+        required: true
+        type: number
+      approved_payload:
+        description: Structured approved JSON payload
+        required: true
+        type: string
+
+permissions:
+  contents: write
+  issues: read
+  pull-requests: write
+
+jobs:
+  promote:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.repository.default_branch }}
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Verify evidence approval label
+        shell: bash
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          gh api "repos/${GITHUB_REPOSITORY}/issues/${{ inputs.issue_number }}" --jq '.labels[].name' > "$RUNNER_TEMP/issue-labels.txt"
+          grep -Fxq 'evidence-approved' "$RUNNER_TEMP/issue-labels.txt"
+
+      - name: Save and apply approved payload
+        shell: bash
+        env:
+          APPROVED_PAYLOAD: ${{ inputs.approved_payload }}
+        run: |
+          printf '%s' "$APPROVED_PAYLOAD" > "$RUNNER_TEMP/approved-payload.json"
+          node scripts/monitor/promote.mjs --payload "$RUNNER_TEMP/approved-payload.json" --expected-issue "${{ inputs.issue_number }}" --apply
+
+      - name: Verify candidate content
+        run: |
+          npm test
+          npm run lint
+          npm run typecheck
+          npm run build
+
+      - name: Create candidate branch and draft pull request
+        shell: bash
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          branch="codex/monitor-issue-${{ inputs.issue_number }}-${{ github.run_id }}"
+          git switch -c "$branch"
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add data
+          git diff --cached --quiet && { echo "Approved payload produced no data changes"; exit 1; }
+          git commit -m "content(monitoring): apply approved issue #${{ inputs.issue_number }}"
+          git push origin "$branch"
+          gh pr create --draft --base "${{ github.event.repository.default_branch }}" --head "$branch" --title "Content: apply approved monitoring issue #${{ inputs.issue_number }}" --body "Draft candidate generated from evidence-approved issue #${{ inputs.issue_number }}. Review evidence, data diff, indexing gates, and checks before merging."
