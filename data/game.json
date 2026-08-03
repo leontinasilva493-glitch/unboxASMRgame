@@ -3,11 +3,23 @@
   "developer": "ASMR Labs",
   "robloxUrl": "https://www.roblox.com/games/112233638491976/Unbox-ASMR",
   "groupUrl": "https://www.roblox.com/communities/1110056661/ASMR-Labs",
-  "checkedAt": "2026-07-30",
+  "universeId": 10454554751,
+  "checkedAt": "2026-08-01",
+  "officialUpdatedAt": "2026-07-31T20:43:30.7397095Z",
+  "officialClaims": {
+    "coreLoop": [
+      "Unbox rare ASMR toys",
+      "Upgrade your collection",
+      "Unlock better crates"
+    ],
+    "friendBenefit": "Play with friends for more cash",
+    "workerReward": "Like the game and join the group for 2 FREE workers",
+    "codesNotice": "Follow for updates and special codes"
+  },
   "evidence": {
     "status": "official",
-    "verifiedAt": "2026-07-30",
+    "verifiedAt": "2026-08-01",
     "sourceUrl": "https://www.roblox.com/games/112233638491976/Unbox-ASMR",
-    "notes": "Official Roblox experience page and developer attribution."
+    "notes": "Official Roblox experience page and public games API checked on August 1, 2026."
   }
 }
