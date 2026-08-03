@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Breadcrumbs } from "@/components/Breadcrumbs";
 import { InlineCallout, PageIntro, RelatedLinks, SourceList, TableOfContents } from "@/components/PageParts";
+import { VideoReference } from "@/components/VideoReference";
 import { VerificationBadge } from "@/components/Verification";
 import { game } from "@/lib/data";
 import { pageMetadata } from "@/lib/site";
@@ -15,6 +16,7 @@ export const metadata: Metadata = pageMetadata({
 const toc = [
   { href: "#official-baseline", label: "Official baseline" },
   { href: "#first-steps", label: "First five steps" },
+  { href: "#beginner-video", label: "Gameplay reference" },
   { href: "#more-crates", label: "More crates" },
   { href: "#frog-npc", label: "Frog NPC" },
   { href: "#free-workers", label: "Free workers" },
@@ -55,6 +57,24 @@ export default function BeginnerGuide() {
           <li><strong>Check the next unlock before spending again.</strong> Compare your current balance with the displayed requirement instead of following an undated upgrade order.</li>
           <li><strong>Delay irreversible choices.</strong> Do not rebirth or buy a Gamepass until the current confirmation or purchase panel explains the result.</li>
         </ol>
+        <VideoReference
+          sectionId="beginner-video"
+          videoId="7JfyM_GSipY"
+          heading="Recent Unbox ASMR Roblox Beginner Gameplay"
+          headingLevel="h3"
+          intro="This third-party walkthrough shows a recent starter area, early collection, upgrade prompts, and worker placement. Use it to recognize the general flow after completing the five safe checks above; labels and requirements in your current server remain the authority."
+          videoTitle="BEGINNER GUIDE in Unbox ASMR Roblox - Fast Money, Rebirth, Workers and Best Progression Tips"
+          channel="Roblox Guides"
+          reviewedAt="August 3, 2026"
+          compareItems={[
+            "The starter-area HUD, first crate-to-toy loop, and where early upgrade prompts appear.",
+            "How a worker is placed on a toy and how the recorded account moves into later crates.",
+          ]}
+          unverifiedItems={[
+            "Current prices, earnings, fastest route, or any claim that an upgrade is best.",
+            "The frog selling route, worker reward delivery, and exact rebirth reset effects.",
+          ]}
+        />
         <div className="screenshot-slot"><div><strong>Gameplay capture still required</strong><span>Spawn/HUD, onboarding, and the first complete crate-to-toy loop</span></div></div>
 
         <h2 id="more-crates">How to get more crates</h2>
@@ -85,7 +105,7 @@ export default function BeginnerGuide() {
         </ul>
         <InlineCallout title="Indexing gate" tone="reported"><p>This guide remains out of search until original current-version captures prove the first loop, selling path, and worker delivery. The written route is ready for those assets but does not pretend they already exist.</p></InlineCallout>
         <RelatedLinks links={[{ href: "/crates-and-toys/", label: "Crates & Toys" }, { href: "/rebirths-and-workers/", label: "Rebirths & Workers" }, { href: "/gamepasses/", label: "Gamepasses" }]}/>
-        <SourceList sources={[{ label: "Official Unbox ASMR Roblox experience", url: game.robloxUrl, note: "Public description checked August 1, 2026." }, { label: "Official ASMR Labs Roblox group", url: game.groupUrl, note: "Group identity and availability checked August 1, 2026." }]}/>
+        <SourceList sources={[{ label: "Official Unbox ASMR Roblox experience", url: game.robloxUrl, note: "Public description checked August 1, 2026." }, { label: "Official ASMR Labs Roblox group", url: game.groupUrl, note: "Group identity and availability checked August 1, 2026." }, { label: "Roblox Guides beginner gameplay video", url: "https://www.youtube.com/watch?v=7JfyM_GSipY", note: "Third-party gameplay manually reviewed August 3, 2026; used only as a visual reference." }]}/>
       </article>
       <TableOfContents items={toc}/>
     </div>

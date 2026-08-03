@@ -3,6 +3,7 @@ import { Breadcrumbs } from "@/components/Breadcrumbs";
 import { DataTable } from "@/components/DataTable";
 import { EmptyVerifiedState, InlineCallout, PageIntro, RelatedLinks, SourceList } from "@/components/PageParts";
 import { MissingValue, VerificationBadge } from "@/components/Verification";
+import { VideoReference } from "@/components/VideoReference";
 import { game } from "@/lib/data";
 import { pageMetadata } from "@/lib/site";
 
@@ -52,6 +53,25 @@ export default function RebirthsAndWorkers() {
       </ol>
     </section>
 
+    <VideoReference
+      sectionId="rebirth-video"
+      videoId="-G26P9S5yGY"
+      heading="Recorded Unbox ASMR Rebirth Progression Run"
+      intro="This long no-commentary recording follows an account through an extended run advertised as four rebirths. Use it to compare broad progression states only. The sampled review did not establish a timestamped, complete rebirth confirmation dialog, so your current in-game panel still controls the decision."
+      videoTitle="4 Rebirth [🍯] Unbox ASMR! - Roblox, Start Game [4K 60FPS] (No Commentary)"
+      channel="RobloMine"
+      reviewedAt="August 3, 2026"
+      compareItems={[
+        "How a recorded account changes from early play into later progression states.",
+        "The pace and interface context around an extended rebirth-focused session.",
+      ]}
+      unverifiedItems={[
+        "The exact current rebirth requirement, reward, multiplier, unlock, reset list, or retained items.",
+        "Worker output, offline earnings, and whether the recorded progression route is efficient.",
+      ]}
+      secondaryLink={{ label: "How to Rebirth Fast in Unbox ASMR (VendoPlus)", url: "https://www.youtube.com/watch?v=FbqF-ydPuUw" }}
+    />
+
     <section className="section-compact">
       <div className="keep-reset-grid">
         <article className="info-card reset-card"><VerificationBadge status="unverified"/><h2>What you lose</h2><p><MissingValue/> — the full reset list needs a current-version confirmation screenshot.</p></article>
@@ -79,6 +99,6 @@ export default function RebirthsAndWorkers() {
 
     <InlineCallout title="Indexing gate" tone="reported"><p>This route remains noindex until the advertised workers are verified inside the game and the first rebirth decision can be explained from a complete current-version confirmation screen.</p></InlineCallout>
     <RelatedLinks links={[{ href: "/beginner-guide/", label: "Beginner Guide" }, { href: "/crates-and-toys/", label: "Crates & Toys" }, { href: "/gamepasses/", label: "Gamepasses" }]}/>
-    <SourceList sources={[{ label: "Official Unbox ASMR Roblox experience", url: game.robloxUrl, note: "Worker-reward condition checked August 1, 2026." }, { label: "Official ASMR Labs Roblox group", url: game.groupUrl, note: "Group identity checked August 1, 2026." }]}/>
+    <SourceList sources={[{ label: "Official Unbox ASMR Roblox experience", url: game.robloxUrl, note: "Worker-reward condition checked August 1, 2026." }, { label: "Official ASMR Labs Roblox group", url: game.groupUrl, note: "Group identity checked August 1, 2026." }, { label: "RobloMine rebirth progression video", url: "https://www.youtube.com/watch?v=-G26P9S5yGY", note: "Third-party gameplay manually sampled August 3, 2026; no reset or reward fields were imported." }]}/>
   </div>;
 }

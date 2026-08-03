@@ -149,7 +149,10 @@ function containsJsonLdType(value, type) {
   assert((await desktop.locator(".local-time").innerText()).includes("Your local time"), "local time missing");
   const updatesText = await desktop.locator("main").innerText();
   assert(updatesText.includes("Pre-update public check"), "Updates page is missing the August 1 public checkpoint");
-  assert(updatesText.includes("Implementation status: not yet verified"), "Updates page overstates the pre-launch event status");
+  assert(updatesText.includes("Implementation status: current gameplay still required"), "Updates page does not preserve the implementation evidence gate");
+  assert(updatesText.includes("reported event window began on August 2, 2026"), "Updates page still presents the reported event as pre-launch");
+  assert(!updatesText.includes("has not reached its reported start time"), "Updates page contains stale pre-launch wording");
+  assert(updatesText.includes("Last checked: Aug 3, 2026"), "Updates page shows the wrong schedule review date");
   await desktop.screenshot({ path: "artifacts/updates-desktop.png", fullPage: true });
 
   await desktop.goto(BASE + "/codes/", { waitUntil: "networkidle" });
@@ -163,18 +166,39 @@ function containsJsonLdType(value, type) {
   assert(beginnerText.includes("Official Roblox listing"), "Beginner guide does not identify its safe public-source baseline");
   assert(beginnerText.includes("Like the game and join the group"), "Beginner guide is missing the official worker-reward condition");
   assert(beginnerText.includes("Gameplay capture still required"), "Beginner guide does not expose the remaining screenshot gate");
+  const beginnerVideo = desktop.locator('[data-video-id="7JfyM_GSipY"]');
+  assert(await beginnerVideo.count() === 1, "Beginner guide is missing its reviewed gameplay reference");
+  assert(await beginnerVideo.locator("iframe").count() === 0, "Beginner video iframe loads before user intent");
+  await beginnerVideo.getByRole("button", { name: /play third-party video/i }).click();
+  const beginnerFrame = beginnerVideo.locator("iframe");
+  await beginnerFrame.waitFor({ state: "visible" });
+  assert((await beginnerFrame.getAttribute("src")).includes("youtube-nocookie.com/embed/7JfyM_GSipY"), "Beginner guide loads the wrong video or host");
   await desktop.screenshot({ path: "artifacts/quick-mvp-beginner.png", fullPage: true });
 
   await desktop.goto(BASE + "/rebirths-and-workers/", { waitUntil: "networkidle" });
   const progressionText = await desktop.locator("main").innerText();
   assert(progressionText.includes("Publicly advertised worker reward"), "Workers page is missing the official reward baseline");
   assert(progressionText.includes("First rebirth safety checklist"), "Rebirth page is missing the actionable pre-confirmation checklist");
+  const rebirthVideo = desktop.locator('[data-video-id="-G26P9S5yGY"]');
+  assert(await rebirthVideo.count() === 1, "Rebirth guide is missing its reviewed gameplay reference");
+  assert(await rebirthVideo.locator("iframe").count() === 0, "Rebirth video iframe loads before user intent");
+  await rebirthVideo.getByRole("button", { name: /play third-party video/i }).click();
+  const rebirthFrame = rebirthVideo.locator("iframe");
+  await rebirthFrame.waitFor({ state: "visible" });
+  assert((await rebirthFrame.getAttribute("src")).includes("youtube-nocookie.com/embed/-G26P9S5yGY"), "Rebirth guide loads the wrong video or host");
   await desktop.screenshot({ path: "artifacts/quick-mvp-progression.png", fullPage: true });
 
   await desktop.goto(BASE + "/crates-and-toys/", { waitUntil: "networkidle" });
   const collectionText = await desktop.locator("main").innerText();
   assert(collectionText.includes("Starter dataset status"), "Crates and Toys page is missing its scoped MVP status");
   assert(collectionText.includes("Official description confirms crates and toys"), "Crates and Toys page is missing the official fact boundary");
+  const crateVideo = desktop.locator('[data-video-id="UgwslmyT87o"]');
+  assert(await crateVideo.count() === 1, "Crates and Toys page is missing its reviewed gameplay reference");
+  assert(await crateVideo.locator("iframe").count() === 0, "Crates video iframe loads before user intent");
+  await crateVideo.getByRole("button", { name: /play third-party video/i }).click();
+  const crateFrame = crateVideo.locator("iframe");
+  await crateFrame.waitFor({ state: "visible" });
+  assert((await crateFrame.getAttribute("src")).includes("youtube-nocookie.com/embed/UgwslmyT87o"), "Crates page loads the wrong video or host");
   await desktop.screenshot({ path: "artifacts/quick-mvp-collection.png", fullPage: true });
 
   const mobile = await browser.newPage({ viewport: { width: 390, height: 844 }, deviceScaleFactor: 1 });

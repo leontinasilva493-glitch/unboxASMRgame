@@ -4,6 +4,7 @@ import { CollectionFilter } from "@/components/CollectionFilter";
 import { DataTable } from "@/components/DataTable";
 import { EmptyVerifiedState, InlineCallout, PageIntro, RelatedLinks, SourceList } from "@/components/PageParts";
 import { VerificationBadge } from "@/components/Verification";
+import { VideoReference } from "@/components/VideoReference";
 import { game } from "@/lib/data";
 import { pageMetadata } from "@/lib/site";
 
@@ -47,6 +48,24 @@ export default function CratesAndToys() {
       </ol>
     </section>
 
+    <VideoReference
+      sectionId="crate-video"
+      videoId="UgwslmyT87o"
+      heading="How Crate Unlocks Look in Recent Gameplay"
+      intro="This short third-party video shows the crate area, several crate panels, and the route to another visible crate. Use it to recognize where the interface may appear, then capture the current panel before adding any value to the tables below."
+      videoTitle="How to Get More Crates in Unbox ASMR Roblox"
+      channel="VendoPlus"
+      reviewedAt="August 3, 2026"
+      compareItems={[
+        "Where crate panels and their unlock prompts appear in the recorded base.",
+        "Whether the current server still presents the next crate in a similar area and sequence.",
+      ]}
+      unverifiedItems={[
+        "The full crate order, current names, prices, requirements, currencies, or drop odds.",
+        "Toy pools, rarity rankings, cash values, and whether the recorded route is optimal.",
+      ]}
+    />
+
     <section className="section-compact"><CollectionFilter rows={[]}/></section>
     <section>
       <h2>Verified crates</h2>
@@ -66,6 +85,6 @@ export default function CratesAndToys() {
     </section>
     <InlineCallout title="Indexing gate" tone="reported"><p>This route remains noindex until at least the first playable crate sequence and its resulting toys can be presented as a useful, current-version dataset.</p></InlineCallout>
     <RelatedLinks links={[{ href: "/beginner-guide/", label: "Beginner Guide" }, { href: "/updates/", label: "Update 3 status" }, { href: "/rebirths-and-workers/", label: "Rebirths & Workers" }]}/>
-    <SourceList sources={[{ label: "Official Unbox ASMR Roblox experience", url: game.robloxUrl, note: "Public description checked August 1, 2026; no entity values were imported." }]}/>
+    <SourceList sources={[{ label: "Official Unbox ASMR Roblox experience", url: game.robloxUrl, note: "Public description checked August 1, 2026; no entity values were imported." }, { label: "VendoPlus crate gameplay video", url: "https://www.youtube.com/watch?v=UgwslmyT87o", note: "Third-party gameplay manually reviewed August 3, 2026; no displayed values were imported." }]}/>
   </div>;
 }
