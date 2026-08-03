@@ -2,6 +2,24 @@
 
 The site intentionally does not guess gameplay data. Capture the following in the current game version before removing `noindex` from the affected pages.
 
+## Quick MVP checkpoint — August 1, 2026
+
+The public-source portion of the seven-day quick MVP is implemented. Update 3 is still pre-launch and no original gameplay capture was available in the repository, so the three evidence-dependent routes remain `noindex, follow`.
+
+Minimum capture pack for the next review:
+
+1. `beginner-01-spawn-hud.webp` — full spawn/HUD with the current server version or event context.
+2. `beginner-02-first-crate.webp` — starter crate name, cost, currency, requirement, and any displayed contents or odds.
+3. `beginner-03-first-toy.webp` — resulting toy name, rarity, source, interaction, value, and index entry when visible.
+4. `beginner-04-sell-route.webp` — frog NPC location, approach route, interaction prompt, and sell result.
+5. `workers-01-before.webp` and `workers-02-after.webp` — group/like reward state, worker count, slots, and delivery result.
+6. `rebirth-01-panel.webp` and `rebirth-02-confirmation.webp` — requirement, resets, retained items, and rewards in the same current version.
+7. `update-3-01-event-panel.webp` — Update 3/Admin Abuse event panel after the reported start time.
+8. `codes-01-redemption-surface.webp` — current HUD/settings/shop state proving whether a code entry exists.
+9. `gamepasses-<slug>.webp` — official purchase surface plus the complete in-game description for each tested pass.
+
+Beginner Guide may be proposed for indexing only after items 1–5 prove a complete first-session task. Do not remove `noindex` merely because the page has more text.
+
 ## Gameplay screenshots
 
 - Spawn/HUD and the first complete crate-to-toy loop.

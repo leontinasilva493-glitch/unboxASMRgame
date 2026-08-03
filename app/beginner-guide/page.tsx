@@ -2,12 +2,92 @@ import type { Metadata } from "next";
 import { Breadcrumbs } from "@/components/Breadcrumbs";
 import { InlineCallout, PageIntro, RelatedLinks, SourceList, TableOfContents } from "@/components/PageParts";
 import { VerificationBadge } from "@/components/Verification";
+import { game } from "@/lib/data";
 import { pageMetadata } from "@/lib/site";
 
-export const metadata: Metadata = pageMetadata({ title: "Unbox ASMR Beginner Guide: Sell Toys, Workers & Crates", description: "A cautious beginner path for Unbox ASMR on Roblox, with exact evidence gaps for crates, selling, toys, and free workers.", path: "/beginner-guide/", noindex: true });
+export const metadata: Metadata = pageMetadata({
+  title: "Unbox ASMR Beginner Guide: Sell Toys, Workers & Crates",
+  description: "A cautious beginner path for Unbox ASMR on Roblox, separating official starting facts from gameplay steps that still need current-version captures.",
+  path: "/beginner-guide/",
+  noindex: true,
+});
 
-const toc = [{ href: "#core-loop", label: "Core loop" }, { href: "#first-steps", label: "First five steps" }, { href: "#more-crates", label: "More crates" }, { href: "#frog-npc", label: "Frog NPC" }, { href: "#free-workers", label: "Free workers" }, { href: "#troubleshooting", label: "Troubleshooting" }];
+const toc = [
+  { href: "#official-baseline", label: "Official baseline" },
+  { href: "#first-steps", label: "First five steps" },
+  { href: "#more-crates", label: "More crates" },
+  { href: "#frog-npc", label: "Frog NPC" },
+  { href: "#free-workers", label: "Free workers" },
+  { href: "#troubleshooting", label: "Troubleshooting" },
+];
 
 export default function BeginnerGuide() {
-  return <div className="container page-shell"><Breadcrumbs items={[{ label: "Beginner Guide", href: "/beginner-guide/" }]}/><PageIntro eyebrow="Start here" title="Unbox ASMR Beginner Guide for Roblox" description="A direct, evidence-aware route through your first session. Exact button labels and upgrade values stay unpublished until the current game UI is captured."/><div className="content-layout"><article className="prose"><InlineCallout title="30-second answer"><p>Follow the in-game onboarding, complete one crate-to-toy loop, keep your first earnings until the next unlock is clear, and do not rebirth or buy a Gamepass based on an unverified multiplier. This page is currently a capture checklist, not a claim that every interaction has been tested.</p></InlineCallout><h2 id="core-loop">The core loop</h2><p>Unbox ASMR on Roblox is presented as a collection and progression experience. The exact purchase, opening, placement, earning, and selling flow still needs a clean current-version recording.</p><div className="screenshot-slot"><div><strong>Gameplay screenshot needed</strong><span>Spawn/HUD and the first full crate-to-toy loop</span></div></div><h2 id="first-steps">Your first five steps</h2><ol className="ordered-cards"><li><strong>Read the onboarding prompts.</strong> Use the labels shown in your current server; this guide will not invent a button name.</li><li><strong>Capture the first crate panel.</strong> Record its name, cost, currency, unlock state, and any odds the game explicitly shows.</li><li><strong>Open one crate.</strong> Note the resulting toy name and rarity exactly as displayed.</li><li><strong>Place or interact with the toy.</strong> Verify how earnings appear and whether the item remains in your collection.</li><li><strong>Check the next unlock before spending.</strong> Keep price and progression advice separate until both are proven.</li></ol><h2 id="more-crates">How to get more crates</h2><VerificationBadge status="unverified"/><p>The crate unlock sequence and costs are not publicly verified. Follow visible in-game requirements and avoid third-party lists that do not show a current screenshot.</p><h2 id="frog-npc">How to sell to the frog NPC</h2><VerificationBadge status="unverified"/><p>The plan identifies a frog NPC as the sell target, but its location and exact interaction are not yet supported by a first-party capture. A numbered screenshot belongs here before this page is indexed.</p><div className="screenshot-slot"><div><strong>Numbered screenshot needed</strong><span>Frog NPC location, approach route, and sell confirmation</span></div></div><h2 id="free-workers">How to claim free workers</h2><VerificationBadge status="unverified"/><p>A group-related reward is reported, but the before/after worker panel must be recorded before this guide gives a click-by-click instruction. Use only the official ASMR Labs group linked below.</p><h2 id="troubleshooting">Troubleshooting</h2><ul><li>If a prompt differs from this guide, trust the current game UI and record the change.</li><li>If a worker does not appear, capture the reward state, available slots, and any server rejoin result.</li><li>If an item value is missing, do not infer it from rarity.</li><li>If a rebirth prompt is unclear, cancel and capture the full confirmation text first.</li></ul><RelatedLinks links={[{ href: "/crates-and-toys/", label: "Crates & Toys" }, { href: "/rebirths-and-workers/", label: "Rebirths & Workers" }, { href: "/gamepasses/", label: "Gamepasses" }]}/><SourceList sources={[{ label: "Official Unbox ASMR Roblox experience", url: "https://www.roblox.com/games/112233638491976/Unbox-ASMR" }, { label: "Official ASMR Labs Roblox group", url: "https://www.roblox.com/communities/1110056661/ASMR-Labs" }]}/></article><TableOfContents items={toc}/></div></div>;
+  return <div className="container page-shell">
+    <Breadcrumbs items={[{ label: "Beginner Guide", href: "/beginner-guide/" }]}/>
+    <PageIntro
+      eyebrow="Start here"
+      title="Unbox ASMR Roblox Beginner Guide"
+      description="A safe first-session route built from the current official Roblox listing. Exact buttons, values, selling steps, and reward delivery remain gated until original gameplay captures are available."
+      checkedAt={game.checkedAt}
+    />
+    <div className="content-layout">
+      <article className="prose">
+        <InlineCallout title="30-second answer">
+          <p>Open the official experience, read the onboarding shown in your server, complete one crate-to-toy loop, and check the next visible unlock before spending. The official listing confirms toys, collection upgrades, better crates, a friend cash benefit, and a two-worker group reward; it does not publish the exact in-game steps or values.</p>
+        </InlineCallout>
+
+        <h2 id="official-baseline">Official Roblox listing: what it confirms</h2>
+        <VerificationBadge status="official"/>
+        <p>The official Roblox listing was checked on August 1, 2026. It publicly describes these starting facts:</p>
+        <ul>
+          {game.officialClaims.coreLoop.map((claim) => <li key={claim}>{claim}.</li>)}
+          <li>{game.officialClaims.friendBenefit}.</li>
+          <li>{game.officialClaims.workerReward}.</li>
+          <li>{game.officialClaims.codesNotice}.</li>
+        </ul>
+        <p className="muted">These are public description claims, not proof of exact multipliers, button labels, crate prices, worker delivery, or code redemption behavior.</p>
+
+        <h2 id="first-steps">Your first five safe steps</h2>
+        <ol className="ordered-cards">
+          <li><strong>Use the official experience link.</strong> Confirm the creator is ASMR Labs before joining a server.</li>
+          <li><strong>Read the current onboarding.</strong> Follow the labels visible in your server; this guide does not invent a button name.</li>
+          <li><strong>Complete one visible crate-to-toy loop.</strong> Record the crate name, cost, resulting toy, rarity label, and any interaction the UI actually shows.</li>
+          <li><strong>Check the next unlock before spending again.</strong> Compare your current balance with the displayed requirement instead of following an undated upgrade order.</li>
+          <li><strong>Delay irreversible choices.</strong> Do not rebirth or buy a Gamepass until the current confirmation or purchase panel explains the result.</li>
+        </ol>
+        <div className="screenshot-slot"><div><strong>Gameplay capture still required</strong><span>Spawn/HUD, onboarding, and the first complete crate-to-toy loop</span></div></div>
+
+        <h2 id="more-crates">How to get more crates</h2>
+        <VerificationBadge status="unverified"/>
+        <p>The official description confirms that better crates can be unlocked, but it does not publish the unlock sequence, costs, currencies, or contents. Use the requirement displayed on the next locked crate and keep the exact panel in frame when capturing evidence.</p>
+
+        <h2 id="frog-npc">How to sell to the frog NPC</h2>
+        <VerificationBadge status="unverified"/>
+        <p>The frog NPC location and sell interaction are not present in the official public description and have not been captured in the current game version. Do not follow a copied route until the NPC, approach path, prompt, and sell result can be shown together.</p>
+        <div className="screenshot-slot"><div><strong>Numbered screenshot needed</strong><span>Frog NPC location, approach route, interaction prompt, and sell confirmation</span></div></div>
+
+        <h2 id="free-workers">How to claim the publicly advertised workers</h2>
+        <VerificationBadge status="official"/>
+        <p>The official Roblox listing says: “Like the game and join the group for 2 FREE workers.” The condition is official; delivery inside the current build is not yet in-game verified.</p>
+        <ol className="ordered-cards">
+          <li><strong>Open the official ASMR Labs group.</strong> Confirm the group name and join it while signed in to the Roblox account you use to play.</li>
+          <li><strong>Return to the official experience page.</strong> Like the experience if the control is available to your account.</li>
+          <li><strong>Launch or rejoin Unbox ASMR.</strong> Check the current worker or reward panel instead of assuming delivery is automatic.</li>
+          <li><strong>Record the result.</strong> Capture the panel before and after the claim, available slots, and any message shown by the game.</li>
+        </ol>
+
+        <h2 id="troubleshooting">Troubleshooting without guessing</h2>
+        <ul>
+          <li>If a prompt differs from this guide, trust the current game UI and record the change.</li>
+          <li>If workers do not appear, confirm the correct group membership, like state, server rejoin, available slots, and any error text.</li>
+          <li>If an item value is missing, do not infer it from rarity or promotional art.</li>
+          <li>If a rebirth prompt is unclear, cancel and capture the complete confirmation screen first.</li>
+        </ul>
+        <InlineCallout title="Indexing gate" tone="reported"><p>This guide remains out of search until original current-version captures prove the first loop, selling path, and worker delivery. The written route is ready for those assets but does not pretend they already exist.</p></InlineCallout>
+        <RelatedLinks links={[{ href: "/crates-and-toys/", label: "Crates & Toys" }, { href: "/rebirths-and-workers/", label: "Rebirths & Workers" }, { href: "/gamepasses/", label: "Gamepasses" }]}/>
+        <SourceList sources={[{ label: "Official Unbox ASMR Roblox experience", url: game.robloxUrl, note: "Public description checked August 1, 2026." }, { label: "Official ASMR Labs Roblox group", url: game.groupUrl, note: "Group identity and availability checked August 1, 2026." }]}/>
+      </article>
+      <TableOfContents items={toc}/>
+    </div>
+  </div>;
 }

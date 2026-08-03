@@ -1,5 +1,10 @@
 [
   {
+    "date": "2026-08-01",
+    "title": "Pre-update public check",
+    "details": "The official Roblox public record was checked before Update 3. The listing changed on July 31, but no Update 3 feature list, active code string, crate values, rebirth effects, or Gamepass effects were published there."
+  },
+  {
     "date": "2026-07-30",
     "title": "MVP evidence baseline created",
     "details": "Official identity, a dated public game snapshot, scheduled event information, and public Gamepass price snapshots were recorded. Gameplay-specific values remain gated."
