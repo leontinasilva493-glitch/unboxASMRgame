@@ -12,7 +12,7 @@
 | `roblox-game-details` | A | Universe `10454554751` 的公开游戏详情 |
 | `roblox-group-details` | A | ASMR Labs Group `1110056661` 的公开群组详情 |
 
-配置文件为 [`sources.json`](sources.json)。公开 API 可以证明它直接返回的名称、描述、Creator、更新时间和公开指标，不能证明价格、玩法效果、解锁、重生结果或代码有效性。
+来源配置文件为 [`sources.json`](sources.json)，内页字段与采集要求配置文件为 [`content-requirements.json`](content-requirements.json)。公开 API 可以证明它直接返回的名称、描述、Creator、更新时间和公开指标，不能证明价格、玩法效果、解锁、重生结果或代码有效性。
 
 不需要也不得配置 Roblox Cookie 或 Open Cloud API Key。官方 Discord、YouTube 或社交账号必须先人工确认归属，再作为 B 级来源加入；Wiki、攻略、视频或玩家讨论只能作为 C 级调查线索；D 级推算、解包和泄露内容不登记。
 
@@ -62,6 +62,9 @@ artifacts/monitoring/run-<ISO时间>/
     <source-id>.json
   reviews/
     <source-id>-<topic>.md
+  content-opportunities.json
+  capture-plan.md
+  content-coverage-summary.md
   run-summary.json
 ```
 
@@ -71,6 +74,13 @@ artifacts/monitoring/run-<ISO时间>/
 - `actionable` 排除普通趋势，只保留需要人工处理的变化。
 - `failures` 记录来源、绝对检查时间和稳定错误分类。
 - `reviews` 提供去重键、Issue 标题、正文、标签和本地文件路径。
+- `contentAudit` 汇总空数据集、不完整记录、受影响内页及报告路径。
+
+内容产出文件中：
+
+- `content-opportunities.json` 将每个缺口映射到内页、数据文件、缺失字段和采集动作。
+- `capture-plan.md` 是按内页排列的当前版本游戏内截图或录屏清单。
+- `content-coverage-summary.md` 展示每个数据集的记录数、完整记录数和字段完成度；完成度不代表证据已经批准。
 
 失败响应不会覆盖最近成功快照。连续三次失败、解析结构损坏、累计计数异常回退或连续三次成功响应的在线人数为 0，会进入健康审核。
 

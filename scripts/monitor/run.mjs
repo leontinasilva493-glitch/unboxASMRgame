@@ -2,6 +2,7 @@ import { mkdir, readFile, writeFile } from "node:fs/promises";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 import { collectSource } from "./collect.mjs";
+import { runContentAudit } from "./content-gap.mjs";
 import { loadSourceRegistry } from "./config.mjs";
 import { compareSnapshot } from "./diff.mjs";
 import { writeReviewFiles } from "./report.mjs";
@@ -71,6 +72,7 @@ export async function runMonitoring(options = {}) {
   const actionable = changes.filter((item) => item.kind !== "trend");
   const sourcesById = new Map(sources.map((source) => [source.id, source]));
   const reviews = await writeReviewFiles(outputDir, sourcesById, actionable, startedAt);
+  const contentAudit = await runContentAudit(root, outputDir, startedAt);
   const summary = {
     status: failures.length ? "partial_success" : "success",
     mode,
@@ -81,6 +83,7 @@ export async function runMonitoring(options = {}) {
     changes,
     actionable,
     reviews,
+    contentAudit,
     outputDir,
   };
   await writeFile(path.join(outputDir, "run-summary.json"), `${JSON.stringify(summary, null, 2)}\n`, "utf8");
@@ -108,6 +111,9 @@ async function main() {
     sourcesChecked: summary.sourcesChecked,
     baselinesCreated: summary.baselinesCreated,
     actionable: summary.actionable.length,
+    contentOpportunities: summary.contentAudit?.summary.totalOpportunities ?? 0,
+    emptyCollections: summary.contentAudit?.summary.emptyCollectionCount ?? 0,
+    incompleteRecords: summary.contentAudit?.summary.incompleteRecordCount ?? 0,
     failures: summary.failures.length,
     outputDir: summary.outputDir,
   }, null, 2));

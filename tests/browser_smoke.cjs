@@ -43,6 +43,7 @@ function containsJsonLdType(value, type) {
   fs.mkdirSync("artifacts", { recursive: true });
   const browser = await chromium.launch({ headless: true });
   const desktop = await browser.newPage({ viewport: { width: 1440, height: 1000 }, deviceScaleFactor: 1 });
+  await desktop.route("https://www.clarity.ms/**", (route) => route.fulfill({ status: 200, contentType: "application/javascript", body: "" }));
   const consoleErrors = [];
   desktop.on("console", (msg) => { if (msg.type() === "error") consoleErrors.push(msg.text()); });
   desktop.on("pageerror", (error) => consoleErrors.push(String(error)));
@@ -82,6 +83,8 @@ function containsJsonLdType(value, type) {
   }
 
   await desktop.goto(BASE + "/", { waitUntil: "networkidle" });
+  await desktop.waitForFunction(() => typeof window.clarity === "function");
+  assert(await desktop.locator("script#microsoft-clarity").count() === 1, "Microsoft Clarity bootstrap is missing");
   const homeH1 = await desktop.locator("h1").innerText();
   const homeEntityText = `${homeH1} ${await desktop.locator(".hero-lead").innerText()}`;
   assert(/Unbox ASMR on Roblox/i.test(homeEntityText), "homepage hero does not disambiguate Unbox ASMR on Roblox");
@@ -98,6 +101,9 @@ function containsJsonLdType(value, type) {
   const gamepassTitleAndH1 = `${await desktop.title()} ${await desktop.locator("h1").innerText()}`;
   assert(!/\bbest\b|worth it/i.test(gamepassTitleAndH1), `Gamepasses TDH overstates the evidence: ${gamepassTitleAndH1}`);
 
+  await desktop.goto(BASE + "/privacy/", { waitUntil: "networkidle" });
+  assert((await desktop.locator("main").innerText()).includes("Microsoft Clarity usage analytics"), "privacy disclosure does not mention Microsoft Clarity");
+
   await desktop.goto(BASE + "/updates/", { waitUntil: "networkidle" });
   await desktop.waitForTimeout(1100);
   const values = (await desktop.locator(".countdown-grid strong").allTextContents()).map(Number);
@@ -106,6 +112,7 @@ function containsJsonLdType(value, type) {
   await desktop.screenshot({ path: "artifacts/updates-desktop.png", fullPage: true });
 
   const mobile = await browser.newPage({ viewport: { width: 390, height: 844 }, deviceScaleFactor: 1 });
+  await mobile.route("https://www.clarity.ms/**", (route) => route.fulfill({ status: 200, contentType: "application/javascript", body: "" }));
   const mobileErrors = [];
   mobile.on("console", (msg) => { if (msg.type() === "error") mobileErrors.push(msg.text()); });
   mobile.on("pageerror", (error) => mobileErrors.push(String(error)));

@@ -32,3 +32,26 @@ test("data validation enforces evidence gates and crate references", () => {
   assert.ok(errors.some((error) => error.includes("unverified gamepass")));
   assert.ok(errors.some((error) => error.includes("unknown crate")));
 });
+
+test("data validation covers rebirth and worker slugs and evidence", () => {
+  const errors = validateDataCollections({
+    events: [],
+    codes: [],
+    gamepasses: [],
+    crates: [],
+    toys: [],
+    rebirths: [
+      { slug: "rebirth-1", evidence: [{ status: "in_game_verified", verifiedAt: "invalid" }] },
+      { slug: "rebirth-1", evidence: [] },
+    ],
+    workers: [
+      { slug: "worker", evidence: [{ status: "in_game_verified", verifiedAt: "2026-08-02" }] },
+      { slug: "worker", evidence: [] },
+    ],
+  });
+
+  assert.ok(errors.some((error) => error.includes("rebirths: duplicate slug")));
+  assert.ok(errors.some((error) => error.includes("workers: duplicate slug")));
+  assert.ok(errors.some((error) => error.includes("rebirth rebirth-1: evidence has invalid verifiedAt")));
+  assert.ok(errors.some((error) => error.includes("worker worker: in_game_verified evidence needs")));
+});
