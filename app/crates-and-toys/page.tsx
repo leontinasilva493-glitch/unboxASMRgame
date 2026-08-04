@@ -1,11 +1,13 @@
 import type { Metadata } from "next";
+import type { ReactNode } from "react";
 import { Breadcrumbs } from "@/components/Breadcrumbs";
 import { CollectionFilter } from "@/components/CollectionFilter";
 import { DataTable } from "@/components/DataTable";
 import { EmptyVerifiedState, InlineCallout, PageIntro, RelatedLinks, SourceList } from "@/components/PageParts";
-import { VerificationBadge } from "@/components/Verification";
+import { MissingValue, VerificationBadge } from "@/components/Verification";
 import { VideoReference } from "@/components/VideoReference";
-import { game } from "@/lib/data";
+import { buildCollectionFilterRows, buildCrateViewModels, buildToyViewModels } from "@/lib/content-view-models.mjs";
+import { crates, game, toys } from "@/lib/data";
 import { pageMetadata } from "@/lib/site";
 
 export const metadata: Metadata = pageMetadata({
@@ -20,7 +22,16 @@ const baselineRows = [
   ["Toys", "The experience advertises rare ASMR toys and collection upgrades", "Names, rarity, source crate, cash value, interaction, event status, index", <VerificationBadge key="toy-status" status="official"/>],
 ];
 
+function show(value: string | null): ReactNode {
+  return value ?? <MissingValue/>;
+}
+
 export default function CratesAndToys() {
+  const crateModels = buildCrateViewModels(crates);
+  const toyModels = buildToyViewModels(toys, crates);
+  const crateRows = crateModels.map((crate) => [show(crate.name), show(crate.area), show(crate.requirement), show(crate.cost), show(crate.possibleToys), show(crate.event), show(crate.verifiedAt), <VerificationBadge key="evidence" status={crate.evidenceStatus}/>]);
+  const toyRows = toyModels.map((toy) => [show(toy.name), show(toy.rarity), show(toy.sourceCrates), show(toy.cashValue), show(toy.interaction), show(toy.event), show(toy.indexNumber), show(toy.verifiedAt)]);
+
   return <div className="container page-shell">
     <Breadcrumbs items={[{ label: "Crates & Toys", href: "/crates-and-toys/" }]}/>
     <PageIntro
@@ -66,18 +77,16 @@ export default function CratesAndToys() {
       ]}
     />
 
-    <section className="section-compact"><CollectionFilter rows={[]}/></section>
+    <section className="section-compact"><CollectionFilter rows={buildCollectionFilterRows({ crates, toys })}/></section>
     <section>
       <h2>Verified crates</h2>
-      <DataTable label="Unbox ASMR crates" headers={["Name","Area / stage","Requirement","Cost","Possible toys","Event","Verified at","Evidence"]} rows={[]}/>
-      <div className="spacer-small"/>
-      <EmptyVerifiedState description="Capture each crate panel with its name, area, unlock requirement, cost, toy pool, and only the odds visibly displayed by the game."/>
+      <DataTable label="Unbox ASMR crates" headers={["Name","Area / stage","Requirement","Cost","Possible toys","Event","Verified at","Evidence"]} rows={crateRows}/>
+      {crateRows.length === 0 && <><div className="spacer-small"/><EmptyVerifiedState description="Capture each crate panel with its name, area, unlock requirement, cost, toy pool, and only the odds visibly displayed by the game."/></>}
     </section>
     <section className="section-compact">
       <h2>Verified toys</h2>
-      <DataTable label="Unbox ASMR toys" headers={["Name","Rarity","Source crate","Cash value","Interaction","Event","Index","Verified at"]} rows={[]}/>
-      <div className="spacer-small"/>
-      <EmptyVerifiedState description="Capture the toy detail or Complete Index UI showing the exact name, rarity, source, value, interaction type, event status, and index number."/>
+      <DataTable label="Unbox ASMR toys" headers={["Name","Rarity","Source crate","Cash value","Interaction","Event","Index","Verified at"]} rows={toyRows}/>
+      {toyRows.length === 0 && <><div className="spacer-small"/><EmptyVerifiedState description="Capture the toy detail or Complete Index UI showing the exact name, rarity, source, value, interaction type, event status, and index number."/></>}
     </section>
     <section className="summary-grid">
       <article className="summary-card"><h3>Rarity is not earnings</h3><p>A rarity color or name will never be used to invent a value ranking. Both fields must be visible in the current game.</p></article>

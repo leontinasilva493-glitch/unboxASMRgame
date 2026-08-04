@@ -1,10 +1,12 @@
 import type { Metadata } from "next";
+import type { ReactNode } from "react";
 import { Breadcrumbs } from "@/components/Breadcrumbs";
 import { DataTable } from "@/components/DataTable";
 import { InlineCallout, PageIntro, RelatedLinks, SourceList } from "@/components/PageParts";
 import { MissingValue, VerificationBadge } from "@/components/Verification";
+import { buildGamepassViewModels } from "@/lib/content-view-models.mjs";
 import { gamepasses } from "@/lib/data";
-import { formatDate, pageMetadata, ROBLOX_URL } from "@/lib/site";
+import { pageMetadata, ROBLOX_URL } from "@/lib/site";
 
 export const metadata: Metadata = pageMetadata({
   title: "Unbox ASMR Gamepasses — Prices & Verified Effects",
@@ -12,16 +14,21 @@ export const metadata: Metadata = pageMetadata({
   path: "/gamepasses/",
 });
 
+function show(value: string | null): ReactNode {
+  return value ?? <MissingValue/>;
+}
+
 export default function Gamepasses() {
-  const rows = gamepasses.map((pass) => [
-    pass.name,
-    <span className="numeric" key="price">{pass.priceRobux} Robux</span>,
-    <MissingValue key="effect"/>,
-    <MissingValue key="best"/>,
-    <MissingValue key="stage"/>,
-    <MissingValue key="verdict"/>,
-    <VerificationBadge key="badge" status={pass.evidence[0].status}/>,
-    formatDate(pass.evidence[0].verifiedAt, "short"),
+  const models = buildGamepassViewModels(gamepasses);
+  const rows = models.map((pass) => [
+    show(pass.name),
+    <span className="numeric" key="price">{show(pass.price)}</span>,
+    show(pass.effect),
+    show(pass.bestFor),
+    show(pass.gameStage),
+    show(pass.verdict),
+    <VerificationBadge key="badge" status={pass.evidenceStatus}/>,
+    show(pass.verifiedAt),
   ]);
 
   return <div className="container page-shell">
@@ -36,7 +43,7 @@ export default function Gamepasses() {
 
     <section className="section-compact">
       <div className="desktop-gamepass-table"><DataTable label="Unbox ASMR Gamepass comparison" headers={["Name","Public price","Verified effect","Best for","Stage","Value verdict","Evidence","Checked"]} rows={rows}/></div>
-      <div className="mobile-card-table">{gamepasses.map((pass) => <article className="mobile-data-card" key={pass.slug}><h3>{pass.name}</h3><dl><dt>Public price</dt><dd>{pass.priceRobux} Robux</dd><dt>Effect</dt><dd><MissingValue/></dd><dt>Value verdict</dt><dd><MissingValue/></dd><dt>Evidence</dt><dd><VerificationBadge status={pass.evidence[0].status}/></dd><dt>Checked</dt><dd>{formatDate(pass.evidence[0].verifiedAt, "short")}</dd></dl></article>)}</div>
+      <div className="mobile-card-table">{models.map((pass, index) => <article className="mobile-data-card" key={gamepasses[index].slug}><h3>{show(pass.name)}</h3><dl><dt>Public price</dt><dd>{show(pass.price)}</dd><dt>Effect</dt><dd>{show(pass.effect)}</dd><dt>Best for</dt><dd>{show(pass.bestFor)}</dd><dt>Stage</dt><dd>{show(pass.gameStage)}</dd><dt>Value verdict</dt><dd>{show(pass.verdict)}</dd><dt>Evidence</dt><dd><VerificationBadge status={pass.evidenceStatus}/></dd><dt>Checked</dt><dd>{show(pass.verifiedAt)}</dd></dl></article>)}</div>
     </section>
 
     <section className="section-compact">

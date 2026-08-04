@@ -1,0 +1,107 @@
+name: Game information monitor
+
+on:
+  schedule:
+    - cron: "15 1,13 * * *"
+    - cron: "17 * * * *"
+  workflow_dispatch:
+    inputs:
+      mode:
+        description: Monitoring mode
+        required: true
+        default: manual
+        type: choice
+        options:
+          - manual
+          - scheduled
+          - hourly
+      source:
+        description: Optional source id
+        required: false
+        type: string
+
+permissions:
+  contents: write
+  issues: write
+
+concurrency:
+  group: game-information-monitor
+  cancel-in-progress: false
+
+jobs:
+  monitor:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    env:
+      OUTPUT_DIR: artifacts/monitoring/current
+      STATE_WORKTREE: .monitor-state
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+
+      - name: Prepare monitor-state worktree
+        shell: bash
+        run: |
+          git fetch origin monitor-state || true
+          if git show-ref --verify --quiet refs/remotes/origin/monitor-state; then
+            git worktree add -B monitor-state "$STATE_WORKTREE" origin/monitor-state
+          else
+            git worktree add --detach --no-checkout "$STATE_WORKTREE" HEAD
+            git -C "$STATE_WORKTREE" switch --orphan monitor-state
+            git -C "$STATE_WORKTREE" read-tree --empty
+          fi
+          mkdir -p "$STATE_WORKTREE/state"
+
+      - name: Select monitoring mode
+        shell: bash
+        run: |
+          if [ "${{ github.event_name }}" = "workflow_dispatch" ]; then
+            echo "MONITOR_MODE=${{ inputs.mode }}" >> "$GITHUB_ENV"
+            echo "MONITOR_SOURCE=${{ inputs.source }}" >> "$GITHUB_ENV"
+          elif [ "${{ github.event.schedule }}" = "17 * * * *" ]; then
+            echo "MONITOR_MODE=hourly" >> "$GITHUB_ENV"
+          else
+            echo "MONITOR_MODE=scheduled" >> "$GITHUB_ENV"
+          fi
+
+      - name: Collect and compare public sources
+        shell: bash
+        run: |
+          args=(--mode "$MONITOR_MODE" --state-dir "$STATE_WORKTREE/state" --output-dir "$OUTPUT_DIR")
+          if [ -n "${MONITOR_SOURCE:-}" ]; then args+=(--source "$MONITOR_SOURCE"); fi
+          set +e
+          node scripts/monitor/run.mjs "${args[@]}"
+          code=$?
+          set -e
+          if [ "$code" -ne 0 ] && [ "$code" -ne 2 ]; then exit "$code"; fi
+
+      - name: Create or update review issues
+        if: ${{ hashFiles('artifacts/monitoring/current/run-summary.json') != '' }}
+        run: node scripts/monitor/github-issues.mjs --summary "$OUTPUT_DIR/run-summary.json" --apply
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+
+      - name: Advance monitor-state after issue publication
+        shell: bash
+        run: |
+          git -C "$STATE_WORKTREE" config user.name "github-actions[bot]"
+          git -C "$STATE_WORKTREE" config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git -C "$STATE_WORKTREE" add state
+          if ! git -C "$STATE_WORKTREE" diff --cached --quiet; then
+            git -C "$STATE_WORKTREE" commit -m "chore(monitoring): update public source state"
+            git -C "$STATE_WORKTREE" push origin HEAD:monitor-state
+          fi
+
+      - name: Upload monitoring evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: game-information-monitor-${{ github.run_id }}
+          path: artifacts/monitoring/current
+          if-no-files-found: ignore
+          retention-days: 30

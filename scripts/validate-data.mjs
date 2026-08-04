@@ -4,7 +4,7 @@ import path from "node:path";
 import { validateDataCollections } from "./data-validation.mjs";
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
-const names = ["events", "codes", "gamepasses", "crates", "toys"];
+const names = ["events", "codes", "gamepasses", "crates", "toys", "rebirths", "workers"];
 const collections = {};
 
 for (const name of names) {

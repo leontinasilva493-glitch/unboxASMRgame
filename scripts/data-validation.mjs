@@ -32,8 +32,10 @@ export function validateDataCollections(collections) {
   const gamepasses = collections.gamepasses ?? [];
   const crates = collections.crates ?? [];
   const toys = collections.toys ?? [];
+  const rebirths = collections.rebirths ?? [];
+  const workers = collections.workers ?? [];
 
-  for (const [name, records] of Object.entries({ events, gamepasses, crates, toys })) {
+  for (const [name, records] of Object.entries({ events, gamepasses, crates, toys, rebirths, workers })) {
     validateUniqueSlugs(name, records, errors);
   }
 
@@ -68,5 +70,7 @@ export function validateDataCollections(collections) {
   }
 
   for (const crate of crates) validateEvidence(`crate ${crate.slug}`, crate.evidence, errors);
+  for (const rebirth of rebirths) validateEvidence(`rebirth ${rebirth.slug}`, rebirth.evidence, errors);
+  for (const worker of workers) validateEvidence(`worker ${worker.slug}`, worker.evidence, errors);
   return errors;
 }
