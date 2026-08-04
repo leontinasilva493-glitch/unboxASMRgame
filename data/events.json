@@ -11,7 +11,8 @@
       "The published schedule lists an end at 3:00 PM ET / 12:00 PM PT on August 9, 2026."
     ],
     "unconfirmedNotes": [
-      "Specific crates, toys, rebirth changes, and codes have not been confirmed in-game."
+      "Specific crates, toys, rebirth changes, and codes have not been confirmed in-game.",
+      "The official public game description checked on August 1 does not list Update 3 features."
     ],
     "evidence": [
       {
@@ -19,6 +20,12 @@
         "verifiedAt": "2026-07-30",
         "sourceUrl": "https://allthings.how/unbox-asmr-events-schedule/",
         "notes": "Third-party published event schedule; re-check against official channels before launch."
+      },
+      {
+        "status": "official",
+        "verifiedAt": "2026-08-01",
+        "sourceUrl": "https://games.roblox.com/v1/games?universeIds=10454554751",
+        "notes": "Official public game record checked before the event; it shows a July 31 update timestamp but no Update 3 feature list."
       }
     ]
   }
