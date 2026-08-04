@@ -19,8 +19,8 @@ export default function Updates() {
     <PageIntro
       eyebrow="Event desk"
       title="Unbox ASMR Roblox Update 3 and Admin Abuse"
-      description="The schedule is community-reported and converted to your local time. The official public listing was checked before launch; no Update 3 feature list has been published there."
-      checkedAt={game.checkedAt}
+      description="The schedule is community-reported and converted to your local time. The reported window has begun, but the official public listing still does not provide an Update 3 feature list."
+      checkedAt="2026-08-03"
     />
 
     <InlineCallout title="Pre-update public check" tone="reported">
@@ -36,6 +36,10 @@ export default function Updates() {
       <EventCountdown startsAt={event.startsAt} endsAt={event.endsAt} initialStatus={event.publishedStatus}/>
     </div>
 
+    <InlineCallout title="Community schedule source" tone="reported">
+      <p>AbuseTime and All Things How list the August 2–9 event window. These community schedule records support timing only; they do not prove that a crate, toy, code, rebirth, worker, or Gamepass change is active in the current build.</p>
+    </InlineCallout>
+
     <section className="section-compact split-cards">
       <article className="info-card keep-card">
         <h2>Published schedule</h2>
@@ -48,7 +52,7 @@ export default function Updates() {
       </article>
     </section>
 
-    <InlineCallout title="Implementation status: not yet verified" tone="danger"><p>Update 3 has not reached its reported start time. No crate, toy, code, rebirth, worker, or Gamepass change is presented as implemented. This page must be refreshed from current-version gameplay after the event starts.</p></InlineCallout>
+    <InlineCallout title="Implementation status: current gameplay still required" tone="danger"><p>The community-reported event window began on August 2, 2026. No crate, toy, code, rebirth, worker, or Gamepass change is presented as implemented until current-version gameplay or an official announcement proves it.</p></InlineCallout>
 
     <section className="section-compact narrow">
       <h2>Changelog</h2>
@@ -67,6 +71,6 @@ export default function Updates() {
     </section>
 
     <RelatedLinks links={[{ href: "/codes/", label: "Codes status" }, { href: "/crates-and-toys/", label: "Crates & Toys" }, { href: "/rebirths-and-workers/", label: "Rebirths & Workers" }, { href: "/sources/", label: "Evidence policy" }]}/>
-    <SourceList sources={[{ label: "Official Unbox ASMR Roblox experience", url: game.robloxUrl, note: "Public description and games API checked August 1, 2026." }, { label: "All Things How event schedule", url: "https://allthings.how/unbox-asmr-events-schedule/", note: "Community-reported schedule checked July 30, 2026; not proof of implemented features." }]}/>
+    <SourceList sources={[{ label: "Official Unbox ASMR Roblox experience", url: game.robloxUrl, note: "Public description and games API checked August 1, 2026." }, { label: "AbuseTime Unbox ASMR schedule", url: "https://abusetime.dev/games/unbox-asmr/current", note: "Community schedule checked August 3, 2026; timing only, not feature proof." }, { label: "All Things How event schedule", url: "https://allthings.how/unbox-asmr-events-schedule/", note: "Community-reported schedule checked July 30, 2026; not proof of implemented features." }]}/>
   </div>;
 }
