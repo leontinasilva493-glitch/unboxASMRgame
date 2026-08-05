@@ -1,0 +1,22 @@
+{
+  "data": [
+    {
+      "id": 10454554751,
+      "rootPlaceId": 112233638491976,
+      "name": "[🍯] Unbox ASMR!",
+      "description": "📦Unbox ASMR Toys! 🎧Relax & collect!\n\n🔔 Follow for updates and special codes!",
+      "creator": {
+        "id": 1110056661,
+        "name": "ASMR Labs",
+        "type": "Group"
+      },
+      "playing": 38182,
+      "visits": 23289548,
+      "maxPlayers": 6,
+      "updated": "2026-07-31T20:43:30.7397095Z",
+      "favoritedCount": 717476,
+      "canonicalUrlPath": "/games/112233638491976/Unbox-ASMR",
+      "isContentRestricted": false
+    }
+  ]
+}

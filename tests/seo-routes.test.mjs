@@ -50,6 +50,11 @@ test("roblox index has an exact title and keeps its evidence gate", () => {
   assert.match(index, /title="Unbox ASMR Roblox Index"/);
   assert.match(index, /noindex: true/);
   assert.match(index, /Complete Index/);
+  assert.match(index, /buildCollectionFilterRows/);
+  assert.match(index, /buildCrateViewModels/);
+  assert.match(index, /buildToyViewModels/);
+  assert.match(index, /rows=\{crateRows\}/);
+  assert.match(index, /rows=\{toyRows\}/);
 });
 
 test("legacy crates route permanently redirects to the roblox index", () => {

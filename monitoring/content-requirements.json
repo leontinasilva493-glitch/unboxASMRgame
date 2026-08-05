@@ -1,0 +1,79 @@
+{
+  "version": 1,
+  "pages": [
+    {
+      "route": "/updates/",
+      "collections": [
+        {
+          "id": "events",
+          "dataFile": "data/events.json",
+          "label": "活动与更新",
+          "requiredFields": ["name", "startsAt", "publishedStatus", "confirmedChanges", "evidence"],
+          "captureInstruction": "拍摄当前版本的活动面板，并记录实际新增、移除或变更的内容。"
+        }
+      ]
+    },
+    {
+      "route": "/codes/",
+      "collections": [
+        {
+          "id": "codes",
+          "dataFile": "data/codes.json",
+          "label": "兑换码",
+          "requiredFields": ["code", "reward", "status", "checkedAt", "evidence"],
+          "captureInstruction": "拍摄代码输入界面及每个候选代码的成功或失败结果。"
+        }
+      ]
+    },
+    {
+      "route": "/gamepasses/",
+      "collections": [
+        {
+          "id": "gamepasses",
+          "dataFile": "data/gamepasses.json",
+          "label": "Gamepass",
+          "requiredFields": ["name", "priceRobux", "effect", "bestFor", "gameStage", "verdict", "evidence"],
+          "captureInstruction": "拍摄每个 Gamepass 的游戏内购买说明；在安全可行时记录使用前后对比。"
+        }
+      ]
+    },
+    {
+      "route": "/crates-and-toys/",
+      "collections": [
+        {
+          "id": "crates",
+          "dataFile": "data/crates.json",
+          "label": "箱子",
+          "requiredFields": ["name", "area", "unlockRequirement", "cost", "possibleToys", "evidence"],
+          "captureInstruction": "拍摄每个箱子的完整面板，包括名称、区域、解锁条件、价格和玩具池。"
+        },
+        {
+          "id": "toys",
+          "dataFile": "data/toys.json",
+          "label": "玩具",
+          "requiredFields": ["name", "rarity", "sourceCrateIds", "cashValue", "interaction", "indexNumber", "evidence"],
+          "captureInstruction": "拍摄玩具详情或 Complete Index，包含名称、稀有度、来源、价值、互动和编号。"
+        }
+      ]
+    },
+    {
+      "route": "/rebirths-and-workers/",
+      "collections": [
+        {
+          "id": "rebirths",
+          "dataFile": "data/rebirths.json",
+          "label": "重生",
+          "requiredFields": ["name", "requirement", "resets", "keeps", "reward", "unlock", "evidence"],
+          "captureInstruction": "拍摄重生面板和完整确认弹窗，区分重置项、保留项和永久奖励。"
+        },
+        {
+          "id": "workers",
+          "dataFile": "data/workers.json",
+          "label": "工人",
+          "requiredFields": ["source", "unlock", "cost", "slot", "task", "offlineBehavior", "knownFix", "evidence"],
+          "captureInstruction": "拍摄工人页面、群组奖励前后状态、槽位，并记录重新进入服务器后的结果。"
+        }
+      ]
+    }
+  ]
+}

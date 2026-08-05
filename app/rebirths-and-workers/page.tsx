@@ -1,10 +1,12 @@
 import type { Metadata } from "next";
+import type { ReactNode } from "react";
 import { Breadcrumbs } from "@/components/Breadcrumbs";
 import { DataTable } from "@/components/DataTable";
 import { EmptyVerifiedState, InlineCallout, PageIntro, RelatedLinks, SourceList } from "@/components/PageParts";
 import { MissingValue, VerificationBadge } from "@/components/Verification";
 import { VideoReference } from "@/components/VideoReference";
-import { game } from "@/lib/data";
+import { buildRebirthViewModels, buildWorkerViewModels } from "@/lib/content-view-models.mjs";
+import { game, rebirths, workers } from "@/lib/data";
 import { pageMetadata } from "@/lib/site";
 
 export const metadata: Metadata = pageMetadata({
@@ -14,7 +16,17 @@ export const metadata: Metadata = pageMetadata({
   noindex: true,
 });
 
+function show(value: string | null): ReactNode {
+  return value ?? <MissingValue/>;
+}
+
 export default function RebirthsAndWorkers() {
+  const rebirthModels = buildRebirthViewModels(rebirths);
+  const workerModels = buildWorkerViewModels(workers);
+  const rebirthRows = rebirthModels.map((rebirth) => [show(rebirth.name), show(rebirth.requirement), show(rebirth.resets), show(rebirth.keeps), show(rebirth.reward), show(rebirth.unlock), show(rebirth.version), show(rebirth.verifiedAt), <VerificationBadge key="evidence" status={rebirth.evidenceStatus}/>]);
+  const workerRows = workerModels.map((worker) => [show(worker.source), show(worker.unlock), show(worker.cost), show(worker.slot), show(worker.task), show(worker.offlineBehavior), show(worker.knownFix), show(worker.verifiedAt)]);
+  const firstRebirth = rebirthModels[0];
+
   return <div className="container page-shell">
     <Breadcrumbs items={[{ label: "Rebirths & Workers", href: "/rebirths-and-workers/" }]}/>
     <PageIntro
@@ -74,27 +86,25 @@ export default function RebirthsAndWorkers() {
 
     <section className="section-compact">
       <div className="keep-reset-grid">
-        <article className="info-card reset-card"><VerificationBadge status="unverified"/><h2>What you lose</h2><p><MissingValue/> — the full reset list needs a current-version confirmation screenshot.</p></article>
-        <article className="info-card keep-card"><VerificationBadge status="unverified"/><h2>What you keep</h2><p><MissingValue/> — retained items and permanent progress must be shown by the game.</p></article>
+        <article className="info-card reset-card"><VerificationBadge status={firstRebirth?.evidenceStatus ?? "unverified"}/><h2>What you lose</h2><p>{show(firstRebirth?.resets ?? null)}</p></article>
+        <article className="info-card keep-card"><VerificationBadge status={firstRebirth?.evidenceStatus ?? "unverified"}/><h2>What you keep</h2><p>{show(firstRebirth?.keeps ?? null)}</p></article>
       </div>
     </section>
 
     <section>
       <h2>Verified rebirth requirements and rewards</h2>
-      <p className="muted">No current-version rebirth record is eligible for publication yet.</p>
+      <p className="muted">Only evidence-backed, current-version rebirth records are eligible for publication.</p>
       <div style={{height:16}}/>
-      <DataTable label="Unbox ASMR rebirths" headers={["Rebirth","Requirement","Resets","Keeps","Reward","Unlock","Event / version","Verified at","Evidence"]} rows={[]}/>
-      <div style={{height:16}}/>
-      <EmptyVerifiedState description="Capture the rebirth panel and the complete confirmation dialog. The evidence must distinguish permanent rewards from session earnings."/>
+      <DataTable label="Unbox ASMR rebirths" headers={["Rebirth","Requirement","Resets","Keeps","Reward","Unlock","Event / version","Verified at","Evidence"]} rows={rebirthRows}/>
+      {rebirthRows.length === 0 && <><div style={{height:16}}/><EmptyVerifiedState description="Capture the rebirth panel and the complete confirmation dialog. The evidence must distinguish permanent rewards from session earnings."/></>}
     </section>
 
     <section className="section">
       <h2>Verified workers</h2>
-      <p className="muted">The public reward condition is known, but worker delivery and behavior are not yet verified in-game.</p>
+      <p className="muted">The public reward condition is known, but worker delivery and behavior require in-game verification.</p>
       <div style={{height:16}}/>
-      <DataTable label="Unbox ASMR workers" headers={["Source","Unlock","Cost","Slot","Task","Offline behavior","Known fix","Verified at"]} rows={[]}/>
-      <div style={{height:16}}/>
-      <EmptyVerifiedState description="Record the worker panel before and after the official group reward, including available slots and what happens after a server rejoin."/>
+      <DataTable label="Unbox ASMR workers" headers={["Source","Unlock","Cost","Slot","Task","Offline behavior","Known fix","Verified at"]} rows={workerRows}/>
+      {workerRows.length === 0 && <><div style={{height:16}}/><EmptyVerifiedState description="Record the worker panel before and after the official group reward, including available slots and what happens after a server rejoin."/></>}
     </section>
 
     <InlineCallout title="Indexing gate" tone="reported"><p>This route remains noindex until the advertised workers are verified inside the game and the first rebirth decision can be explained from a complete current-version confirmation screen.</p></InlineCallout>

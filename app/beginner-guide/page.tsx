@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import { Breadcrumbs } from "@/components/Breadcrumbs";
 import { InlineCallout, PageIntro, RelatedLinks, SourceList, TableOfContents } from "@/components/PageParts";
 import { VideoReference } from "@/components/VideoReference";
@@ -84,7 +85,16 @@ export default function BeginnerGuide() {
         <h2 id="frog-npc">How to sell to the frog NPC</h2>
         <VerificationBadge status="unverified"/>
         <p>The frog NPC location and sell interaction are not present in the official public description and have not been captured in the current game version. Do not follow a copied route until the NPC, approach path, prompt, and sell result can be shown together.</p>
-        <div className="screenshot-slot"><div><strong>Numbered screenshot needed</strong><span>Frog NPC location, approach route, interaction prompt, and sell confirmation</span></div></div>
+        <figure className="guide-illustration">
+          <Image
+            src="/images/guides/frog-npc-toy-sale-illustration.webp"
+            alt="Concept illustration of a player offering a toy to a friendly frog merchant in exchange for coins"
+            width={1672}
+            height={941}
+            sizes="(max-width: 900px) 100vw, 900px"
+          />
+          <figcaption><strong>Concept illustration.</strong> This is not an in-game screenshot and does not verify the NPC location, approach route, interaction prompt, or sale result.</figcaption>
+        </figure>
 
         <h2 id="free-workers">How to claim the publicly advertised workers</h2>
         <VerificationBadge status="official"/>

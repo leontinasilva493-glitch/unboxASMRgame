@@ -1,0 +1,60 @@
+{
+  "version": 1,
+  "sources": [
+    {
+      "id": "roblox-place-universe",
+      "label": "Roblox Place to Universe",
+      "tier": "A",
+      "kind": "roblox_api",
+      "url": "https://apis.roblox.com/universes/v1/places/112233638491976/universe",
+      "cadence": "twice_daily",
+      "parser": "roblox_place_universe",
+      "allowedClaims": ["universe_identity"],
+      "affectedRoutes": ["/sources/"],
+      "enabled": true,
+      "contentFields": [],
+      "trendFields": [],
+      "expectedIdentity": {
+        "placeId": 112233638491976,
+        "universeId": 10454554751
+      }
+    },
+    {
+      "id": "roblox-game-details",
+      "label": "Official Roblox game details",
+      "tier": "A",
+      "kind": "roblox_api",
+      "url": "https://games.roblox.com/v1/games?universeIds=10454554751",
+      "cadence": "twice_daily",
+      "parser": "roblox_game",
+      "allowedClaims": ["official_name", "official_description", "creator_identity", "public_status", "public_metrics"],
+      "affectedRoutes": ["/", "/updates/", "/codes/", "/sources/"],
+      "enabled": true,
+      "contentFields": ["content.name", "content.description", "content.updated", "content.canonicalUrlPath"],
+      "trendFields": ["trends.playing", "trends.visits", "trends.favoritedCount"],
+      "expectedIdentity": {
+        "universeId": 10454554751,
+        "placeId": 112233638491976,
+        "creatorId": 1110056661,
+        "creatorType": "Group"
+      }
+    },
+    {
+      "id": "roblox-group-details",
+      "label": "Official ASMR Labs group details",
+      "tier": "A",
+      "kind": "roblox_api",
+      "url": "https://groups.roblox.com/v1/groups/1110056661",
+      "cadence": "twice_daily",
+      "parser": "roblox_group",
+      "allowedClaims": ["group_identity", "official_group_description", "official_group_shout"],
+      "affectedRoutes": ["/updates/", "/sources/"],
+      "enabled": true,
+      "contentFields": ["content.name", "content.description", "content.shout"],
+      "trendFields": ["trends.memberCount"],
+      "expectedIdentity": {
+        "groupId": 1110056661
+      }
+    }
+  ]
+}
