@@ -61,9 +61,20 @@ p { margin: 0; }
 .brand strong { font-weight: 800; }
 .brand-mark { display: grid; place-items: center; width: 38px; height: 38px; border-radius: 12px; color: var(--primary-ink); background: var(--primary); box-shadow: inset 0 -3px 0 rgba(61,46,16,.12); }
 .desktop-nav { margin-left: auto; display: flex; align-self: stretch; gap: 2px; }
-.desktop-nav a { position: relative; display: grid; place-items: center; padding: 0 10px; text-decoration: none; color: #4f5867; font-size: .875rem; font-weight: 700; }
+.desktop-nav > a { position: relative; display: grid; place-items: center; padding: 0 10px; text-decoration: none; color: #4f5867; font-size: .875rem; font-weight: 700; }
 .desktop-nav a[aria-current="page"] { color: var(--text); }
-.desktop-nav a[aria-current="page"]::after { content: ""; position: absolute; left: 10px; right: 10px; bottom: -1px; height: 3px; border-radius: 3px 3px 0 0; background: var(--primary); }
+.desktop-nav > a[aria-current="page"]::after, .desktop-wiki-menu > summary[aria-current="page"]::after { content: ""; position: absolute; left: 10px; right: 10px; bottom: -1px; height: 3px; border-radius: 3px 3px 0 0; background: var(--primary); }
+.desktop-wiki-menu { position: relative; display: flex; align-self: stretch; }
+.desktop-wiki-menu > summary { position: relative; display: flex; align-items: center; padding: 0 10px; list-style: none; color: #4f5867; font-size: .875rem; font-weight: 700; cursor: pointer; }
+.desktop-wiki-menu > summary::-webkit-details-marker { display: none; }
+.desktop-wiki-menu > summary[aria-current="page"] { color: var(--text); }
+.wiki-dropdown { position: absolute; z-index: 50; top: calc(100% - 7px); left: -8px; width: 300px; display: none; gap: 4px; padding: 10px; border: 1px solid var(--border); border-radius: var(--radius-card); background: var(--surface); box-shadow: var(--shadow-hover); }
+.desktop-wiki-menu[open] .wiki-dropdown, .desktop-wiki-menu:hover .wiki-dropdown, .desktop-wiki-menu:focus-within .wiki-dropdown { display: grid; }
+.wiki-dropdown a { display: grid; gap: 3px; padding: 11px 12px; border-radius: 10px; text-decoration: none; color: var(--text); }
+.wiki-dropdown a:hover, .wiki-dropdown a:focus-visible { background: var(--surface-soft); outline: none; }
+.wiki-dropdown a[aria-current="page"] { background: #fff3cf; }
+.wiki-dropdown strong { font-size: .875rem; }
+.wiki-dropdown span { color: var(--text-secondary); font-size: .75rem; line-height: 1.4; }
 .header-cta { flex: none; }
 .mobile-nav { display: none; margin-left: auto; position: relative; }
 .mobile-nav summary { min-height: 44px; list-style: none; display: flex; align-items: center; gap: 8px; padding: 0 12px; border: 1px solid var(--border); background: var(--surface); border-radius: var(--radius-button); font-weight: 700; cursor: pointer; }
@@ -71,6 +82,8 @@ p { margin: 0; }
 .mobile-nav nav { position: absolute; right: 0; top: calc(100% + 10px); width: min(310px, calc(100vw - 32px)); display: grid; padding: 10px; border: 1px solid var(--border); border-radius: var(--radius-card); background: var(--surface); box-shadow: var(--shadow-hover); }
 .mobile-nav nav a { min-height: 44px; display: flex; align-items: center; padding: 0 12px; border-radius: 9px; text-decoration: none; font-weight: 700; }
 .mobile-nav nav a:hover { background: var(--surface-soft); }
+.mobile-nav-group { display: grid; padding-bottom: 8px; margin-bottom: 8px; border-bottom: 1px solid var(--border); }
+.mobile-nav-group > span { padding: 8px 12px 4px; color: var(--text-secondary); font-size: .7rem; font-weight: 800; letter-spacing: .08em; text-transform: uppercase; }
 
 .button { min-height: 44px; display: inline-flex; align-items: center; justify-content: center; gap: 9px; padding: 10px 17px; border: 1px solid transparent; border-radius: var(--radius-button); text-decoration: none; font-weight: 800; transition: transform 160ms ease-out, background 160ms ease-out, box-shadow 160ms ease-out; }
 .button svg { width: 18px; height: 18px; }

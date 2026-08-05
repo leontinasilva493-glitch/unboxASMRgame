@@ -108,7 +108,7 @@ export default function RebirthsAndWorkers() {
     </section>
 
     <InlineCallout title="Indexing gate" tone="reported"><p>This route remains noindex until the advertised workers are verified inside the game and the first rebirth decision can be explained from a complete current-version confirmation screen.</p></InlineCallout>
-    <RelatedLinks links={[{ href: "/beginner-guide/", label: "Beginner Guide" }, { href: "/crates-and-toys/", label: "Crates & Toys" }, { href: "/gamepasses/", label: "Gamepasses" }]}/>
+    <RelatedLinks links={[{ href: "/wiki/", label: "Unbox ASMR Wiki" }, { href: "/beginner-guide/", label: "Beginner Guide" }, { href: "/roblox-index/", label: "Roblox Index" }, { href: "/gamepasses/", label: "Gamepasses" }]}/>
     <SourceList sources={[{ label: "Official Unbox ASMR Roblox experience", url: game.robloxUrl, note: "Worker-reward condition checked August 1, 2026." }, { label: "Official ASMR Labs Roblox group", url: game.groupUrl, note: "Group identity checked August 1, 2026." }, { label: "RobloMine rebirth progression video", url: "https://www.youtube.com/watch?v=-G26P9S5yGY", note: "Third-party gameplay manually sampled August 3, 2026; no reset or reward fields were imported." }]}/>
   </div>;
 }

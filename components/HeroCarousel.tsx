@@ -17,8 +17,8 @@ const slides = [
   {
     title: "Build the collection",
     description: "See what the official listing confirms about collection upgrades and better crates—and what still needs gameplay proof.",
-    href: "/crates-and-toys/",
-    cta: "Check crates and toys",
+    href: "/roblox-index/",
+    cta: "Open the Roblox Index",
     image: "/images/home/carousel-collection-workshop.webp",
     alt: "Editorial illustration of crates moving through a colorful miniature collection workshop",
   },
