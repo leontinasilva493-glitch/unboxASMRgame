@@ -6,11 +6,15 @@ export const ROBLOX_URL =
   "https://www.roblox.com/games/112233638491976/Unbox-ASMR";
 export const LAST_CHECKED = "2026-08-01";
 
+export const wikiNavItems = [
+  { href: "/wiki/", label: "Wiki Home", mobileLabel: "Wiki Home", description: "Verified facts and every player guide" },
+  { href: "/beginner-guide/", label: "Beginner Guide", mobileLabel: "Beginner Guide", description: "A cautious route through the first session" },
+  { href: "/roblox-index/", label: "Roblox Index", mobileLabel: "Roblox Index", description: "Evidence-gated crate and toy collection data" },
+  { href: "/rebirths-and-workers/", label: "Rebirths & Workers", mobileLabel: "Rebirths & Workers", description: "Reset questions and worker evidence" },
+  { href: "/sources/", label: "Sources & Verification", mobileLabel: "Sources & Verification", description: "How claims earn a verification status" },
+] as const;
+
 export const navItems = [
-  { href: "/", label: "Home", mobileLabel: "Home" },
-  { href: "/beginner-guide/", label: "Beginner Guide", mobileLabel: "Beginner" },
-  { href: "/crates-and-toys/", label: "Crates & Toys", mobileLabel: "Crates & Toys" },
-  { href: "/rebirths-and-workers/", label: "Rebirths & Workers", mobileLabel: "Rebirths" },
   { href: "/gamepasses/", label: "Gamepasses", mobileLabel: "Gamepasses" },
   { href: "/updates/", label: "Updates", mobileLabel: "Updates" },
   { href: "/codes/", label: "Codes", mobileLabel: "Codes" },
@@ -30,15 +34,17 @@ export function pageMetadata({
   description,
   path,
   noindex = false,
+  absoluteTitle = false,
 }: {
   title: string;
   description: string;
   path: string;
   noindex?: boolean;
+  absoluteTitle?: boolean;
 }): Metadata {
   const canonical = new URL(path, SITE_URL).toString();
   return {
-    title,
+    title: absoluteTitle ? { absolute: title } : title,
     description,
     alternates: { canonical },
     robots: noindex ? { index: false, follow: true } : { index: true, follow: true },

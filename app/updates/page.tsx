@@ -70,7 +70,7 @@ export default function Updates() {
       </ol>
     </section>
 
-    <RelatedLinks links={[{ href: "/codes/", label: "Codes status" }, { href: "/crates-and-toys/", label: "Crates & Toys" }, { href: "/rebirths-and-workers/", label: "Rebirths & Workers" }, { href: "/sources/", label: "Evidence policy" }]}/>
+    <RelatedLinks links={[{ href: "/wiki/", label: "Unbox ASMR Wiki" }, { href: "/codes/", label: "Codes status" }, { href: "/roblox-index/", label: "Roblox Index" }, { href: "/rebirths-and-workers/", label: "Rebirths & Workers" }, { href: "/sources/", label: "Evidence policy" }]}/>
     <SourceList sources={[{ label: "Official Unbox ASMR Roblox experience", url: game.robloxUrl, note: "Public description and games API checked August 1, 2026." }, { label: "AbuseTime Unbox ASMR schedule", url: "https://abusetime.dev/games/unbox-asmr/current", note: "Community schedule checked August 3, 2026; timing only, not feature proof." }, { label: "All Things How event schedule", url: "https://allthings.how/unbox-asmr-events-schedule/", note: "Community-reported schedule checked July 30, 2026; not proof of implemented features." }]}/>
   </div>;
 }

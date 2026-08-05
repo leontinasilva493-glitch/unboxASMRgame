@@ -7,7 +7,7 @@ import { game } from "@/lib/data";
 import { pageMetadata } from "@/lib/site";
 
 export const metadata: Metadata = pageMetadata({
-  title: "Unbox ASMR Beginner Guide: Sell Toys, Workers & Crates",
+  title: "Unbox ASMR Beginner Guide for Roblox",
   description: "A cautious beginner path for Unbox ASMR on Roblox, separating official starting facts from gameplay steps that still need current-version captures.",
   path: "/beginner-guide/",
   noindex: true,
@@ -104,7 +104,7 @@ export default function BeginnerGuide() {
           <li>If a rebirth prompt is unclear, cancel and capture the complete confirmation screen first.</li>
         </ul>
         <InlineCallout title="Indexing gate" tone="reported"><p>This guide remains out of search until original current-version captures prove the first loop, selling path, and worker delivery. The written route is ready for those assets but does not pretend they already exist.</p></InlineCallout>
-        <RelatedLinks links={[{ href: "/crates-and-toys/", label: "Crates & Toys" }, { href: "/rebirths-and-workers/", label: "Rebirths & Workers" }, { href: "/gamepasses/", label: "Gamepasses" }]}/>
+        <RelatedLinks links={[{ href: "/wiki/", label: "Unbox ASMR Wiki" }, { href: "/roblox-index/", label: "Roblox Index" }, { href: "/rebirths-and-workers/", label: "Rebirths & Workers" }, { href: "/gamepasses/", label: "Gamepasses" }]}/>
         <SourceList sources={[{ label: "Official Unbox ASMR Roblox experience", url: game.robloxUrl, note: "Public description checked August 1, 2026." }, { label: "Official ASMR Labs Roblox group", url: game.groupUrl, note: "Group identity and availability checked August 1, 2026." }, { label: "Roblox Guides beginner gameplay video", url: "https://www.youtube.com/watch?v=7JfyM_GSipY", note: "Third-party gameplay manually reviewed August 3, 2026; used only as a visual reference." }]}/>
       </article>
       <TableOfContents items={toc}/>

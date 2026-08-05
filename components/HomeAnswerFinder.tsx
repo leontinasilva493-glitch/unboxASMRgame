@@ -20,7 +20,7 @@ const answers = [
     title: "Which crates and toys are verified?",
     answer: "The official description confirms the crates-and-toys theme, but the current evidence set does not yet prove a complete crate list, toy list, rarity table, opening odds, cash values, or unlock sequence. Those fields remain intentionally blank instead of being copied from an undated community page. A reliable comparison needs a current-version capture of each crate panel and the resulting toy details.",
     caution: "Do not treat rarity, promotional art, or a copied list as proof of earnings or odds.",
-    href: "/crates-and-toys/",
+    href: "/roblox-index/",
     linkLabel: "See the crates and toys evidence checklist",
   },
   {

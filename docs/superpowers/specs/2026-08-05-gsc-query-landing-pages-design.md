@@ -36,7 +36,7 @@ Move the existing Crates & Toys evidence-ready structure to this route and use t
 
 ## Navigation and internal links
 
-The brand remains the Home link, so the redundant `Home` text link is removed. The initial primary navigation is `Wiki`, `Beginner Guide`, `Gamepasses`, `Updates`, and `Codes`, followed by the existing Roblox CTA. `Roblox Index` remains discoverable from the Wiki, homepage, Beginner Guide, and related links, but does not enter the primary navigation until its dataset passes the indexing gate.
+The brand remains the Home link, so the redundant `Home` text link is removed. On desktop, `Wiki` is a hover, click, and keyboard-accessible dropdown containing Wiki Home, Beginner Guide, Roblox Index, Rebirths & Workers, and Sources & Verification. Gamepasses, Updates, and Codes remain top-level links, followed by the existing Roblox CTA. On mobile, the same destinations appear in a labelled `Wiki & Guides` group rather than a hover-dependent control. `Roblox Index` is discoverable from this guide menu but remains visibly evidence-gated until its dataset passes the indexing threshold.
 
 The homepage keeps its existing Title and Description. It gains a Wiki task card and points its Crates & Toys card and data-room summary to `/roblox-index/`.
 

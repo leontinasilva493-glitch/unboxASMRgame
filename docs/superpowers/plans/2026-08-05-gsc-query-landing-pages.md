@@ -125,9 +125,9 @@ Expected: route, title, noindex, and redirect assertions pass.
 - Consumes: new `/wiki/` and `/roblox-index/` routes.
 - Produces: intent-led primary navigation, internal links to both routes, and an indexable sitemap containing Wiki but not thin routes.
 
-- [ ] **Step 1: Update primary navigation**
+- [x] **Step 1: Update primary navigation**
 
-Remove the redundant Home item, add Wiki first, retain Beginner Guide, Gamepasses, Updates, and Codes, and omit Roblox Index until its evidence gate passes.
+Remove the redundant Home item. Add an accessible desktop Wiki dropdown for Wiki Home, Beginner Guide, Roblox Index, Rebirths & Workers, and Sources & Verification; group the same links under `Wiki & Guides` on mobile. Keep Gamepasses, Updates, and Codes as top-level status links.
 
 - [ ] **Step 2: Update homepage and contextual links**
 
