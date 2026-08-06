@@ -1,1 +1,21 @@
-[]
+[
+  {
+    "slug": "first-rebirth-community-snapshot",
+    "name": "First rebirth panel",
+    "requirement": "$75K Money and Rare Slime",
+    "resets": "Everything except limited, exclusive, or rebirth ASMRs",
+    "keeps": "Limited, exclusive, and rebirth ASMRs",
+    "reward": "+10% Money Bonus; Lightning Keyboard (Rebirth ASMR); +2 Worker Slots",
+    "unlock": "Lightning Keyboard (Rebirth ASMR) and +2 Worker Slots",
+    "gameVersion": "Third-party gameplay recorded July 27, 2026",
+    "evidence": [{
+      "status": "community_reported",
+      "verifiedAt": "2026-08-06",
+      "gameVersion": "Third-party gameplay recorded July 27, 2026",
+      "sourceUrl": "https://www.youtube.com/watch?v=FbqF-ydPuUw",
+      "videoTimestamp": "00:54",
+      "screenshot": "/images/evidence/rebirths/first-rebirth-panel-july-27.webp",
+      "notes": "The full panel is readable in a third-party recording. Its requirement, reset rule, and rewards have not been independently reproduced in the current game build, so no timing recommendation is made."
+    }]
+  }
+]

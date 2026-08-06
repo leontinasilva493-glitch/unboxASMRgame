@@ -11,6 +11,7 @@ export type Evidence = {
   eventName?: string;
   sourceUrl?: string;
   screenshot?: string;
+  videoTimestamp?: string;
   notes?: string;
 };
 
