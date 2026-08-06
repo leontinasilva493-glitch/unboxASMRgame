@@ -1,8 +1,10 @@
 import test from "node:test";
 import assert from "node:assert/strict";
+import { readFileSync } from "node:fs";
 import {
   buildCollectionFilterRows,
   buildCrateViewModels,
+  buildEvidenceHref,
   buildGamepassViewModels,
   buildRebirthViewModels,
   buildToyViewModels,
@@ -13,6 +15,10 @@ const evidence = [{
   status: "in_game_verified",
   verifiedAt: "2026-08-02T10:00:00+08:00",
   screenshot: "/evidence/update-3/panel.webp",
+  sourceUrl: "https://www.youtube.com/watch?v=example",
+  videoTimestamp: "00:54",
+  gameVersion: "Community recording from July 27, 2026",
+  notes: "Third-party recording; current build still needs an original capture.",
 }];
 
 test("content view models expose verified collection and progression records to pages", () => {
@@ -45,8 +51,14 @@ test("content view models expose verified collection and progression records to 
     cost: "100 Cash",
     possibleToys: "Duck, Frog",
     event: "Standard",
+    rarity: null,
     verifiedAt: "2026-08-02T10:00:00+08:00",
     evidenceStatus: "in_game_verified",
+    evidenceUrl: "https://www.youtube.com/watch?v=example",
+    evidenceScreenshot: "/evidence/update-3/panel.webp",
+    evidenceTimestamp: "00:54",
+    evidenceVersion: "Community recording from July 27, 2026",
+    evidenceNotes: "Third-party recording; current build still needs an original capture.",
   }]);
   assert.deepEqual(buildToyViewModels(toys, crates), [{
     name: "Duck",
@@ -58,6 +70,11 @@ test("content view models expose verified collection and progression records to 
     indexNumber: "1",
     verifiedAt: "2026-08-02T10:00:00+08:00",
     evidenceStatus: "in_game_verified",
+    evidenceUrl: "https://www.youtube.com/watch?v=example",
+    evidenceScreenshot: "/evidence/update-3/panel.webp",
+    evidenceTimestamp: "00:54",
+    evidenceVersion: "Community recording from July 27, 2026",
+    evidenceNotes: "Third-party recording; current build still needs an original capture.",
   }]);
   assert.deepEqual(buildCollectionFilterRows({ crates, toys }), [
     { type: "crate", name: "Starter Box", crate: "Starter Box", rarity: undefined, eventLimited: false },
@@ -86,5 +103,36 @@ test("gamepass view models expose effects and leave genuinely missing fields emp
     verdict: null,
     verifiedAt: "2026-08-02T10:00:00+08:00",
     evidenceStatus: "in_game_verified",
+    evidenceUrl: "https://www.youtube.com/watch?v=example",
+    evidenceScreenshot: "/evidence/update-3/panel.webp",
+    evidenceTimestamp: "00:54",
+    evidenceVersion: "Community recording from July 27, 2026",
+    evidenceNotes: "Third-party recording; current build still needs an original capture.",
   }]);
+});
+
+test("video evidence links open at the recorded timestamp", () => {
+  assert.equal(
+    buildEvidenceHref("https://www.youtube.com/watch?v=example", "01:05"),
+    "https://www.youtube.com/watch?v=example&t=65s",
+  );
+  assert.equal(buildEvidenceHref("https://example.com/article", "00:54"), "https://example.com/article");
+});
+
+test("Roblox Index data answers five observed crate-to-toy relationships", () => {
+  const crates = JSON.parse(readFileSync(new URL("../data/crates.json", import.meta.url), "utf8"));
+  const toys = JSON.parse(readFileSync(new URL("../data/toys.json", import.meta.url), "utf8"));
+  const crateModels = buildCrateViewModels(crates);
+  const toyModels = buildToyViewModels(toys, crates);
+  const byToy = new Map(toyModels.map((toy) => [toy.name, toy]));
+  const byCrate = new Map(crateModels.map((crate) => [crate.name, crate]));
+
+  assert.equal(crates.length, 10);
+  assert.equal(toys.length, 5);
+  assert.equal(byToy.get("Chocolate Keyboard")?.sourceCrates, "Chocolate Key Crate");
+  assert.equal(byToy.get("Candy Keyboard")?.sourceCrates, "Candy Key Crate");
+  assert.equal(byToy.get("Needoo")?.sourceCrates, "Needle Crate");
+  assert.equal(byToy.get("Honey Dipper")?.sourceCrates, "Honey Dipper Crate");
+  assert.equal(byToy.get("Slime")?.sourceCrates, "Slime Crate");
+  assert.equal(byCrate.get("Candy Key Crate")?.cost, "$10K (Jul 27); $1.0K (Aug 1)");
 });

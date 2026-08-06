@@ -55,3 +55,26 @@ test("data validation covers rebirth and worker slugs and evidence", () => {
   assert.ok(errors.some((error) => error.includes("rebirth rebirth-1: evidence has invalid verifiedAt")));
   assert.ok(errors.some((error) => error.includes("worker worker: in_game_verified evidence needs")));
 });
+
+test("community gameplay evidence requires a source, notes, and a valid video timestamp", () => {
+  const errors = validateDataCollections({
+    events: [], codes: [], gamepasses: [], workers: [],
+    crates: [{ slug: "crate", evidence: [{ status: "community_reported", verifiedAt: "2026-08-06", videoTimestamp: "1:75" }] }],
+    toys: [{ slug: "toy", evidence: [{ status: "community_reported", verifiedAt: "2026-08-06", sourceUrl: "https://www.youtube.com/watch?v=example" }] }],
+    rebirths: [],
+  });
+
+  assert.ok(errors.some((error) => error.includes("invalid videoTimestamp")));
+  assert.ok(errors.some((error) => error.includes("community_reported evidence needs a source URL")));
+  assert.ok(errors.some((error) => error.includes("community_reported evidence needs explicit notes")));
+});
+
+test("data validation catches one-sided crate-to-toy relationships", () => {
+  const errors = validateDataCollections({
+    events: [], codes: [], gamepasses: [], workers: [], rebirths: [],
+    crates: [{ slug: "key-crate", name: "Key Crate", possibleToys: [], evidence: [] }],
+    toys: [{ slug: "keyboard", name: "Keyboard", sourceCrateIds: ["key-crate"], evidence: [] }],
+  });
+
+  assert.ok(errors.some((error) => error.includes("relationship is not mirrored by crate")));
+});

@@ -2,6 +2,8 @@
 
 import { FormEvent, useState } from "react";
 import Link from "next/link";
+import codeAudit from "@/data/code-audit.json";
+import { formatDate } from "@/lib/site";
 import { ArrowIcon } from "./icons";
 
 const answers = [
@@ -45,7 +47,7 @@ const answers = [
     id: "codes",
     label: "Active codes",
     title: "Are there active Unbox ASMR codes?",
-    answer: "No active code was verified in the August 1, 2026 public-source check. The official experience description mentions updates and special codes, but it does not publish a code string, reward, expiration date, or redemption path. Familiar strings such as RELEASE, THANKS, or SORRY are not listed here unless an official announcement or a successful current-version redemption proves them.",
+    answer: `No active code was verified in the ${formatDate(codeAudit.checkedAt)} public-source check. The official experience description mentions updates and special codes, but it does not publish a code string, reward, expiration date, or redemption path. Community-reported strings are not listed as active unless a successful current-version redemption proves them.`,
     caution: "Never enter Roblox credentials into a third-party code generator or reward form.",
     href: "/codes/",
     linkLabel: "Review the full codes status",

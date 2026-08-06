@@ -22,6 +22,15 @@ function validateEvidence(recordLabel, evidence, errors) {
     if (item.status === "in_game_verified" && !item.screenshot && !item.notes) {
       errors.push(`${recordLabel}: in_game_verified evidence needs a screenshot or explicit notes`);
     }
+    if (item.videoTimestamp && !/^\d+:[0-5]\d(?::[0-5]\d)?$/.test(item.videoTimestamp)) {
+      errors.push(`${recordLabel}: evidence has invalid videoTimestamp`);
+    }
+    if (item.status === "community_reported" && !item.sourceUrl) {
+      errors.push(`${recordLabel}: community_reported evidence needs a source URL`);
+    }
+    if (item.status === "community_reported" && !item.notes) {
+      errors.push(`${recordLabel}: community_reported evidence needs explicit notes`);
+    }
   }
 }
 
@@ -62,9 +71,15 @@ export function validateDataCollections(collections) {
   }
 
   const crateSlugs = new Set(crates.map((crate) => crate.slug));
+  const cratesBySlug = new Map(crates.map((crate) => [crate.slug, crate]));
   for (const toy of toys) {
     for (const crateId of toy.sourceCrateIds ?? []) {
       if (!crateSlugs.has(crateId)) errors.push(`toy ${toy.slug}: references unknown crate "${crateId}"`);
+      const crate = cratesBySlug.get(crateId);
+      const mirroredToys = crate?.possibleToys ?? crate?.toyIds ?? [];
+      if (crate && !mirroredToys.includes(toy.name) && !mirroredToys.includes(toy.slug)) {
+        errors.push(`toy ${toy.slug}: relationship is not mirrored by crate "${crateId}"`);
+      }
     }
     validateEvidence(`toy ${toy.slug}`, toy.evidence, errors);
   }

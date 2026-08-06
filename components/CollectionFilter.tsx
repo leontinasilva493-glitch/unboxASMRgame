@@ -31,7 +31,7 @@ export function CollectionFilter({ rows }: { rows: CollectionFilterRow[] }) {
       <select value={rarity} onChange={(e) => { setRarity(e.target.value); track(); }} aria-label="Filter by rarity"><option value="all">All rarities</option>{rarities.map((item) => <option key={item}>{item}</option>)}</select>
       <select value={event} onChange={(e) => { setEvent(e.target.value); track(); }} aria-label="Filter by event"><option value="all">All event states</option><option value="limited">Event limited</option><option value="standard">Standard</option></select>
     </div>
-    <p className="muted" aria-live="polite">{rows.length ? `${filtered.length} of ${rows.length} verified records shown.` : "0 verified records. Filters are ready for the first evidence-backed entries."}</p>
+    <p className="muted" aria-live="polite">{rows.length ? `${filtered.length} of ${rows.length} evidence records shown.` : "0 evidence records. Filters are ready for the first evidence-backed entries."}</p>
     {filtered.length > 0 && <div className="filter-results">{filtered.map((row) => <article className="info-card" key={`${row.type}-${row.name}`}><span className="eyebrow">{row.type}</span><h3>{row.name}</h3><p>{row.crate || "No source crate recorded"}{row.rarity ? ` · ${row.rarity}` : ""}</p></article>)}</div>}
   </div>;
 }

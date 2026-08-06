@@ -48,7 +48,7 @@ test("first run establishes baselines without review issues", async () => {
     assert.equal(summary.baselinesCreated, 3);
     assert.equal(summary.actionable.length, 0);
     assert.equal(summary.status, "success");
-    assert.equal(summary.contentAudit.summary.emptyCollectionCount, 5);
+    assert.equal(summary.contentAudit.summary.emptyCollectionCount, 2);
     assert.equal(summary.contentAudit.summary.incompleteRecordCount >= 7, true);
     assert.equal(JSON.parse(await readFile(summary.contentAudit.files.opportunitiesFile, "utf8")).length > 0, true);
     assert.match(await readFile(summary.contentAudit.files.capturePlanFile, "utf8"), /\/gamepasses\//);

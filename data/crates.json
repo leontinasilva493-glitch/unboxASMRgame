@@ -1,1 +1,172 @@
-[]
+[
+  {
+    "slug": "needle-crate",
+    "name": "Needle Crate",
+    "rarity": "Common",
+    "cost": "$150",
+    "possibleToys": ["Needoo"],
+    "evidence": [{
+      "status": "community_reported",
+      "verifiedAt": "2026-08-06",
+      "gameVersion": "Third-party gameplay recorded July 27, 2026",
+      "sourceUrl": "https://www.youtube.com/watch?v=UgwslmyT87o",
+      "videoTimestamp": "00:00",
+      "screenshot": "/images/evidence/crates/needle-crate.webp",
+      "notes": "The recording shows this name, rarity, and displayed price. The current game build, unlock requirement, toy pool, and odds have not been independently verified."
+    }, {
+      "status": "community_reported",
+      "verifiedAt": "2026-08-06",
+      "gameVersion": "Third-party gameplay uploaded August 1, 2026",
+      "sourceUrl": "https://www.youtube.com/watch?v=xPiGrQ2t_V8",
+      "videoTimestamp": "02:05",
+      "screenshot": "/images/evidence/index/needoo.webp",
+      "notes": "The same continuous recording shows the Needle Crate purchase at 01:54 and the resulting Needoo at 02:05. This supports one observed result, not a complete drop pool or current-build guarantee."
+    }]
+  },
+  {
+    "slug": "foam-ball-crate",
+    "name": "Foam Ball Crate",
+    "rarity": "Uncommon",
+    "cost": "$2K",
+    "evidence": [{
+      "status": "community_reported",
+      "verifiedAt": "2026-08-06",
+      "gameVersion": "Third-party gameplay recorded July 27, 2026",
+      "sourceUrl": "https://www.youtube.com/watch?v=UgwslmyT87o",
+      "videoTimestamp": "00:05",
+      "screenshot": "/images/evidence/crates/foam-ball-crate.webp",
+      "notes": "The recording shows this name, rarity, and displayed price. The current game build, unlock requirement, toy pool, and odds have not been independently verified."
+    }]
+  },
+  {
+    "slug": "cheese-squishy-crate",
+    "name": "Cheese Squishy Crate",
+    "rarity": "Rare",
+    "cost": "$8.5K",
+    "evidence": [{
+      "status": "community_reported",
+      "verifiedAt": "2026-08-06",
+      "gameVersion": "Third-party gameplay recorded July 27, 2026",
+      "sourceUrl": "https://www.youtube.com/watch?v=FbqF-ydPuUw",
+      "videoTimestamp": "00:15",
+      "screenshot": "/images/evidence/crates/cheese-squishy-crate.webp",
+      "notes": "The recording shows this name, rarity, and displayed price. The current game build, unlock requirement, toy pool, and odds have not been independently verified."
+    }]
+  },
+  {
+    "slug": "candy-key-crate",
+    "name": "Candy Key Crate",
+    "rarity": "Uncommon",
+    "cost": "$10K (Jul 27); $1.0K (Aug 1)",
+    "possibleToys": ["Candy Keyboard"],
+    "evidence": [{
+      "status": "community_reported",
+      "verifiedAt": "2026-08-06",
+      "gameVersion": "Third-party gameplay recorded July 27, 2026",
+      "sourceUrl": "https://www.youtube.com/watch?v=FbqF-ydPuUw",
+      "videoTimestamp": "00:20",
+      "screenshot": "/images/evidence/crates/candy-key-crate.webp",
+      "notes": "The recording shows this name, rarity, and displayed $10K price. A later August 1 recording displays $1.0K, so neither observation is labeled current without a live check."
+    }, {
+      "status": "community_reported",
+      "verifiedAt": "2026-08-06",
+      "gameVersion": "Third-party gameplay uploaded August 1, 2026",
+      "sourceUrl": "https://www.youtube.com/watch?v=xPiGrQ2t_V8",
+      "videoTimestamp": "00:58",
+      "screenshot": "/images/evidence/index/candy-key-crate-aug-1.webp",
+      "notes": "The panel displays Candy Key Crate, Uncommon, and $1.0K; the continuous sequence shows Candy Keyboard at 01:17. The price conflicts with the July 27 $10K capture and must be checked in the live game."
+    }]
+  },
+  {
+    "slug": "wax-foam-ball-crate",
+    "name": "Wax Foam Ball Crate",
+    "rarity": "Rare",
+    "cost": "$20K",
+    "evidence": [{
+      "status": "community_reported",
+      "verifiedAt": "2026-08-06",
+      "gameVersion": "Third-party gameplay recorded July 27, 2026",
+      "sourceUrl": "https://www.youtube.com/watch?v=FbqF-ydPuUw",
+      "videoTimestamp": "00:25",
+      "screenshot": "/images/evidence/crates/wax-foam-ball-crate.webp",
+      "notes": "The recording shows this name, rarity, and displayed price. The current game build, unlock requirement, toy pool, and odds have not been independently verified."
+    }]
+  },
+  {
+    "slug": "rainbow-key-crate",
+    "name": "Rainbow Key Crate",
+    "rarity": "Epic",
+    "cost": "$120K",
+    "evidence": [{
+      "status": "community_reported",
+      "verifiedAt": "2026-08-06",
+      "gameVersion": "Third-party gameplay recorded July 27, 2026",
+      "sourceUrl": "https://www.youtube.com/watch?v=UgwslmyT87o",
+      "videoTimestamp": "00:20",
+      "screenshot": "/images/evidence/crates/rainbow-key-crate.webp",
+      "notes": "The recording shows this name, rarity, and displayed price. The current game build, unlock requirement, toy pool, and odds have not been independently verified."
+    }]
+  },
+  {
+    "slug": "honey-key-crate",
+    "name": "Honey Key Crate",
+    "rarity": "Legendary",
+    "cost": "$39.9M",
+    "evidence": [{
+      "status": "community_reported",
+      "verifiedAt": "2026-08-06",
+      "gameVersion": "Third-party gameplay recorded July 27, 2026",
+      "sourceUrl": "https://www.youtube.com/watch?v=UgwslmyT87o",
+      "videoTimestamp": "00:25",
+      "screenshot": "/images/evidence/crates/honey-key-crate.webp",
+      "notes": "The recording shows this name, rarity, and displayed price. The current game build, unlock requirement, toy pool, and odds have not been independently verified."
+    }]
+  },
+  {
+    "slug": "chocolate-key-crate",
+    "name": "Chocolate Key Crate",
+    "rarity": "Common",
+    "cost": "$100",
+    "possibleToys": ["Chocolate Keyboard"],
+    "evidence": [{
+      "status": "community_reported",
+      "verifiedAt": "2026-08-06",
+      "gameVersion": "Third-party gameplay uploaded August 1, 2026",
+      "sourceUrl": "https://www.youtube.com/watch?v=xPiGrQ2t_V8",
+      "videoTimestamp": "00:17",
+      "screenshot": "/images/evidence/index/chocolate-key-crate.webp",
+      "notes": "The panel displays Chocolate Key Crate, Common, and $100. The same continuous opening shows a keyboard result at 00:29, cross-checked against a separate July 31 recording that names Chocolate Keyboard."
+    }]
+  },
+  {
+    "slug": "honey-dipper-crate",
+    "name": "Honey Dipper Crate",
+    "cost": "$4K",
+    "possibleToys": ["Honey Dipper"],
+    "evidence": [{
+      "status": "community_reported",
+      "verifiedAt": "2026-08-06",
+      "gameVersion": "Third-party gameplay uploaded August 1, 2026",
+      "sourceUrl": "https://www.youtube.com/watch?v=xPiGrQ2t_V8",
+      "videoTimestamp": "01:59",
+      "screenshot": "/images/evidence/index/honey-dipper-crate.webp",
+      "notes": "The panel displays Honey Dipper Crate and $4K. The continuous sequence shows a Honey Dipper result at 02:49; the yellow Honey label is not classified as rarity without a live Index check."
+    }]
+  },
+  {
+    "slug": "slime-crate",
+    "name": "Slime Crate",
+    "rarity": "Rare",
+    "cost": "$25K",
+    "possibleToys": ["Slime"],
+    "evidence": [{
+      "status": "community_reported",
+      "verifiedAt": "2026-08-06",
+      "gameVersion": "Third-party gameplay uploaded August 1, 2026",
+      "sourceUrl": "https://www.youtube.com/watch?v=xPiGrQ2t_V8",
+      "videoTimestamp": "03:06",
+      "screenshot": "/images/evidence/index/slime-crate.webp",
+      "notes": "The panel displays Slime Crate, Rare, and $25K. The same continuous sequence opens this crate and displays a Rare Slime at 03:39."
+    }]
+  }
+]

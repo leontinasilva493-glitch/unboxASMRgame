@@ -243,6 +243,17 @@ p { margin: 0; }
 .badge-community_reported { color: #7d5000; background: var(--reported-bg); }
 .badge-unverified { color: #665e70; background: var(--unverified-bg); }
 .missing-value { color: var(--unverified); font-style: italic; }
+.evidence-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 20px; }
+.evidence-item { min-width: 0; }
+.evidence-item > h3 { margin: 0 0 10px; }
+.evidence-reference { overflow: hidden; height: calc(100% - 38px); border: 1px solid var(--border); border-radius: var(--radius-card); background: var(--surface); box-shadow: var(--shadow-card); }
+.evidence-reference-image { display: block; overflow: hidden; aspect-ratio: 16 / 9; background: #17131d; }
+.evidence-reference-image img { display: block; width: 100%; height: 100%; object-fit: cover; transition: transform 180ms ease-out; }
+.evidence-reference-image:hover img { transform: scale(1.015); }
+.evidence-reference-copy { padding: 18px; }
+.evidence-reference-copy p { margin: 9px 0 0; }
+.evidence-reference-meta { display: flex; flex-wrap: wrap; align-items: center; gap: 10px; }
+.last-verified { color: var(--text-secondary); font-size: .78rem; font-weight: 700; }
 .empty-state { display: grid; grid-template-columns: auto 1fr; gap: 20px; padding: clamp(24px,5vw,40px); border: 1px dashed #cfc4d7; border-radius: var(--radius-card); background: linear-gradient(135deg, var(--surface), #faf7fc); }
 .empty-state h2 { margin: 8px 0 10px; max-width: 680px; }
 .empty-state p { max-width: 730px; margin-bottom: 16px; color: var(--text-secondary); }
@@ -333,7 +344,7 @@ tbody tr:hover { background: #fffaf1; }
   .hero-carousel-previous { right: 60px; }
   .hero-carousel-next { right: 12px; }
   .hero-carousel-dots { left: 14px; top: 27px; }
-  .card-grid, .step-grid, .summary-grid, .split-cards, .keep-reset-grid, .event-banner, .answer-grid, .evidence-overview { grid-template-columns: 1fr; }
+  .card-grid, .step-grid, .summary-grid, .split-cards, .keep-reset-grid, .event-banner, .answer-grid, .evidence-overview, .evidence-grid, .filter-results { grid-template-columns: 1fr; }
   .answer-finder-fields { grid-template-columns: 1fr; }
   .answer-card { padding: 22px; }
   .guide-card { min-height: 180px; }

@@ -24,12 +24,42 @@ test("wiki has an exact absolute title and an indexable hub", () => {
 
 test("codes consolidates observed query variants without a rumor section", () => {
   const codes = read("app/codes/page.tsx");
+  const auditPath = new URL("../data/code-audit.json", import.meta.url);
 
+  assert.equal(existsSync(auditPath), true, "data/code-audit.json must be the shared code-status source");
+  const audit = JSON.parse(read("data/code-audit.json"));
+  const publishedCodes = JSON.parse(read("data/codes.json"));
+  assert.equal(audit.checkedAt, "2026-08-06");
+  assert.equal(audit.verifiedActiveCount, 0);
+  assert.equal(audit.reportedCandidateCount, 3);
+  assert.equal(publishedCodes.length, 0, "community reports must not enter the published active-code dataset");
   assert.match(codes, /Is there an Unbox ASMR code\?/);
   assert.match(codes, /Are there any Unbox ASMR Roblox codes\?/);
+  assert.match(codes, /Are [鈥\u201c"]?Unboxing ASMR codes[鈥\u201d"]? the same game\?/);
   assert.match(codes, /Where do you enter codes in Unbox ASMR\?/);
   assert.match(codes, /When will new Unbox ASMR codes be released\?/);
+  assert.match(codes, /Community discovery/);
+  assert.match(codes, /In-game verification/);
+  assert.match(codes, /Publish or reject/);
   assert.doesNotMatch(codes, /Expected Codes|Rumors/i);
+});
+
+test("homepage and wiki consume the shared code audit date", () => {
+  const home = read("app/page.tsx");
+  const wiki = read("app/wiki/page.tsx");
+  const answerFinder = read("components/HomeAnswerFinder.tsx");
+
+  assert.match(home, /codeAudit\.checkedAt/);
+  assert.match(wiki, /codeAudit\.checkedAt/);
+  assert.match(answerFinder, /codeAudit\.checkedAt/);
+});
+
+test("homepage Roblox Index summary uses live collection counts", () => {
+  const home = read("app/page.tsx");
+
+  assert.match(home, /crates\.length/);
+  assert.match(home, /toys\.length/);
+  assert.doesNotMatch(home, /seven crates and one toy/i);
 });
 
 test("beginner guide stays focused and noindex", () => {
@@ -55,6 +85,24 @@ test("roblox index has an exact title and keeps its evidence gate", () => {
   assert.match(index, /buildToyViewModels/);
   assert.match(index, /rows=\{crateRows\}/);
   assert.match(index, /rows=\{toyRows\}/);
+  assert.match(index, /First community-reported snapshot/);
+  assert.match(index, /EvidenceReference/);
+  assert.match(index, /no current-version original capture/);
+});
+
+test("roblox index leads with usable relationships and a dated Complete Index snapshot", () => {
+  const index = read("app/roblox-index/page.tsx");
+
+  assert.match(index, /Which toy came from each crate\?/);
+  assert.match(index, /4\/64 Found/);
+  assert.match(index, /does not display a stable numeric item ID/);
+  assert.match(index, /Conflicting Candy Key Crate prices/);
+  assert.match(index, /relationRows/);
+  assert.ok(index.indexOf("Which toy came from each crate?") < index.indexOf("All recorded crates"));
+  assert.match(index, /title: "Unbox ASMR Roblox Index"/);
+  assert.match(index, /title="Unbox ASMR Roblox Index"/);
+  assert.match(index, /noindex: true/);
+  assert.doesNotMatch(read("app/sitemap.ts"), /path: "\/roblox-index\/"/);
 });
 
 test("legacy crates route permanently redirects to the roblox index", () => {
@@ -65,6 +113,17 @@ test("legacy crates route permanently redirects to the roblox index", () => {
   assert.match(legacy, /permanentRedirect\("\/roblox-index\/"\)/);
   assert.doesNotMatch(carousel, /href: "\/crates-and-toys\/"/);
   assert.doesNotMatch(answerFinder, /href: "\/crates-and-toys\/"/);
+});
+
+test("rebirth guide answers the decision before worker details and remains gated", () => {
+  const page = read("app/rebirths-and-workers/page.tsx");
+  assert.match(page, /noindex: true/);
+  assert.match(page, /What does the first rebirth cost\?/);
+  assert.match(page, /What resets\?/);
+  assert.match(page, /What stays\?/);
+  assert.match(page, /What are the rewards\?/);
+  assert.match(page, /EvidenceReference/);
+  assert.ok(page.indexOf("What does the first rebirth cost?") < page.indexOf("Workers and the two-worker reward"));
 });
 
 test("wiki navigation uses an accessible dropdown and keeps status pages top-level", () => {

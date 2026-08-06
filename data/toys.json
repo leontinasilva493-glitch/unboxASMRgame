@@ -1,1 +1,86 @@
-[]
+[
+  {
+    "slug": "chocolate-keyboard",
+    "name": "Chocolate Keyboard",
+    "rarity": "Common",
+    "cashValue": "+$4 / Use",
+    "interaction": "Use",
+    "sourceCrateIds": ["chocolate-key-crate"],
+    "evidence": [{
+      "status": "community_reported",
+      "verifiedAt": "2026-08-06",
+      "gameVersion": "Third-party gameplay recorded July 27, 2026",
+      "sourceUrl": "https://www.youtube.com/watch?v=FbqF-ydPuUw",
+      "videoTimestamp": "00:50",
+      "screenshot": "/images/evidence/toys/chocolate-keyboard.webp",
+      "notes": "The recording shows the toy name, Common rarity, and +$4 / Use label. Its Complete Index slot and current-build value have not been independently verified."
+    }, {
+      "status": "community_reported",
+      "verifiedAt": "2026-08-06",
+      "gameVersion": "Third-party gameplay uploaded August 1, 2026",
+      "sourceUrl": "https://www.youtube.com/watch?v=xPiGrQ2t_V8",
+      "videoTimestamp": "00:29",
+      "screenshot": "/images/evidence/index/chocolate-keyboard.webp",
+      "notes": "A continuous opening begins with Chocolate Key Crate at 00:17 and produces a keyboard at 00:29. A separate July 31 recording names the result Chocolate Keyboard; this is one observed relationship, not a full drop pool."
+    }]
+  },
+  {
+    "slug": "candy-keyboard",
+    "name": "Candy Keyboard",
+    "rarity": "Uncommon",
+    "sourceCrateIds": ["candy-key-crate"],
+    "evidence": [{
+      "status": "community_reported",
+      "verifiedAt": "2026-08-06",
+      "gameVersion": "Third-party gameplay uploaded August 1, 2026",
+      "sourceUrl": "https://www.youtube.com/watch?v=xPiGrQ2t_V8",
+      "videoTimestamp": "01:17",
+      "screenshot": "/images/evidence/index/candy-keyboard.webp",
+      "notes": "The continuous sequence starts with Candy Key Crate at 00:58 and visibly labels the result Candy Keyboard, Uncommon, at 01:17. Value and Complete Index slot remain unknown."
+    }]
+  },
+  {
+    "slug": "needoo",
+    "name": "Needoo",
+    "rarity": "Common",
+    "sourceCrateIds": ["needle-crate"],
+    "evidence": [{
+      "status": "community_reported",
+      "verifiedAt": "2026-08-06",
+      "gameVersion": "Third-party gameplay uploaded August 1, 2026",
+      "sourceUrl": "https://www.youtube.com/watch?v=xPiGrQ2t_V8",
+      "videoTimestamp": "02:05",
+      "screenshot": "/images/evidence/index/needoo.webp",
+      "notes": "The recording buys a Needle Crate at 01:54 and visibly labels the result Needoo, Common, at 02:05. Value and Complete Index slot remain unknown."
+    }]
+  },
+  {
+    "slug": "honey-dipper",
+    "name": "Honey Dipper",
+    "sourceCrateIds": ["honey-dipper-crate"],
+    "evidence": [{
+      "status": "community_reported",
+      "verifiedAt": "2026-08-06",
+      "gameVersion": "Third-party gameplay uploaded August 1, 2026",
+      "sourceUrl": "https://www.youtube.com/watch?v=xPiGrQ2t_V8",
+      "videoTimestamp": "02:49",
+      "screenshot": "/images/evidence/index/honey-dipper.webp",
+      "notes": "The continuous sequence starts with Honey Dipper Crate at 01:59 and visibly labels the result Honey Dipper at 02:49. A spoken $150 payout is not stored as a structured value, and the Honey label is not assumed to be rarity."
+    }]
+  },
+  {
+    "slug": "slime",
+    "name": "Slime",
+    "rarity": "Rare",
+    "sourceCrateIds": ["slime-crate"],
+    "evidence": [{
+      "status": "community_reported",
+      "verifiedAt": "2026-08-06",
+      "gameVersion": "Third-party gameplay uploaded August 1, 2026",
+      "sourceUrl": "https://www.youtube.com/watch?v=xPiGrQ2t_V8",
+      "videoTimestamp": "03:39",
+      "screenshot": "/images/evidence/index/slime.webp",
+      "notes": "The continuous sequence starts with Slime Crate at 03:06 and visibly labels the result Slime, Rare, at 03:39. A spoken 428 payout is not stored as a structured value."
+    }]
+  }
+]
