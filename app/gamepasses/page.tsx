@@ -9,8 +9,8 @@ import { gamepasses } from "@/lib/data";
 import { pageMetadata, ROBLOX_URL } from "@/lib/site";
 
 export const metadata: Metadata = pageMetadata({
-  title: "Unbox ASMR Gamepasses — Prices & Verified Effects",
-  description: "Dated Unbox ASMR Gamepass price snapshots for Roblox, with effects and value verdicts withheld until in-game verification.",
+  title: "Unbox ASMR Gamepasses Guide — All 7 Prices (August 2026)",
+  description: "All seven dated Unbox ASMR Gamepass price snapshots for Roblox, with effects and value verdicts withheld until in-game verification.",
   path: "/gamepasses/",
 });
 
@@ -35,7 +35,7 @@ export default function Gamepasses() {
     <Breadcrumbs items={[{ label: "Gamepasses", href: "/gamepasses/" }]}/>
     <PageIntro
       eyebrow="Spend with context"
-      title="Unbox ASMR Roblox Gamepass Price and Effect Tracker"
+      title="Unbox ASMR Gamepasses Guide: Prices & Evidence"
       description="Seven public prices were re-checked on August 1. Their names and prices are a public snapshot; effects, limitations, player fit, and value still require current-version purchase panels and gameplay tests."
       checkedAt="2026-08-01"
     />
@@ -73,7 +73,7 @@ export default function Gamepasses() {
       <div style={{height:20}}/>
       <a className="button button-secondary" href={ROBLOX_URL} target="_blank" rel="noopener noreferrer" data-event="gamepass_official_click">View the official experience on Roblox ↗</a>
     </section>
-    <RelatedLinks links={[{ href: "/updates/", label: "Update 3 status" }, { href: "/beginner-guide/", label: "Beginner Guide" }, { href: "/rebirths-and-workers/", label: "Rebirths & Workers" }]}/>
+    <RelatedLinks links={[{ href: "/updates/", label: "Latest update evidence" }, { href: "/beginner-guide/", label: "Beginner Guide" }, { href: "/rebirths-and-workers/", label: "Rebirths & Workers" }]}/>
     <SourceList sources={[{ label: "Rolimon’s Unbox ASMR public page", url: "https://www.rolimons.com/game/112233638491976", note: "Community-reported price source re-checked August 1, 2026; source cards reported their own older update age." }, { label: "Official Unbox ASMR Roblox experience", url: ROBLOX_URL, note: "Use Roblox as the purchase authority and re-check live before spending." }]}/>
   </div>;
 }

@@ -1,5 +1,10 @@
 [
   {
+    "date": "2026-08-11",
+    "title": "Latest official listing check",
+    "details": "The official Roblox games API shows the public record updated on August 11. The description still supports only the broad crates, toys, friends, workers, and special-codes claims; it does not publish a numbered update, weather-event mechanics, active code string, or gameplay values."
+  },
+  {
     "date": "2026-08-01",
     "title": "Pre-update public check",
     "details": "The official Roblox public record was checked before Update 3. The listing changed on July 31, but no Update 3 feature list, active code string, crate values, rebirth effects, or Gamepass effects were published there."

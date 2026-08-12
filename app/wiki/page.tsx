@@ -44,7 +44,7 @@ export default function Wiki() {
     <InlineCallout title="Quick answer"><p>Unbox ASMR is a Roblox collecting experience by ASMR Labs. The official listing describes unboxing ASMR toys, upgrading a collection, unlocking better crates, earning more cash with friends, and a two-worker group reward. Exact prices, drop odds, reset effects, and optimal routes require current in-game proof.</p></InlineCallout>
 
     <section className="section-compact">
-      <div className="section-head"><div><span className="section-kicker">Verified quick facts</span><h2>What the Unbox ASMR Roblox listing confirms</h2></div><p>Official description and public games API rechecked {formatDate(codeAudit.checkedAt)}.</p></div>
+      <div className="section-head"><div><span className="section-kicker">Verified quick facts</span><h2>What the Unbox ASMR Roblox listing confirms</h2></div><p>Official description and public games API rechecked {formatDate(game.checkedAt)}.</p></div>
       <div className="summary-grid">
         <article className="summary-card"><VerificationBadge status="official"/><h3>Game and creator</h3><p><strong>Platform:</strong> Roblox<br/><strong>Experience:</strong> Unbox ASMR<br/><strong>Creator:</strong> ASMR Labs</p></article>
         <article className="summary-card warm-panel"><VerificationBadge status="official"/><h3>Published core loop</h3><p>Unbox rare ASMR toys, upgrade the collection, enjoy relaxing sounds, and unlock better crates.</p></article>
@@ -79,7 +79,7 @@ export default function Wiki() {
     </section>
 
     <RelatedLinks links={[{ href: "/beginner-guide/", label: "Unbox ASMR beginner guide" }, { href: "/roblox-index/", label: "Unbox ASMR Roblox Index" }, { href: "/sources/", label: "How Wiki claims are verified" }]}/>
-    <SourceList sources={[{ label: "Official Unbox ASMR Roblox experience", url: game.robloxUrl, note: `Official description and public games API rechecked ${formatDate(codeAudit.checkedAt)}.` }, { label: "Official ASMR Labs Roblox group", url: game.groupUrl, note: `Group identity and public availability rechecked ${formatDate(codeAudit.checkedAt)}.` }]}/>
+    <SourceList sources={[{ label: "Official Unbox ASMR Roblox experience", url: game.robloxUrl, note: `Official description and public games API rechecked ${formatDate(game.checkedAt)}.` }, { label: "Official ASMR Labs Roblox group", url: game.groupUrl, note: `Group identity and public availability rechecked ${formatDate(game.checkedAt)}.` }]}/>
     <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify({ "@context": "https://schema.org", "@type": "CollectionPage", name: "Unbox ASMR Wiki", url: `${SITE_URL}/wiki/`, isPartOf: { "@type": "WebSite", name: "Unbox ASMR Guide", url: SITE_URL } }) }}/>
   </div>;
 }

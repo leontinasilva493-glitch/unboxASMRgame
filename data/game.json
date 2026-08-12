@@ -4,8 +4,8 @@
   "robloxUrl": "https://www.roblox.com/games/112233638491976/Unbox-ASMR",
   "groupUrl": "https://www.roblox.com/communities/1110056661/ASMR-Labs",
   "universeId": 10454554751,
-  "checkedAt": "2026-08-01",
-  "officialUpdatedAt": "2026-07-31T20:43:30.7397095Z",
+  "checkedAt": "2026-08-11",
+  "officialUpdatedAt": "2026-08-11T08:09:42.9445543Z",
   "officialClaims": {
     "coreLoop": [
       "Unbox rare ASMR toys",
@@ -18,8 +18,8 @@
   },
   "evidence": {
     "status": "official",
-    "verifiedAt": "2026-08-01",
+    "verifiedAt": "2026-08-11",
     "sourceUrl": "https://www.roblox.com/games/112233638491976/Unbox-ASMR",
-    "notes": "Official Roblox experience page and public games API checked on August 1, 2026."
+    "notes": "Official Roblox experience page and public games API checked on August 11, 2026. The public description still supports the same broad core-loop, friend-benefit, worker-reward, and codes-notice claims."
   }
 }

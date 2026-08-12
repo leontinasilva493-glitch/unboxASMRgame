@@ -6,7 +6,7 @@ import { ArrowIcon, BoxIcon, ClockIcon, GamepadIcon, MessageIcon, QuestionIcon, 
 import { VerificationBadge } from "@/components/Verification";
 import { EventCountdown } from "@/components/EventCountdown";
 import { RelatedLinks, SourceList } from "@/components/PageParts";
-import { codeAudit, crates, events, gamepasses, toys } from "@/lib/data";
+import { codeAudit, crates, events, game, gamepasses, toys } from "@/lib/data";
 import { formatDate, pageMetadata, SITE_URL } from "@/lib/site";
 
 export const metadata: Metadata = pageMetadata({
@@ -37,10 +37,10 @@ export default function Home() {
   return <>
     <Hero />
     <div className="container status-strip" aria-label="Quick status">
-      <article className="status-card"><div className="status-card-head"><span>Update 3 status</span><span className="status-icon"><QuestionIcon /></span></div><strong>Implementation not verified</strong><p>Pre-update public check completed Aug 1.</p></article>
-      <article className="status-card"><div className="status-card-head"><span>Next scheduled event</span><span className="status-icon"><ClockIcon /></span></div><strong>Update 3 · Aug 2</strong><p>3:00 PM ET / 12:00 PM PT</p></article>
+      <article className="status-card"><div className="status-card-head"><span>Official listing</span><span className="status-icon"><QuestionIcon /></span></div><strong>Broad description unchanged</strong><p>Checked {formatDate(game.checkedAt)}</p></article>
+      <article className="status-card"><div className="status-card-head"><span>Reported event archive</span><span className="status-icon"><ClockIcon /></span></div><strong>Update 3 window ended</strong><p>Reported end: Aug 9</p></article>
       <article className="status-card"><div className="status-card-head"><span>Codes status</span><span className="status-icon"><MessageIcon /></span></div><strong>No active code verified</strong><p>Checked {formatDate(codeAudit.checkedAt)}</p></article>
-      <article className="status-card"><div className="status-card-head"><span>Latest verification</span><span className="status-icon"><ShieldIcon /></span></div><strong>Official public listing</strong><p>Checked {formatDate(codeAudit.checkedAt)}</p></article>
+      <article className="status-card"><div className="status-card-head"><span>Public record updated</span><span className="status-icon"><ShieldIcon /></span></div><strong>{formatDate(game.officialUpdatedAt, "short")}</strong><p>Timestamp is not gameplay proof</p></article>
     </div>
 
     <HomeAnswerFinder />
@@ -53,9 +53,9 @@ export default function Home() {
 
     <section className="section"><div className="container"><div className="summary-grid"><article className="summary-card"><VerificationBadge status="community_reported"/><h3>Roblox Index evidence room</h3><p>The dated gameplay snapshot now covers {crates.length} crates, {toys.length} toys, and five observed crate-to-toy results. It remains noindex because current-version original captures, full drop pools, unlock conditions, and stable Complete Index fields are incomplete.</p><Link className="text-link" href="/roblox-index/">Review crate-to-toy evidence <ArrowIcon /></Link></article><article className="summary-card warm-panel"><VerificationBadge status="community_reported"/><h3>{gamepasses.length} public Gamepass prices</h3><p>A dated Rolimon’s snapshot is available. Effects, player fit, and value verdicts are deliberately not inferred from price.</p><Link className="text-link" href="/gamepasses/">Compare the snapshot <ArrowIcon /></Link></article></div></div></section>
 
-    <section className="section-compact"><div className="container"><div className="event-banner"><div className="event-banner-copy"><span className="eyebrow">Next reported event</span><h2>{event.name}</h2><p>The schedule is community-reported and must be re-checked against official channels before publication. No feature list is being guessed.</p><Link className="text-link" href="/updates/">Open update details <ArrowIcon /></Link></div><EventCountdown startsAt={event.startsAt} endsAt={event.endsAt} initialStatus={event.publishedStatus}/></div></div></section>
+    <section className="section-compact"><div className="container"><div className="event-banner"><div className="event-banner-copy"><span className="eyebrow">Reported event archive</span><h2>{event.name}</h2><p>The community-reported window ended August 9. The August 11 official listing check still does not publish a numbered update or feature list, so gameplay changes remain unverified.</p><Link className="text-link" href="/updates/">Open update evidence <ArrowIcon /></Link></div><EventCountdown startsAt={event.startsAt} endsAt={event.endsAt} initialStatus={event.publishedStatus}/></div></div></section>
 
-    <section className="section"><div className="container narrow"><div className="section-head"><div><span className="section-kicker">Clear answers</span><h2>Unbox ASMR Roblox questions</h2></div></div><div className="faq-list">{faqs.map(([question, answer]) => <details key={question}><summary>{question}</summary><p>{answer}</p></details>)}</div><SourceList sources={[{ label: "Official Unbox ASMR Roblox experience", url: "https://www.roblox.com/games/112233638491976/Unbox-ASMR", note: `Official public description checked ${formatDate(codeAudit.checkedAt)}.` }, { label: "Rolimon’s public game snapshot", url: "https://www.rolimons.com/game/112233638491976", note: "Third-party price and popularity source; re-checked August 1, 2026." }]} /><RelatedLinks links={[{ href: "/sources/", label: "How this guide verifies claims" }, { href: "/about/", label: "About the Unbox ASMR guide" }]} /></div></section>
+    <section className="section"><div className="container narrow"><div className="section-head"><div><span className="section-kicker">Clear answers</span><h2>Unbox ASMR Roblox questions</h2></div></div><div className="faq-list">{faqs.map(([question, answer]) => <details key={question}><summary>{question}</summary><p>{answer}</p></details>)}</div><SourceList sources={[{ label: "Official Unbox ASMR Roblox experience", url: game.robloxUrl, note: `Official public description and games API checked ${formatDate(game.checkedAt)}.` }, { label: "Rolimon’s public game snapshot", url: "https://www.rolimons.com/game/112233638491976", note: "Third-party price and popularity source; re-checked August 1, 2026." }]} /><RelatedLinks links={[{ href: "/sources/", label: "How this guide verifies claims" }, { href: "/about/", label: "About the Unbox ASMR guide" }]} /></div></section>
     <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify({ "@context": "https://schema.org", "@type": "WebPage", name: "Unbox ASMR Roblox Guide & Verified Data Tracker", url: SITE_URL }) }} />
   </>;
 }

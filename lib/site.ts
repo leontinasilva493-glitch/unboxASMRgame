@@ -4,7 +4,7 @@ export const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || "https://unboxasmrgu
 export const ROBLOX_URL =
   process.env.NEXT_PUBLIC_ROBLOX_GAME_URL ||
   "https://www.roblox.com/games/112233638491976/Unbox-ASMR";
-export const LAST_CHECKED = "2026-08-01";
+export const LAST_CHECKED = "2026-08-11";
 
 export const wikiNavItems = [
   { href: "/wiki/", label: "Wiki Home", mobileLabel: "Wiki Home", description: "Verified facts and every player guide" },

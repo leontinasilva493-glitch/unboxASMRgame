@@ -4,11 +4,11 @@ import { EventCountdown } from "@/components/EventCountdown";
 import { InlineCallout, PageIntro, RelatedLinks, SourceList } from "@/components/PageParts";
 import { VerificationBadge } from "@/components/Verification";
 import { changelog, events, game } from "@/lib/data";
-import { pageMetadata } from "@/lib/site";
+import { formatDate, pageMetadata } from "@/lib/site";
 
 export const metadata: Metadata = pageMetadata({
-  title: "Unbox ASMR Update 3 & Admin Abuse Time",
-  description: "The reported Unbox ASMR Update 3 and Admin Abuse schedule with local time, a pre-update public check, and a strict implementation-evidence boundary.",
+  title: "Unbox ASMR Updates — Latest Official Check & Event Status",
+  description: "Latest official Unbox ASMR Roblox listing check, archived event timing, gameplay verification gaps, and the weather-events evidence queue.",
   path: "/updates/",
 });
 
@@ -18,18 +18,19 @@ export default function Updates() {
     <Breadcrumbs items={[{ label: "Updates", href: "/updates/" }]}/>
     <PageIntro
       eyebrow="Event desk"
-      title="Unbox ASMR Roblox Update 3 and Admin Abuse"
-      description="The schedule is community-reported and converted to your local time. The reported window has begun, but the official public listing still does not provide an Update 3 feature list."
-      checkedAt="2026-08-03"
+      title="Unbox ASMR Updates and Event Status"
+      description="Start with the latest official listing check, then review the expired community-reported event window and the gameplay evidence still needed for weather, codes, crates, workers, and rebirths."
+      checkedAt={game.checkedAt}
     />
 
-    <InlineCallout title="Pre-update public check" tone="reported">
-      <p>The official Roblox games record was checked on August 1, 2026. It shows the public experience was updated on July 31 at 20:43 UTC, but the description still contains the general crates, toys, friends, workers, and special-codes messaging. That timestamp alone does not prove Update 3 content.</p>
+    <InlineCallout title="Latest official check" tone="reported">
+      <p>The official Roblox games API was checked on {formatDate(game.checkedAt)}. It shows the public record updated on {formatDate(game.officialUpdatedAt)}, while the description still contains only the broad crates, toys, friends, workers, and special-codes messaging. An update timestamp does not prove a numbered update, weather mechanic, active code, or gameplay value.</p>
     </InlineCallout>
 
     <div className="event-banner">
       <div className="event-banner-copy">
         <VerificationBadge status="community_reported"/>
+        <span className="eyebrow">Reported event archive</span>
         <h2>{event.name}</h2>
         <p>Starts Aug 2, 2026 · 3:00 PM ET / 12:00 PM PT<br/>Ends Aug 9, 2026 · 3:00 PM ET / 12:00 PM PT</p>
       </div>
@@ -52,7 +53,20 @@ export default function Updates() {
       </article>
     </section>
 
-    <InlineCallout title="Implementation status: current gameplay still required" tone="danger"><p>The community-reported event window began on August 2, 2026. No crate, toy, code, rebirth, worker, or Gamepass change is presented as implemented until current-version gameplay or an official announcement proves it.</p></InlineCallout>
+    <InlineCallout title="Implementation status: current gameplay still required" tone="danger"><p>The community-reported event window ended on August 9, 2026. No crate, toy, weather event, code, rebirth, worker, or Gamepass change is presented as implemented until current-version gameplay or an official announcement proves it.</p></InlineCallout>
+
+    <section className="section-compact summary-card warm-panel">
+      <span className="section-kicker">High-value content gap</span>
+      <h2>Weather events evidence queue</h2>
+      <p>Search research shows player interest in weather events, but this build has no current-version first-party capture that proves an event name, trigger, duration, and effect together. A dedicated weather page would stay noindex and thin until it can answer what changed and what the player should do.</p>
+      <ol>
+        <li>Capture the event banner or weather label with the server and current game context visible.</li>
+        <li>Record the same action before and during the event to separate a real effect from coincidence.</li>
+        <li>Keep any countdown, start/end state, reward result, and relevant UI in one continuous recording.</li>
+        <li>Repeat the observation or find an official announcement before publishing a stable mechanic as fact.</li>
+      </ol>
+      <p className="muted">SEO decision: do not add <code>/weather-events/</code> to the sitemap until the page contains differentiated, reproducible gameplay evidence.</p>
+    </section>
 
     <section className="section-compact narrow">
       <h2>Changelog</h2>
@@ -60,7 +74,7 @@ export default function Updates() {
     </section>
 
     <section className="summary-card warm-panel">
-      <h2>Update 3 verification runbook</h2>
+      <h2>Current gameplay verification runbook</h2>
       <ol>
         <li>Capture the event panel and server version after the reported start.</li>
         <li>Record added or changed crates and toys without inferring hidden odds.</li>
@@ -71,6 +85,6 @@ export default function Updates() {
     </section>
 
     <RelatedLinks links={[{ href: "/wiki/", label: "Unbox ASMR Wiki" }, { href: "/codes/", label: "Codes status" }, { href: "/roblox-index/", label: "Roblox Index" }, { href: "/rebirths-and-workers/", label: "Rebirths & Workers" }, { href: "/sources/", label: "Evidence policy" }]}/>
-    <SourceList sources={[{ label: "Official Unbox ASMR Roblox experience", url: game.robloxUrl, note: "Public description and games API checked August 1, 2026." }, { label: "AbuseTime Unbox ASMR schedule", url: "https://abusetime.dev/games/unbox-asmr/current", note: "Community schedule checked August 3, 2026; timing only, not feature proof." }, { label: "All Things How event schedule", url: "https://allthings.how/unbox-asmr-events-schedule/", note: "Community-reported schedule checked July 30, 2026; not proof of implemented features." }]}/>
+    <SourceList sources={[{ label: "Official Unbox ASMR Roblox experience", url: game.robloxUrl, note: `Public description and games API checked ${formatDate(game.checkedAt)}.` }, { label: "AbuseTime Unbox ASMR schedule", url: "https://abusetime.dev/games/unbox-asmr/current", note: "Community schedule checked August 3, 2026; timing only, not feature proof." }, { label: "All Things How event schedule", url: "https://allthings.how/unbox-asmr-events-schedule/", note: "Community-reported schedule checked July 30, 2026; not proof of implemented features." }]}/>
   </div>;
 }

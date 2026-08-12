@@ -4,7 +4,7 @@
     "name": "Update 3 + Admin Abuse",
     "startsAt": "2026-08-02T15:00:00-04:00",
     "endsAt": "2026-08-09T15:00:00-04:00",
-    "publishedStatus": "upcoming",
+    "publishedStatus": "ended",
     "accentColor": "purple",
     "confirmedChanges": [
       "The published schedule lists a start at 3:00 PM ET / 12:00 PM PT on August 2, 2026.",
@@ -12,7 +12,7 @@
     ],
     "unconfirmedNotes": [
       "Specific crates, toys, rebirth changes, and codes have not been confirmed in-game.",
-      "The official public game description checked on August 1 does not list Update 3 features."
+      "The official public game description checked on August 11 does not list a numbered update or an event feature list."
     ],
     "evidence": [
       {
@@ -23,9 +23,9 @@
       },
       {
         "status": "official",
-        "verifiedAt": "2026-08-01",
+        "verifiedAt": "2026-08-11",
         "sourceUrl": "https://games.roblox.com/v1/games?universeIds=10454554751",
-        "notes": "Official public game record checked before the event; it shows a July 31 update timestamp but no Update 3 feature list."
+        "notes": "Official public game record checked after the reported event window; it shows an August 11 update timestamp but no numbered update or event feature list."
       }
     ]
   }

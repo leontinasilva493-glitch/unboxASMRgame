@@ -1,11 +1,13 @@
 import type { Metadata } from "next";
 import Image from "next/image";
+import Link from "next/link";
 import { Breadcrumbs } from "@/components/Breadcrumbs";
+import { ArrowIcon } from "@/components/icons";
 import { InlineCallout, PageIntro, RelatedLinks, SourceList, TableOfContents } from "@/components/PageParts";
 import { VideoReference } from "@/components/VideoReference";
 import { VerificationBadge } from "@/components/Verification";
 import { game } from "@/lib/data";
-import { pageMetadata } from "@/lib/site";
+import { formatDate, pageMetadata } from "@/lib/site";
 
 export const metadata: Metadata = pageMetadata({
   title: "Unbox ASMR Beginner Guide for Roblox",
@@ -15,6 +17,7 @@ export const metadata: Metadata = pageMetadata({
 });
 
 const toc = [
+  { href: "#quick-index", label: "Quick guide index" },
   { href: "#official-baseline", label: "Official baseline" },
   { href: "#first-steps", label: "First five steps" },
   { href: "#beginner-video", label: "Gameplay reference" },
@@ -39,9 +42,21 @@ export default function BeginnerGuide() {
           <p>Open the official experience, read the onboarding shown in your server, complete one crate-to-toy loop, and check the next visible unlock before spending. The official listing confirms toys, collection upgrades, better crates, a friend cash benefit, and a two-worker group reward; it does not publish the exact in-game steps or values.</p>
         </InlineCallout>
 
+        <section id="quick-index">
+          <h2>Quick guide index</h2>
+          <p>Choose the page that matches the decision in front of you. Verification status stays visible, so this index does not turn incomplete gameplay evidence into a complete wiki.</p>
+          <div className="summary-grid">
+            <article className="summary-card"><h3>Codes and rewards</h3><p>See verified active, reported, and unverified redemption states.</p><Link className="text-link" href="/codes/">Check codes <ArrowIcon /></Link></article>
+            <article className="summary-card warm-panel"><h3>Crates, toys, and the Roblox Index</h3><p>Review dated opening results, conflicts, and missing current-version fields.</p><Link className="text-link" href="/roblox-index/">Open the Index <ArrowIcon /></Link></article>
+            <article className="summary-card warm-panel"><h3>Gamepass prices</h3><p>Compare seven dated public prices without treating a pass name as a proven effect.</p><Link className="text-link" href="/gamepasses/">Compare prices <ArrowIcon /></Link></article>
+            <article className="summary-card"><h3>Rebirths and workers</h3><p>Read the recorded first-rebirth panel and the still-unverified worker delivery path.</p><Link className="text-link" href="/rebirths-and-workers/">Review reset evidence <ArrowIcon /></Link></article>
+            <article className="summary-card"><h3>Latest updates and weather evidence</h3><p>Check the latest official listing timestamp, archived event timing, and what a weather guide still needs to prove.</p><Link className="text-link" href="/updates/">Open update evidence <ArrowIcon /></Link></article>
+          </div>
+        </section>
+
         <h2 id="official-baseline">Official Roblox listing: what it confirms</h2>
         <VerificationBadge status="official"/>
-        <p>The official Roblox listing was checked on August 1, 2026. It publicly describes these starting facts:</p>
+        <p>The official Roblox listing was checked on {formatDate(game.checkedAt)}. It publicly describes these starting facts:</p>
         <ul>
           {game.officialClaims.coreLoop.map((claim) => <li key={claim}>{claim}.</li>)}
           <li>{game.officialClaims.friendBenefit}.</li>
@@ -115,7 +130,7 @@ export default function BeginnerGuide() {
         </ul>
         <InlineCallout title="Indexing gate" tone="reported"><p>This guide remains out of search until original current-version captures prove the first loop, selling path, and worker delivery. The written route is ready for those assets but does not pretend they already exist.</p></InlineCallout>
         <RelatedLinks links={[{ href: "/wiki/", label: "Unbox ASMR Wiki" }, { href: "/roblox-index/", label: "Roblox Index" }, { href: "/rebirths-and-workers/", label: "Rebirths & Workers" }, { href: "/gamepasses/", label: "Gamepasses" }]}/>
-        <SourceList sources={[{ label: "Official Unbox ASMR Roblox experience", url: game.robloxUrl, note: "Public description checked August 1, 2026." }, { label: "Official ASMR Labs Roblox group", url: game.groupUrl, note: "Group identity and availability checked August 1, 2026." }, { label: "Roblox Guides beginner gameplay video", url: "https://www.youtube.com/watch?v=7JfyM_GSipY", note: "Third-party gameplay manually reviewed August 3, 2026; used only as a visual reference." }]}/>
+        <SourceList sources={[{ label: "Official Unbox ASMR Roblox experience", url: game.robloxUrl, note: `Public description and games API checked ${formatDate(game.checkedAt)}.` }, { label: "Official ASMR Labs Roblox group", url: game.groupUrl, note: `Group identity and availability checked ${formatDate(game.checkedAt)}.` }, { label: "Roblox Guides beginner gameplay video", url: "https://www.youtube.com/watch?v=7JfyM_GSipY", note: "Third-party gameplay manually reviewed August 3, 2026; used only as a visual reference." }]}/>
       </article>
       <TableOfContents items={toc}/>
     </div>
