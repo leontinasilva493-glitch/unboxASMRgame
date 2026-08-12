@@ -29,9 +29,14 @@ test("codes consolidates observed query variants without a rumor section", () =>
   assert.equal(existsSync(auditPath), true, "data/code-audit.json must be the shared code-status source");
   const audit = JSON.parse(read("data/code-audit.json"));
   const publishedCodes = JSON.parse(read("data/codes.json"));
-  assert.equal(audit.checkedAt, "2026-08-06");
+  assert.equal(audit.checkedAt, "2026-08-11");
   assert.equal(audit.verifiedActiveCount, 0);
   assert.equal(audit.reportedCandidateCount, 3);
+  assert.deepEqual(
+    audit.reportedCandidates.map((candidate) => candidate.code),
+    ["ILOVEASMR", "SORRYFORDELAY", "1M"],
+  );
+  assert.ok(audit.reportedCandidates.every((candidate) => candidate.status === "community_reported"));
   assert.equal(publishedCodes.length, 0, "community reports must not enter the published active-code dataset");
   assert.match(codes, /Is there an Unbox ASMR code\?/);
   assert.match(codes, /Are there any Unbox ASMR Roblox codes\?/);
@@ -41,7 +46,30 @@ test("codes consolidates observed query variants without a rumor section", () =>
   assert.match(codes, /Community discovery/);
   assert.match(codes, /In-game verification/);
   assert.match(codes, /Publish or reject/);
+  assert.match(codes, /Reported codes awaiting an in-game result/);
+  assert.match(codes, /codeAudit\.reportedCandidates\.map/);
+  assert.match(codes, /Candidate only/);
   assert.doesNotMatch(codes, /Expected Codes|Rumors/i);
+});
+
+test("official freshness is shared across the homepage, wiki, and update desk", () => {
+  const game = JSON.parse(read("data/game.json"));
+  const events = JSON.parse(read("data/events.json"));
+  const home = read("app/page.tsx");
+  const hero = read("components/Hero.tsx");
+  const wiki = read("app/wiki/page.tsx");
+  const updates = read("app/updates/page.tsx");
+
+  assert.equal(game.checkedAt, "2026-08-11");
+  assert.equal(game.officialUpdatedAt, "2026-08-11T08:09:42.9445543Z");
+  assert.equal(events[0].publishedStatus, "ended");
+  assert.match(home, /game\.checkedAt/);
+  assert.match(hero, /game\.checkedAt/);
+  assert.match(wiki, /game\.checkedAt/);
+  assert.match(updates, /Latest official check/);
+  assert.match(updates, /Reported event archive/);
+  assert.doesNotMatch(home, /Next scheduled event/);
+  assert.doesNotMatch(home, /Pre-update public check completed Aug 1/);
 });
 
 test("homepage and wiki consume the shared code audit date", () => {
@@ -67,7 +95,29 @@ test("beginner guide stays focused and noindex", () => {
 
   assert.match(beginner, /title: "Unbox ASMR Beginner Guide for Roblox"/);
   assert.match(beginner, /noindex: true/);
+  assert.match(beginner, /Quick guide index/);
+  assert.match(beginner, /Latest updates and weather evidence/);
+  assert.match(beginner, /game\.checkedAt/);
   assert.doesNotMatch(beginner, /Beginner Guide & Wiki|Complete Roblox Index/);
+});
+
+test("search opportunities stay evidence-gated until gameplay is captured", () => {
+  const updates = read("app/updates/page.tsx");
+  const index = read("app/roblox-index/page.tsx");
+  const sitemap = read("app/sitemap.ts");
+
+  assert.match(updates, /Weather events evidence queue/);
+  assert.match(updates, /trigger, duration, and effect/);
+  assert.match(index, /Can you skip crate opening animations\?/);
+  assert.match(index, /no verified crate-skip method/i);
+  assert.doesNotMatch(sitemap, /path: "\/weather-events\/"/);
+});
+
+test("gamepass metadata promises only the seven dated public prices", () => {
+  const gamepasses = read("app/gamepasses/page.tsx");
+
+  assert.match(gamepasses, /title: "Unbox ASMR Gamepasses Guide — All 7 Prices \(August 2026\)"/);
+  assert.doesNotMatch(gamepasses, /title: "[^"]*Verified Effects/);
 });
 
 test("roblox index has an exact title and keeps its evidence gate", () => {

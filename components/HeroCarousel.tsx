@@ -24,7 +24,7 @@ const slides = [
   },
   {
     title: "Track new updates",
-    description: "Follow the dated Update 3 status without treating reports, generated art, or missing patch notes as verified gameplay.",
+    description: "Follow the latest official listing check and archived event status without treating a timestamp or missing patch notes as verified gameplay.",
     href: "/updates/",
     cta: "Open update status",
     image: "/images/home/carousel-update-tracker.webp",

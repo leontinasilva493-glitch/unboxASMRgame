@@ -3,11 +3,11 @@ const { chromium } = require("playwright");
 
 const BASE = process.env.TEST_BASE || "http://127.0.0.1:3107";
 const ROUTES = [
-  "/", "/beginner-guide/", "/crates-and-toys/", "/rebirths-and-workers/",
+  "/", "/wiki/", "/beginner-guide/", "/roblox-index/", "/rebirths-and-workers/",
   "/gamepasses/", "/updates/", "/codes/", "/about/", "/sources/",
   "/privacy/", "/terms/", "/robots.txt", "/sitemap.xml",
 ];
-const NOINDEX = ["/beginner-guide/", "/crates-and-toys/", "/rebirths-and-workers/"];
+const NOINDEX = ["/beginner-guide/", "/roblox-index/", "/rebirths-and-workers/"];
 const EXPECTED_SEO = {
   "/": {
     title: "Unbox ASMR Guide — Verified Crates, Toys & Rebirth Data",
@@ -15,33 +15,33 @@ const EXPECTED_SEO = {
     h1: "Unbox ASMR Roblox Guide & Verified Data Tracker",
   },
   "/beginner-guide/": {
-    title: "Unbox ASMR Beginner Guide: Sell Toys, Workers & Crates | Unbox ASMR Guide",
+    title: "Unbox ASMR Beginner Guide for Roblox | Unbox ASMR Guide",
     description: "A cautious beginner path for Unbox ASMR on Roblox, separating official starting facts from gameplay steps that still need current-version captures.",
     h1: "Unbox ASMR Roblox Beginner Guide",
   },
-  "/crates-and-toys/": {
-    title: "Unbox ASMR Crates & Toys — Prices, Rarity & Sources | Unbox ASMR Guide",
-    description: "Evidence-gated Unbox ASMR crates and toys tables for Roblox. Unverified prices, odds, rarity, and cash values are never guessed.",
-    h1: "Unbox ASMR Roblox Crates and Toys List",
+  "/roblox-index/": {
+    title: "Unbox ASMR Roblox Index",
+    description: "Evidence-gated Unbox ASMR Roblox Index for crates, toys, rarity, source crates, values, and Complete Index entries verified in the current game.",
+    h1: "Unbox ASMR Roblox Index",
   },
   "/rebirths-and-workers/": {
     title: "Unbox ASMR Rebirths & Workers — Costs, Resets & Unlocks | Unbox ASMR Guide",
-    description: "A safe Unbox ASMR rebirth and workers guide for Roblox that keeps resets, rewards, and offline behavior unverified until proven.",
+    description: "Unbox ASMR rebirth requirement, reset, keep, and reward answers from dated Roblox gameplay, followed by the official two-worker condition and evidence limits.",
     h1: "Unbox ASMR Roblox Rebirths and Workers Guide",
   },
   "/gamepasses/": {
-    title: "Unbox ASMR Gamepasses — Prices & Verified Effects | Unbox ASMR Guide",
-    description: "Dated Unbox ASMR Gamepass price snapshots for Roblox, with effects and value verdicts withheld until in-game verification.",
-    h1: "Unbox ASMR Roblox Gamepass Price and Effect Tracker",
+    title: "Unbox ASMR Gamepasses Guide — All 7 Prices (August 2026) | Unbox ASMR Guide",
+    description: "All seven dated Unbox ASMR Gamepass price snapshots for Roblox, with effects and value verdicts withheld until in-game verification.",
+    h1: "Unbox ASMR Gamepasses Guide: Prices & Evidence",
   },
   "/updates/": {
-    title: "Unbox ASMR Update 3 & Admin Abuse Time | Unbox ASMR Guide",
-    description: "The reported Unbox ASMR Update 3 and Admin Abuse schedule with local time, a pre-update public check, and a strict implementation-evidence boundary.",
-    h1: "Unbox ASMR Roblox Update 3 and Admin Abuse",
+    title: "Unbox ASMR Updates — Latest Official Check & Event Status | Unbox ASMR Guide",
+    description: "Latest official Unbox ASMR Roblox listing check, archived event timing, gameplay verification gaps, and the weather-events evidence queue.",
+    h1: "Unbox ASMR Updates and Event Status",
   },
   "/codes/": {
-    title: "Unbox ASMR Codes (August 2026): No Verified Active Codes | Unbox ASMR Guide",
-    description: "No reliably verified active Unbox ASMR codes as of August 1, 2026. See the official-source check, redemption status, and verification rule.",
+    title: "Unbox ASMR Codes (August 2026): Active, Expired & Fake Codes | Unbox ASMR Guide",
+    description: "No verified active Unbox ASMR Roblox codes as of August 11, 2026. Check three reported candidates, redemption evidence, fake-code warnings, and official sources.",
     h1: "Unbox ASMR Roblox Codes (August 2026)",
   },
 };
@@ -154,17 +154,19 @@ function containsJsonLdType(value, type) {
   assert(values.every((value) => value >= 0), `negative countdown: ${values.join(",")}`);
   assert((await desktop.locator(".local-time").innerText()).includes("Your local time"), "local time missing");
   const updatesText = await desktop.locator("main").innerText();
-  assert(updatesText.includes("Pre-update public check"), "Updates page is missing the August 1 public checkpoint");
+  assert(updatesText.includes("Latest official check"), "Updates page is missing the August 11 official checkpoint");
+  assert(/reported event archive/i.test(updatesText), "Updates page does not identify the expired event window");
   assert(updatesText.includes("Implementation status: current gameplay still required"), "Updates page does not preserve the implementation evidence gate");
-  assert(updatesText.includes("reported event window began on August 2, 2026"), "Updates page still presents the reported event as pre-launch");
+  assert(updatesText.includes("reported event window ended on August 9, 2026"), "Updates page does not present the reported event as ended");
   assert(!updatesText.includes("has not reached its reported start time"), "Updates page contains stale pre-launch wording");
-  assert(updatesText.includes("Last checked: Aug 3, 2026"), "Updates page shows the wrong schedule review date");
+  assert(updatesText.includes("Last checked: Aug 11, 2026"), "Updates page shows the wrong official review date");
   await desktop.screenshot({ path: "artifacts/updates-desktop.png", fullPage: true });
 
   await desktop.goto(BASE + "/codes/", { waitUntil: "networkidle" });
   const codesText = await desktop.locator("main").innerText();
-  assert(codesText.includes("Checked August 1, 2026"), "Codes page does not show the fresh public-source check");
-  assert(codesText.includes("No code string is published"), "Codes page does not distinguish an official codes mention from an active code");
+  assert(codesText.includes("August 11, 2026"), "Codes page does not show the fresh public-source check");
+  assert(codesText.includes("Reported codes awaiting an in-game result"), "Codes page does not expose the reported-candidate queue");
+  assert(codesText.includes("ILOVEASMR"), "Codes page does not show reported candidates for transparent testing");
   await desktop.screenshot({ path: "artifacts/quick-mvp-codes.png", fullPage: true });
 
   await desktop.goto(BASE + "/beginner-guide/", { waitUntil: "networkidle" });
@@ -172,6 +174,7 @@ function containsJsonLdType(value, type) {
   assert(beginnerText.includes("Official Roblox listing"), "Beginner guide does not identify its safe public-source baseline");
   assert(beginnerText.includes("Like the game and join the group"), "Beginner guide is missing the official worker-reward condition");
   assert(beginnerText.includes("Gameplay capture still required"), "Beginner guide does not expose the remaining screenshot gate");
+  assert(beginnerText.includes("Quick guide index"), "Beginner guide does not expose the task-based guide index");
   const beginnerVideo = desktop.locator('[data-video-id="7JfyM_GSipY"]');
   assert(await beginnerVideo.count() === 1, "Beginner guide is missing its reviewed gameplay reference");
   assert(await beginnerVideo.locator("iframe").count() === 0, "Beginner video iframe loads before user intent");
@@ -183,28 +186,28 @@ function containsJsonLdType(value, type) {
 
   await desktop.goto(BASE + "/rebirths-and-workers/", { waitUntil: "networkidle" });
   const progressionText = await desktop.locator("main").innerText();
-  assert(progressionText.includes("Publicly advertised worker reward"), "Workers page is missing the official reward baseline");
+  assert(progressionText.includes("Workers and the two-worker reward"), "Workers page is missing the official reward baseline");
   assert(progressionText.includes("First rebirth safety checklist"), "Rebirth page is missing the actionable pre-confirmation checklist");
-  const rebirthVideo = desktop.locator('[data-video-id="-G26P9S5yGY"]');
+  const rebirthVideo = desktop.locator('[data-video-id="FbqF-ydPuUw"]');
   assert(await rebirthVideo.count() === 1, "Rebirth guide is missing its reviewed gameplay reference");
   assert(await rebirthVideo.locator("iframe").count() === 0, "Rebirth video iframe loads before user intent");
   await rebirthVideo.getByRole("button", { name: /play third-party video/i }).click();
   const rebirthFrame = rebirthVideo.locator("iframe");
   await rebirthFrame.waitFor({ state: "visible" });
-  assert((await rebirthFrame.getAttribute("src")).includes("youtube-nocookie.com/embed/-G26P9S5yGY"), "Rebirth guide loads the wrong video or host");
+  assert((await rebirthFrame.getAttribute("src")).includes("youtube-nocookie.com/embed/FbqF-ydPuUw"), "Rebirth guide loads the wrong video or host");
   await desktop.screenshot({ path: "artifacts/quick-mvp-progression.png", fullPage: true });
 
-  await desktop.goto(BASE + "/crates-and-toys/", { waitUntil: "networkidle" });
+  await desktop.goto(BASE + "/roblox-index/", { waitUntil: "networkidle" });
   const collectionText = await desktop.locator("main").innerText();
-  assert(collectionText.includes("Starter dataset status"), "Crates and Toys page is missing its scoped MVP status");
-  assert(collectionText.includes("Official description confirms crates and toys"), "Crates and Toys page is missing the official fact boundary");
-  const crateVideo = desktop.locator('[data-video-id="UgwslmyT87o"]');
-  assert(await crateVideo.count() === 1, "Crates and Toys page is missing its reviewed gameplay reference");
-  assert(await crateVideo.locator("iframe").count() === 0, "Crates video iframe loads before user intent");
+  assert(collectionText.includes("First community-reported snapshot"), "Roblox Index is missing its scoped evidence status");
+  assert(collectionText.includes("Can you skip crate opening animations?"), "Roblox Index is missing the crate-skip evidence answer");
+  const crateVideo = desktop.locator('[data-video-id="xPiGrQ2t_V8"]');
+  assert(await crateVideo.count() === 1, "Roblox Index is missing its reviewed gameplay reference");
+  assert(await crateVideo.locator("iframe").count() === 0, "Roblox Index video iframe loads before user intent");
   await crateVideo.getByRole("button", { name: /play third-party video/i }).click();
   const crateFrame = crateVideo.locator("iframe");
   await crateFrame.waitFor({ state: "visible" });
-  assert((await crateFrame.getAttribute("src")).includes("youtube-nocookie.com/embed/UgwslmyT87o"), "Crates page loads the wrong video or host");
+  assert((await crateFrame.getAttribute("src")).includes("youtube-nocookie.com/embed/xPiGrQ2t_V8"), "Roblox Index loads the wrong video or host");
   await desktop.screenshot({ path: "artifacts/quick-mvp-collection.png", fullPage: true });
 
   const mobile = await browser.newPage({ viewport: { width: 390, height: 844 }, deviceScaleFactor: 1 });
@@ -212,7 +215,7 @@ function containsJsonLdType(value, type) {
   const mobileErrors = [];
   mobile.on("console", (msg) => { if (msg.type() === "error") mobileErrors.push(msg.text()); });
   mobile.on("pageerror", (error) => mobileErrors.push(String(error)));
-  for (const route of ["/", "/crates-and-toys/", "/gamepasses/", "/updates/"]) {
+  for (const route of ["/", "/roblox-index/", "/gamepasses/", "/updates/"]) {
     await mobile.goto(BASE + route, { waitUntil: "networkidle" });
     const dimensions = await mobile.evaluate(() => ({ scroll: document.documentElement.scrollWidth, client: document.documentElement.clientWidth }));
     assert(dimensions.scroll <= dimensions.client + 1, `horizontal page overflow at ${route}: ${JSON.stringify(dimensions)}`);

@@ -8,7 +8,7 @@ import { EvidenceReference, MissingValue } from "@/components/Verification";
 import { VideoReference } from "@/components/VideoReference";
 import { buildCollectionFilterRows, buildCrateViewModels, buildEvidenceHref, buildToyViewModels } from "@/lib/content-view-models.mjs";
 import { crates, game, toys } from "@/lib/data";
-import { pageMetadata } from "@/lib/site";
+import { formatDate, pageMetadata } from "@/lib/site";
 
 export const metadata: Metadata = pageMetadata({
   title: "Unbox ASMR Roblox Index",
@@ -104,6 +104,18 @@ export default function RobloxIndex() {
 
     <InlineCallout title="Conflicting Candy Key Crate prices" tone="reported"><p>A July 27 capture displays <strong>$10K</strong>, while an August 1 continuous opening displays <strong>$1.0K</strong>. Both dated observations remain visible because the difference may reflect a game update or recording context. Check the current conveyor panel before spending.</p></InlineCallout>
 
+    <section className="section-compact split-cards">
+      <article className="info-card">
+        <span className="section-kicker">Crate skips</span>
+        <h2>Can you skip crate opening animations?</h2>
+        <p>There is no verified crate-skip method in the current evidence set. The dated recordings show openings, but they do not prove a skip button, setting, input, entitlement, or consistent automatic shortcut.</p>
+      </article>
+      <article className="info-card warm-panel">
+        <h2>How to verify a crate skip</h2>
+        <p>Record the unopened crate, all visible controls and settings, the exact input, the animation response, and the resulting toy in one take. Repeat it on another crate before publishing steps.</p>
+      </article>
+    </section>
+
     <section className="section-compact"><CollectionFilter rows={buildCollectionFilterRows({ crates, toys })}/></section>
     <section>
       <h2>All recorded crates</h2>
@@ -130,7 +142,7 @@ export default function RobloxIndex() {
     <InlineCallout title="Indexing gate" tone="reported"><p>This route remains noindex and stays out of the sitemap. The gate opens only after an original current-version capture confirms a playable crate sequence, resulting toys, source relationships, and enough Complete Index fields to answer comparison questions reliably.</p></InlineCallout>
     <RelatedLinks links={[{ href: "/wiki/", label: "Unbox ASMR Wiki" }, { href: "/beginner-guide/", label: "Beginner Guide" }, { href: "/updates/", label: "Update status" }, { href: "/rebirths-and-workers/", label: "Rebirths & Workers" }]}/>
     <SourceList sources={[
-      { label: "Official Unbox ASMR Roblox experience", url: game.robloxUrl, note: "Public description checked August 6, 2026; it confirms the crate-and-toy theme but not the imported entity values." },
+      { label: "Official Unbox ASMR Roblox experience", url: game.robloxUrl, note: `Public description checked ${formatDate(game.checkedAt)}; it confirms the crate-and-toy theme but not imported entity values or a crate-skip method.` },
       { label: "Nolannati new-player opening route", url: "https://www.youtube.com/watch?v=xPiGrQ2t_V8", note: "Third-party gameplay uploaded August 1 and manually reviewed August 6, 2026; used for the five observed opening relationships." },
       { label: "CaylusBlox Chocolate Key cross-check", url: "https://www.youtube.com/watch?v=MeEcGabrpb8", note: "Third-party gameplay uploaded July 31; used only to cross-check the Chocolate Keyboard name." },
       { label: "CoralBlox2 Complete Index view", url: "https://www.youtube.com/watch?v=lutxF0LFCPI", note: "Third-party gameplay uploaded August 2; its 4/64 Found panel is a dated snapshot, not a current total." },

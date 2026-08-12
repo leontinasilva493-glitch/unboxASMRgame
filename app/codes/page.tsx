@@ -8,7 +8,7 @@ import { formatDate, pageMetadata } from "@/lib/site";
 
 export const metadata: Metadata = pageMetadata({
   title: "Unbox ASMR Codes (August 2026): Active, Expired & Fake Codes",
-  description: "No verified active Unbox ASMR Roblox codes as of August 6, 2026. Check reported candidates, redemption evidence, fake-code warnings, and official sources.",
+  description: "No verified active Unbox ASMR Roblox codes as of August 11, 2026. Check three reported candidates, redemption evidence, fake-code warnings, and official sources.",
   path: "/codes/",
 });
 
@@ -22,6 +22,13 @@ const faqs = [
 ];
 
 export default function Codes() {
+  const reportedRows = codeAudit.reportedCandidates.map((candidate) => [
+    <code key={`${candidate.code}-value`}>{candidate.code}</code>,
+    <VerificationBadge key={`${candidate.code}-status`} status="community_reported"/>,
+    formatDate(candidate.checkedAt),
+    "Candidate only — no successful current-version redemption recorded.",
+  ]);
+
   return <div className="container page-shell">
     <Breadcrumbs items={[{ label: "Codes", href: "/codes/" }]}/>
     <PageIntro
@@ -37,6 +44,13 @@ export default function Codes() {
       <article className="status-card"><span>Last audit</span><strong>{formatDate(codeAudit.checkedAt, "short")}</strong><p>Official listing and reported-candidate queue checked together.</p></article>
     </div>
     <InlineCallout title="Direct answer"><p>There are no verified active Unbox ASMR codes in this build. {codeAudit.officialListingStatus} The {codeAudit.reportedCandidateCount} community-reported candidates remain outside the active table until an in-game test succeeds.</p></InlineCallout>
+
+    <section className="section-compact">
+      <h2>Reported codes awaiting an in-game result</h2>
+      <p>These strings were present in the dated community report. Listing them here makes the test queue transparent; it does not label them active, working, expired, or safe to redeem.</p>
+      <DataTable label="Community-reported Unbox ASMR code candidates" headers={["Reported code","Status","Report checked","What this proves"]} rows={reportedRows}/>
+      <p className="muted">Candidate only. Use the current in-game redemption surface and record the exact success, invalid, or expired response before changing a status.</p>
+    </section>
 
     <section className="section-compact">
       <h2>Active codes</h2>
@@ -88,7 +102,7 @@ export default function Codes() {
       <h2>Unbox ASMR codes FAQ</h2>
       <div className="faq-list">{faqs.map(([question, answer]) => <details key={question}><summary>{question}</summary><p>{answer}</p></details>)}</div>
     </section>
-    <RelatedLinks links={[{ href: "/wiki/", label: "Unbox ASMR Wiki" }, { href: "/updates/", label: "Update 3 status" }, { href: "/rebirths-and-workers/", label: "Free workers" }]}/>
+    <RelatedLinks links={[{ href: "/wiki/", label: "Unbox ASMR Wiki" }, { href: "/updates/", label: "Latest update evidence" }, { href: "/rebirths-and-workers/", label: "Free workers" }]}/>
     <SourceList sources={[{ label: "Official Unbox ASMR Roblox experience", url: game.robloxUrl, note: `Description and public games API rechecked ${formatDate(codeAudit.checkedAt)}.` }, { label: "Community report awaiting redemption", url: codeAudit.reportedSourceUrl, note: `${codeAudit.reportedCandidateCount} candidate strings observed ${formatDate(codeAudit.reportedSourceCheckedAt)}; none is labeled Active without an in-game result.` }, { label: "Official ASMR Labs Roblox group", url: game.groupUrl, note: `Group surface checked separately from code status on ${formatDate(codeAudit.checkedAt)}.` }]}/>
   </div>;
 }
