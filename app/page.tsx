@@ -59,6 +59,25 @@ const greedyGrowersLinks = [
   { href: "https://greedygrowerhub.wiki/codes/", label: "Current codes status" },
 ] as const;
 
+const gridHanziGroups = [
+  {
+    title: "Make a practice sheet",
+    links: [
+      { href: "https://gridhanzi.org/generator", label: "Chinese worksheet generator" },
+      { href: "https://gridhanzi.org/templates", label: "Printable Chinese writing worksheets" },
+      { href: "https://gridhanzi.org/english-to-chinese-writing-practice", label: "English to Chinese writing practice" },
+    ],
+  },
+  {
+    title: "Write and teach",
+    links: [
+      { href: "https://gridhanzi.org/stroke-order", label: "Chinese stroke order" },
+      { href: "https://gridhanzi.org/for-teachers", label: "Chinese worksheets for teachers" },
+      { href: "https://gridhanzi.org/zh/generator", label: "汉字字帖生成器" },
+    ],
+  },
+] as const;
+
 export default function Home() {
   const event = events[0];
   return <>
@@ -85,8 +104,8 @@ export default function Home() {
     <section className="section related-game-section" aria-label="Related game recommendation">
       <div className="container">
         <div className="section-head">
-          <div><span className="section-kicker">Beyond the box</span><h2>Try another game that rewards curiosity</h2></div>
-          <p>Move from careful collection to co-op puzzle solving or evidence-aware harvest planning with an independent companion built for the task.</p>
+          <div><span className="section-kicker">Beyond the box</span><h2>Explore another useful guide or tool</h2></div>
+          <p>Choose a focused companion for co-op puzzles, evidence-aware harvest planning, or printable Chinese writing practice.</p>
         </div>
         <div className="related-game-list">
           <article className="related-game-card">
@@ -102,6 +121,13 @@ export default function Home() {
               <div className="related-game-copy"><span className="eyebrow">Featured planning tool</span><h3>Greedy Growers Hub</h3><p>Use your observed seed cost, harvest value, wait time, and failed runs to compare profit, ROI, and break-even scenarios without treating hidden lightning odds as a prediction.</p><a className="related-game-primary" href="https://greedygrowerhub.wiki/" target="_blank" rel="noopener">Greedy Growers Calculator <ArrowIcon /></a></div>
             </div>
             <div className="related-game-groups"><div className="related-game-group"><h4>Plan the next harvest</h4><div>{greedyGrowersLinks.map((link) => <a href={link.href} target="_blank" rel="noopener" key={link.href}>{link.label}<span aria-hidden="true">↗</span></a>)}</div></div></div>
+          </article>
+          <article className="related-game-card related-game-card-gridhanzi">
+            <div className="related-game-feature">
+              <div className="related-game-mark" aria-hidden="true"><span>字</span></div>
+              <div className="related-game-copy"><span className="eyebrow">Featured learning tool</span><h3>GridHanzi</h3><p>Turn an English or Chinese vocabulary list into editable Hanzi, Pinyin, tracing, and writing worksheets, browse printable templates, or check stroke order before class or home practice.</p><a className="related-game-primary" href="https://gridhanzi.org/" target="_blank" rel="noopener">GridHanzi <ArrowIcon /></a></div>
+            </div>
+            <div className="related-game-groups">{gridHanziGroups.map((group) => <div className="related-game-group" key={group.title}><h4>{group.title}</h4><div>{group.links.map((link) => <a href={link.href} target="_blank" rel="noopener" key={link.href}>{link.label}<span aria-hidden="true">↗</span></a>)}</div></div>)}</div>
           </article>
         </div>
       </div>
