@@ -107,7 +107,7 @@ function containsJsonLdType(value, type) {
   assert(await desktop.locator("details").count() >= 4, "visible homepage FAQs missing");
   const relatedGame = desktop.getByRole("region", { name: "Related game recommendation" });
   assert(await relatedGame.count() === 1, "homepage related-game recommendation is missing");
-  assert((await relatedGame.getByRole("heading", { level: 2 }).innerText()) === "Try another game that rewards curiosity", "related-game heading is unclear");
+  assert((await relatedGame.getByRole("heading", { level: 2 }).innerText()) === "Explore another useful guide or tool", "related-site heading is unclear");
   const relatedGameLinks = relatedGame.locator('a[href^="https://bigwalkwalkthrough.com"]');
   assert(await relatedGameLinks.count() === 8, "Big Walk recommendation does not expose all eight useful destinations");
   const expectedBigWalkLinks = [
@@ -126,6 +126,44 @@ function containsJsonLdType(value, type) {
     assert(await link.getAttribute("href") === href, `wrong destination for ${label}`);
     assert(await link.getAttribute("target") === "_blank", `${label} does not identify its external navigation behavior`);
     assert(((await link.getAttribute("rel")) || "").split(/\s+/).includes("noopener"), `${label} is missing rel=noopener`);
+  }
+  const greedyGrowersLinks = relatedGame.locator('a[href^="https://greedygrowerhub.wiki"]');
+  assert(await greedyGrowersLinks.count() === 5, "Greedy Growers recommendation does not expose all five useful destinations");
+  const expectedGreedyGrowersLinks = [
+    ["Greedy Growers Calculator", "https://greedygrowerhub.wiki/"],
+    ["Greedy Growers Seed List", "https://greedygrowerhub.wiki/seeds/list/"],
+    ["Greedy Growers Mutations Guide", "https://greedygrowerhub.wiki/mechanics/mutations/"],
+    ["How to play Greedy Growers", "https://greedygrowerhub.wiki/beginner-guide/"],
+    ["Current codes status", "https://greedygrowerhub.wiki/codes/"],
+  ];
+  for (const [label, href] of expectedGreedyGrowersLinks) {
+    const link = relatedGame.getByRole("link", { name: label, exact: true });
+    assert(await link.count() === 1, `missing Greedy Growers link: ${label}`);
+    assert(await link.getAttribute("href") === href, `wrong destination for ${label}`);
+    assert(await link.getAttribute("target") === "_blank", `${label} does not identify its external navigation behavior`);
+    const rel = ((await link.getAttribute("rel")) || "").split(/\s+/);
+    assert(rel.includes("noopener"), `${label} is missing rel=noopener`);
+    assert(!rel.includes("nofollow"), `${label} must remain a normal follow link`);
+  }
+  const gridHanziLinks = relatedGame.locator('a[href^="https://gridhanzi.org"]');
+  assert(await gridHanziLinks.count() === 7, "GridHanzi recommendation does not expose all seven useful destinations");
+  const expectedGridHanziLinks = [
+    ["GridHanzi", "https://gridhanzi.org/"],
+    ["Chinese worksheet generator", "https://gridhanzi.org/generator"],
+    ["Printable Chinese writing worksheets", "https://gridhanzi.org/templates"],
+    ["Chinese stroke order", "https://gridhanzi.org/stroke-order"],
+    ["English to Chinese writing practice", "https://gridhanzi.org/english-to-chinese-writing-practice"],
+    ["Chinese worksheets for teachers", "https://gridhanzi.org/for-teachers"],
+    ["汉字字帖生成器", "https://gridhanzi.org/zh/generator"],
+  ];
+  for (const [label, href] of expectedGridHanziLinks) {
+    const link = relatedGame.getByRole("link", { name: label, exact: true });
+    assert(await link.count() === 1, `missing GridHanzi link: ${label}`);
+    assert(await link.getAttribute("href") === href, `wrong destination for ${label}`);
+    assert(await link.getAttribute("target") === "_blank", `${label} does not identify its external navigation behavior`);
+    const rel = ((await link.getAttribute("rel")) || "").split(/\s+/);
+    assert(rel.includes("noopener"), `${label} is missing rel=noopener`);
+    assert(!rel.includes("nofollow"), `${label} must remain a normal follow link`);
   }
   const answerFinder = desktop.locator('[aria-label="Unbox ASMR Roblox quick answer finder"]');
   assert(await answerFinder.count() === 1, "homepage quick answer finder is missing");
