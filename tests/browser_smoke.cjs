@@ -127,6 +127,24 @@ function containsJsonLdType(value, type) {
     assert(await link.getAttribute("target") === "_blank", `${label} does not identify its external navigation behavior`);
     assert(((await link.getAttribute("rel")) || "").split(/\s+/).includes("noopener"), `${label} is missing rel=noopener`);
   }
+  const greedyGrowersLinks = relatedGame.locator('a[href^="https://greedygrowerhub.wiki"]');
+  assert(await greedyGrowersLinks.count() === 5, "Greedy Growers recommendation does not expose all five useful destinations");
+  const expectedGreedyGrowersLinks = [
+    ["Greedy Growers Calculator", "https://greedygrowerhub.wiki/"],
+    ["Greedy Growers Seed List", "https://greedygrowerhub.wiki/seeds/list/"],
+    ["Greedy Growers Mutations Guide", "https://greedygrowerhub.wiki/mechanics/mutations/"],
+    ["How to play Greedy Growers", "https://greedygrowerhub.wiki/beginner-guide/"],
+    ["Current codes status", "https://greedygrowerhub.wiki/codes/"],
+  ];
+  for (const [label, href] of expectedGreedyGrowersLinks) {
+    const link = relatedGame.getByRole("link", { name: label, exact: true });
+    assert(await link.count() === 1, `missing Greedy Growers link: ${label}`);
+    assert(await link.getAttribute("href") === href, `wrong destination for ${label}`);
+    assert(await link.getAttribute("target") === "_blank", `${label} does not identify its external navigation behavior`);
+    const rel = ((await link.getAttribute("rel")) || "").split(/\s+/);
+    assert(rel.includes("noopener"), `${label} is missing rel=noopener`);
+    assert(!rel.includes("nofollow"), `${label} must remain a normal follow link`);
+  }
   const answerFinder = desktop.locator('[aria-label="Unbox ASMR Roblox quick answer finder"]');
   assert(await answerFinder.count() === 1, "homepage quick answer finder is missing");
   await answerFinder.locator("select").selectOption("codes");

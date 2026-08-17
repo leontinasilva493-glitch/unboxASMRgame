@@ -32,7 +32,7 @@ const faqs = [
   ["Why are some tables empty?", "Empty tables are intentional. Gameplay values remain unpublished until current-version screenshots or recordings prove them."],
 ];
 
-const relatedGameGroups = [
+const bigWalkGroups = [
   {
     title: "Plan the journey",
     links: [
@@ -50,6 +50,13 @@ const relatedGameGroups = [
       { href: "https://bigwalkwalkthrough.com/achievements", label: "Big Walk trophy guide" },
     ],
   },
+] as const;
+
+const greedyGrowersLinks = [
+  { href: "https://greedygrowerhub.wiki/seeds/list/", label: "Greedy Growers Seed List" },
+  { href: "https://greedygrowerhub.wiki/mechanics/mutations/", label: "Greedy Growers Mutations Guide" },
+  { href: "https://greedygrowerhub.wiki/beginner-guide/", label: "How to play Greedy Growers" },
+  { href: "https://greedygrowerhub.wiki/codes/", label: "Current codes status" },
 ] as const;
 
 export default function Home() {
@@ -75,7 +82,30 @@ export default function Home() {
 
     <section className="section-compact"><div className="container"><div className="event-banner"><div className="event-banner-copy"><span className="eyebrow">Reported event archive</span><h2>{event.name}</h2><p>The community-reported window ended August 9. The August 11 official listing check still does not publish a numbered update or feature list, so gameplay changes remain unverified.</p><Link className="text-link" href="/updates/">Open update evidence <ArrowIcon /></Link></div><EventCountdown startsAt={event.startsAt} endsAt={event.endsAt} initialStatus={event.publishedStatus}/></div></div></section>
 
-    <section className="section related-game-section" aria-label="Related game recommendation"><div className="container"><div className="section-head"><div><span className="section-kicker">Beyond the box</span><h2>Try another game that rewards curiosity</h2></div><p>When you want a different kind of discovery, continue with a focused guide for a cooperative puzzle adventure.</p></div><article className="related-game-card"><div className="related-game-feature"><div className="related-game-mark" aria-hidden="true"><span>BW</span></div><div className="related-game-copy"><span className="eyebrow">Featured independent guide</span><h3>Big Walk Walkthrough</h3><p>Swap the collection loop for a cooperative puzzle trip. This companion organizes puzzle help, routes, multiplayer setup, achievements, and ways to find other players.</p><a className="related-game-primary" href="https://bigwalkwalkthrough.com/" target="_blank" rel="noopener">Big Walk walkthrough <ArrowIcon /></a></div></div><div className="related-game-groups">{relatedGameGroups.map((group) => <div className="related-game-group" key={group.title}><h4>{group.title}</h4><div>{group.links.map((link) => <a href={link.href} target="_blank" rel="noopener" key={link.href}>{link.label}<span aria-hidden="true">↗</span></a>)}</div></div>)}</div></article></div></section>
+    <section className="section related-game-section" aria-label="Related game recommendation">
+      <div className="container">
+        <div className="section-head">
+          <div><span className="section-kicker">Beyond the box</span><h2>Try another game that rewards curiosity</h2></div>
+          <p>Move from careful collection to co-op puzzle solving or evidence-aware harvest planning with an independent companion built for the task.</p>
+        </div>
+        <div className="related-game-list">
+          <article className="related-game-card">
+            <div className="related-game-feature">
+              <div className="related-game-mark" aria-hidden="true"><span>BW</span></div>
+              <div className="related-game-copy"><span className="eyebrow">Featured independent guide</span><h3>Big Walk Walkthrough</h3><p>Swap the collection loop for a cooperative puzzle trip. This companion organizes puzzle help, routes, multiplayer setup, achievements, and ways to find other players.</p><a className="related-game-primary" href="https://bigwalkwalkthrough.com/" target="_blank" rel="noopener">Big Walk walkthrough <ArrowIcon /></a></div>
+            </div>
+            <div className="related-game-groups">{bigWalkGroups.map((group) => <div className="related-game-group" key={group.title}><h4>{group.title}</h4><div>{group.links.map((link) => <a href={link.href} target="_blank" rel="noopener" key={link.href}>{link.label}<span aria-hidden="true">↗</span></a>)}</div></div>)}</div>
+          </article>
+          <article className="related-game-card related-game-card-growers">
+            <div className="related-game-feature">
+              <div className="related-game-mark" aria-hidden="true"><span>GG</span></div>
+              <div className="related-game-copy"><span className="eyebrow">Featured planning tool</span><h3>Greedy Growers Hub</h3><p>Use your observed seed cost, harvest value, wait time, and failed runs to compare profit, ROI, and break-even scenarios without treating hidden lightning odds as a prediction.</p><a className="related-game-primary" href="https://greedygrowerhub.wiki/" target="_blank" rel="noopener">Greedy Growers Calculator <ArrowIcon /></a></div>
+            </div>
+            <div className="related-game-groups"><div className="related-game-group"><h4>Plan the next harvest</h4><div>{greedyGrowersLinks.map((link) => <a href={link.href} target="_blank" rel="noopener" key={link.href}>{link.label}<span aria-hidden="true">↗</span></a>)}</div></div></div>
+          </article>
+        </div>
+      </div>
+    </section>
 
     <section className="section"><div className="container narrow"><div className="section-head"><div><span className="section-kicker">Clear answers</span><h2>Unbox ASMR Roblox questions</h2></div></div><div className="faq-list">{faqs.map(([question, answer]) => <details key={question}><summary>{question}</summary><p>{answer}</p></details>)}</div><SourceList sources={[{ label: "Official Unbox ASMR Roblox experience", url: game.robloxUrl, note: `Official public description and games API checked ${formatDate(game.checkedAt)}.` }, { label: "Rolimon’s public game snapshot", url: "https://www.rolimons.com/game/112233638491976", note: "Third-party price and popularity source; re-checked August 1, 2026." }]} /><RelatedLinks links={[{ href: "/sources/", label: "How this guide verifies claims" }, { href: "/about/", label: "About the Unbox ASMR guide" }]} /></div></section>
     <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify({ "@context": "https://schema.org", "@type": "WebPage", name: "Unbox ASMR Roblox Guide & Verified Data Tracker", url: SITE_URL }) }} />
