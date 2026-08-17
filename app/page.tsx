@@ -32,6 +32,26 @@ const faqs = [
   ["Why are some tables empty?", "Empty tables are intentional. Gameplay values remain unpublished until current-version screenshots or recordings prove them."],
 ];
 
+const relatedGameGroups = [
+  {
+    title: "Plan the journey",
+    links: [
+      { href: "https://bigwalkwalkthrough.com/beginner-guide", label: "First-session tips" },
+      { href: "https://bigwalkwalkthrough.com/walkthrough", label: "Big Walk routes" },
+      { href: "https://bigwalkwalkthrough.com/multiplayer", label: "Big Walk crossplay" },
+      { href: "https://bigwalkwalkthrough.com/multiplayer/how-to-find-players", label: "Find Big Walk players" },
+    ],
+  },
+  {
+    title: "Solve and complete",
+    links: [
+      { href: "https://bigwalkwalkthrough.com/puzzles", label: "Big Walk puzzle guide" },
+      { href: "https://bigwalkwalkthrough.com/puzzles/purple-challenges", label: "All 7 purple challenges" },
+      { href: "https://bigwalkwalkthrough.com/achievements", label: "Big Walk trophy guide" },
+    ],
+  },
+] as const;
+
 export default function Home() {
   const event = events[0];
   return <>
@@ -54,6 +74,8 @@ export default function Home() {
     <section className="section"><div className="container"><div className="summary-grid"><article className="summary-card"><VerificationBadge status="community_reported"/><h3>Roblox Index evidence room</h3><p>The dated gameplay snapshot now covers {crates.length} crates, {toys.length} toys, and five observed crate-to-toy results. It remains noindex because current-version original captures, full drop pools, unlock conditions, and stable Complete Index fields are incomplete.</p><Link className="text-link" href="/roblox-index/">Review crate-to-toy evidence <ArrowIcon /></Link></article><article className="summary-card warm-panel"><VerificationBadge status="community_reported"/><h3>{gamepasses.length} public Gamepass prices</h3><p>A dated Rolimon’s snapshot is available. Effects, player fit, and value verdicts are deliberately not inferred from price.</p><Link className="text-link" href="/gamepasses/">Compare the snapshot <ArrowIcon /></Link></article></div></div></section>
 
     <section className="section-compact"><div className="container"><div className="event-banner"><div className="event-banner-copy"><span className="eyebrow">Reported event archive</span><h2>{event.name}</h2><p>The community-reported window ended August 9. The August 11 official listing check still does not publish a numbered update or feature list, so gameplay changes remain unverified.</p><Link className="text-link" href="/updates/">Open update evidence <ArrowIcon /></Link></div><EventCountdown startsAt={event.startsAt} endsAt={event.endsAt} initialStatus={event.publishedStatus}/></div></div></section>
+
+    <section className="section related-game-section" aria-label="Related game recommendation"><div className="container"><div className="section-head"><div><span className="section-kicker">Beyond the box</span><h2>Try another game that rewards curiosity</h2></div><p>When you want a different kind of discovery, continue with a focused guide for a cooperative puzzle adventure.</p></div><article className="related-game-card"><div className="related-game-feature"><div className="related-game-mark" aria-hidden="true"><span>BW</span></div><div className="related-game-copy"><span className="eyebrow">Featured independent guide</span><h3>Big Walk Walkthrough</h3><p>Swap the collection loop for a cooperative puzzle trip. This companion organizes puzzle help, routes, multiplayer setup, achievements, and ways to find other players.</p><a className="related-game-primary" href="https://bigwalkwalkthrough.com/" target="_blank" rel="noopener">Big Walk walkthrough <ArrowIcon /></a></div></div><div className="related-game-groups">{relatedGameGroups.map((group) => <div className="related-game-group" key={group.title}><h4>{group.title}</h4><div>{group.links.map((link) => <a href={link.href} target="_blank" rel="noopener" key={link.href}>{link.label}<span aria-hidden="true">↗</span></a>)}</div></div>)}</div></article></div></section>
 
     <section className="section"><div className="container narrow"><div className="section-head"><div><span className="section-kicker">Clear answers</span><h2>Unbox ASMR Roblox questions</h2></div></div><div className="faq-list">{faqs.map(([question, answer]) => <details key={question}><summary>{question}</summary><p>{answer}</p></details>)}</div><SourceList sources={[{ label: "Official Unbox ASMR Roblox experience", url: game.robloxUrl, note: `Official public description and games API checked ${formatDate(game.checkedAt)}.` }, { label: "Rolimon’s public game snapshot", url: "https://www.rolimons.com/game/112233638491976", note: "Third-party price and popularity source; re-checked August 1, 2026." }]} /><RelatedLinks links={[{ href: "/sources/", label: "How this guide verifies claims" }, { href: "/about/", label: "About the Unbox ASMR guide" }]} /></div></section>
     <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify({ "@context": "https://schema.org", "@type": "WebPage", name: "Unbox ASMR Roblox Guide & Verified Data Tracker", url: SITE_URL }) }} />

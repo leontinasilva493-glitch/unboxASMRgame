@@ -105,6 +105,28 @@ function containsJsonLdType(value, type) {
   assert(/Unbox ASMR on Roblox/i.test(homeEntityText), "homepage hero does not disambiguate Unbox ASMR on Roblox");
   assert(await desktop.locator('a[href*="roblox.com/games/112233638491976"]').count() >= 2, "official Roblox CTAs missing");
   assert(await desktop.locator("details").count() >= 4, "visible homepage FAQs missing");
+  const relatedGame = desktop.getByRole("region", { name: "Related game recommendation" });
+  assert(await relatedGame.count() === 1, "homepage related-game recommendation is missing");
+  assert((await relatedGame.getByRole("heading", { level: 2 }).innerText()) === "Try another game that rewards curiosity", "related-game heading is unclear");
+  const relatedGameLinks = relatedGame.locator('a[href^="https://bigwalkwalkthrough.com"]');
+  assert(await relatedGameLinks.count() === 8, "Big Walk recommendation does not expose all eight useful destinations");
+  const expectedBigWalkLinks = [
+    ["Big Walk walkthrough", "https://bigwalkwalkthrough.com/"],
+    ["Big Walk puzzle guide", "https://bigwalkwalkthrough.com/puzzles"],
+    ["Big Walk routes", "https://bigwalkwalkthrough.com/walkthrough"],
+    ["First-session tips", "https://bigwalkwalkthrough.com/beginner-guide"],
+    ["Big Walk crossplay", "https://bigwalkwalkthrough.com/multiplayer"],
+    ["Big Walk trophy guide", "https://bigwalkwalkthrough.com/achievements"],
+    ["All 7 purple challenges", "https://bigwalkwalkthrough.com/puzzles/purple-challenges"],
+    ["Find Big Walk players", "https://bigwalkwalkthrough.com/multiplayer/how-to-find-players"],
+  ];
+  for (const [label, href] of expectedBigWalkLinks) {
+    const link = relatedGame.getByRole("link", { name: label, exact: true });
+    assert(await link.count() === 1, `missing Big Walk link: ${label}`);
+    assert(await link.getAttribute("href") === href, `wrong destination for ${label}`);
+    assert(await link.getAttribute("target") === "_blank", `${label} does not identify its external navigation behavior`);
+    assert(((await link.getAttribute("rel")) || "").split(/\s+/).includes("noopener"), `${label} is missing rel=noopener`);
+  }
   const answerFinder = desktop.locator('[aria-label="Unbox ASMR Roblox quick answer finder"]');
   assert(await answerFinder.count() === 1, "homepage quick answer finder is missing");
   await answerFinder.locator("select").selectOption("codes");

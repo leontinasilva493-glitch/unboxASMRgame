@@ -150,6 +150,27 @@ p { margin: 0; }
 .summary-card h3 { margin: 12px 0 8px; }
 .summary-card p { color: var(--text-secondary); }
 .summary-card .text-link { margin-top: 18px; }
+
+.related-game-section { position: relative; }
+.related-game-card { position: relative; display: grid; grid-template-columns: minmax(0, 1.15fr) minmax(360px, .85fr); overflow: hidden; border: 1px solid #44394f; border-radius: var(--radius-hero); background: radial-gradient(circle at 8% 12%, rgba(242,184,75,.18), transparent 32%), #282230; color: #fffaf2; box-shadow: 0 22px 54px rgba(45,35,54,.18); }
+.related-game-card::after { content: ""; position: absolute; left: 70px; bottom: -72px; width: 210px; height: 140px; border: 2px dashed rgba(255,226,168,.2); border-radius: 50%; transform: rotate(-11deg); pointer-events: none; }
+.related-game-feature { position: relative; z-index: 1; display: grid; grid-template-columns: auto minmax(0, 1fr); gap: clamp(22px, 3vw, 36px); align-items: start; padding: clamp(30px, 5vw, 54px); }
+.related-game-mark { width: clamp(66px, 8vw, 92px); aspect-ratio: 1; display: grid; place-items: center; border-radius: 38% 62% 56% 44%; background: var(--primary); color: #302617; box-shadow: inset 0 -6px 0 rgba(75,53,15,.14), 0 12px 30px rgba(0,0,0,.2); transform: rotate(-4deg); }
+.related-game-mark span { font: 900 clamp(1.2rem, 2.4vw, 1.8rem)/1 "Plus Jakarta Sans", sans-serif; letter-spacing: -.06em; transform: rotate(4deg); }
+.related-game-copy .eyebrow { color: #f7dca2; }
+.related-game-copy h3 { margin: 10px 0 12px; color: #fffaf2; font-size: clamp(1.8rem, 3.3vw, 2.65rem); }
+.related-game-copy p { max-width: 620px; color: rgba(255,250,242,.76); line-height: 1.7; }
+.related-game-primary { min-height: 48px; display: inline-flex; align-items: center; gap: 9px; margin-top: 24px; padding: 10px 16px; border-radius: var(--radius-button); background: var(--primary); color: var(--primary-ink); text-decoration: none; font-weight: 900; transition: background 160ms ease-out, transform 160ms ease-out; }
+.related-game-primary:hover { background: var(--primary-hover); transform: translateY(-2px); }
+.related-game-primary svg { width: 18px; }
+.related-game-groups { position: relative; z-index: 1; display: grid; gap: 28px; align-content: center; padding: clamp(30px, 4vw, 48px); border-left: 1px solid rgba(255,255,255,.12); background: rgba(255,255,255,.045); }
+.related-game-group h4 { margin: 0 0 8px; color: #f7dca2; font: 800 .72rem/1.3 "Plus Jakarta Sans", sans-serif; letter-spacing: .11em; text-transform: uppercase; }
+.related-game-group > div { display: grid; grid-template-columns: 1fr 1fr; gap: 2px 18px; }
+.related-game-group a { min-height: 44px; display: flex; align-items: center; justify-content: space-between; gap: 12px; border-bottom: 1px solid rgba(255,255,255,.11); color: rgba(255,250,242,.9); text-decoration: none; font-size: .9rem; font-weight: 750; transition: border-color 150ms ease-out, color 150ms ease-out; }
+.related-game-group a:hover { border-color: var(--primary); color: #fff; }
+.related-game-group a span { color: var(--primary); font-size: .82rem; }
+.related-game-card :focus-visible { outline-color: #fff1c6; }
+
 .answer-finder-section { background: linear-gradient(180deg, rgba(255,244,223,.58), rgba(255,249,240,0)); }
 .answer-finder-control { display: grid; gap: 10px; margin-bottom: 24px; padding: 22px; border: 1px solid #e6d5b8; border-radius: var(--radius-card); background: var(--surface); box-shadow: var(--shadow-card); }
 .answer-finder-control label { color: #5f4b26; font-weight: 800; }
@@ -326,6 +347,8 @@ tbody tr:hover { background: #fffaf1; }
   .status-card { scroll-snap-align: start; }
   .card-grid, .answer-grid { grid-template-columns: repeat(2,1fr); }
   .step-grid { grid-template-columns: repeat(2,1fr); }
+  .related-game-card { grid-template-columns: 1fr; }
+  .related-game-groups { border-top: 1px solid rgba(255,255,255,.12); border-left: 0; }
 }
 
 @media (max-width: 767px) {
@@ -348,6 +371,9 @@ tbody tr:hover { background: #fffaf1; }
   .answer-finder-fields { grid-template-columns: 1fr; }
   .answer-card { padding: 22px; }
   .guide-card { min-height: 180px; }
+  .related-game-feature { grid-template-columns: 1fr; }
+  .related-game-groups { gap: 22px; }
+  .related-game-group > div { grid-template-columns: 1fr; }
   .content-layout { grid-template-columns: 1fr; gap: 28px; }
   .toc { position: static; grid-row: 1; }
   .page-intro > p { font-size: 1rem; }
