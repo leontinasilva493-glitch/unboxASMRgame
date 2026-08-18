@@ -1,13 +1,13 @@
 {
   "sourceId": "roblox-game-details",
-  "lastCheckedAt": "2026-08-18T02:29:59.808Z",
+  "lastCheckedAt": "2026-08-18T13:58:36.849Z",
   "consecutiveFailures": 0,
   "lastError": null,
   "health": {
     "zeroPlayingStreak": 0
   },
   "lastSuccess": {
-    "checkedAt": "2026-08-18T02:29:59.808Z",
+    "checkedAt": "2026-08-18T13:58:36.849Z",
     "parserVersion": "1",
     "normalized": {
       "identity": {
@@ -20,15 +20,15 @@
         "name": "[🌌] Unbox ASMR!",
         "description": "📦Unbox ASMR Toys! 🎧Relax & collect! 🔓 Unlock new crates!\n\n✨ Unbox rare ASMR toys!\n⬆️ Upgrade your collection!\n🎧 Enjoy relaxing sounds!\n📦 Unlock better crates!\n👥 Play with Friends for more cash!\n\n👍 Like the game and join the group for ⚡ 2 FREE workers!\n\n🔔 Follow for updates and special codes!",
         "creatorName": "ASMR Labs",
-        "updated": "2026-08-18T01:22:00.803Z",
+        "updated": "2026-08-18T12:25:05.950Z",
         "canonicalUrlPath": "/games/112233638491976/Unbox-ASMR",
         "maxPlayers": 6,
         "isContentRestricted": false
       },
       "trends": {
-        "playing": 13574,
-        "visits": 86916518,
-        "favoritedCount": 2028326
+        "playing": 15710,
+        "visits": 87867143,
+        "favoritedCount": 2036448
       }
     }
   }
