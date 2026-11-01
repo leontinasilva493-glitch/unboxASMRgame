@@ -1,13 +1,13 @@
 {
   "sourceId": "roblox-game-details",
-  "lastCheckedAt": "2026-10-31T17:47:00.873Z",
+  "lastCheckedAt": "2026-11-01T07:36:08.960Z",
   "consecutiveFailures": 0,
   "lastError": null,
   "health": {
     "zeroPlayingStreak": 0
   },
   "lastSuccess": {
-    "checkedAt": "2026-10-31T17:47:00.873Z",
+    "checkedAt": "2026-11-01T07:36:08.960Z",
     "parserVersion": "1",
     "normalized": {
       "identity": {
@@ -26,9 +26,9 @@
         "isContentRestricted": false
       },
       "trends": {
-        "playing": 573,
-        "visits": 120896218,
-        "favoritedCount": 2299869
+        "playing": 726,
+        "visits": 120948933,
+        "favoritedCount": 2300209
       }
     }
   }
