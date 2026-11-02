@@ -1,13 +1,13 @@
 {
   "sourceId": "roblox-place-universe",
-  "lastCheckedAt": "2026-11-01T18:26:24.904Z",
+  "lastCheckedAt": "2026-11-02T07:42:31.127Z",
   "consecutiveFailures": 0,
   "lastError": null,
   "health": {
     "zeroPlayingStreak": 0
   },
   "lastSuccess": {
-    "checkedAt": "2026-11-01T18:26:24.904Z",
+    "checkedAt": "2026-11-02T07:42:31.127Z",
     "parserVersion": "1",
     "normalized": {
       "identity": {
