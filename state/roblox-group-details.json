@@ -1,13 +1,13 @@
 {
   "sourceId": "roblox-group-details",
-  "lastCheckedAt": "2026-11-09T22:59:40.450Z",
+  "lastCheckedAt": "2026-11-10T08:26:48.945Z",
   "consecutiveFailures": 0,
   "lastError": null,
   "health": {
     "zeroPlayingStreak": 0
   },
   "lastSuccess": {
-    "checkedAt": "2026-11-09T22:59:40.450Z",
+    "checkedAt": "2026-11-10T08:26:48.945Z",
     "parserVersion": "1",
     "normalized": {
       "identity": {
@@ -19,7 +19,7 @@
         "shout": null
       },
       "trends": {
-        "memberCount": 2197758
+        "memberCount": 2197718
       }
     }
   }
